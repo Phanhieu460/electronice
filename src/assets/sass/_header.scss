@@ -1,0 +1,157 @@
+.header {
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  padding: 15px;
+  cursor: pointer;
+  color: #1f2226;
+  background: #fff;
+  a {
+    text-decoration: none;
+  }
+
+  &__menu {
+    a {
+      font-size: 20px;
+      font-weight: 500;
+      padding: 24px;
+      color: black;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+
+  &__cart {
+    a {
+      color: none;
+      position: relative;
+      &:hover {
+        color: red;
+      }
+    }
+    a svg {
+      padding: 12px;
+      font-size: 24px;
+      color: black;
+      &:hover {
+        color: red;
+      }
+    }
+
+    &__icon {
+      &--quantity {
+        position: absolute;
+        left: 80%;
+        top: -80%;
+        transform: translate(-50%, -100%);
+        font-size: 13px;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        text-align: center;
+        color: #fff;
+        background-color: #1f2226;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__menubar {
+    display: none;
+  }
+
+  &__mobile {
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    border: 1px solid #999;
+    background-color: #fff;
+    visibility: visible;
+    opacity: 1;
+    right: 0;
+    padding: 40px 30px 50px;
+
+    &--close {
+      position: absolute;
+      top: 3%;
+      right: 10%;
+      width: 24px;
+      height: 24px;
+      border: 1px solid #999;
+    }
+
+    &--menu {
+      display: flex;
+      flex-direction: column;
+      a {
+        padding: 24px;
+        font-size: 18px;
+        font-weight: 500;
+        color: #1f2226;
+        cursor: pointer;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .header {
+    max-width: 960px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  //tablet
+  .header {
+    max-width: 720px;
+
+    &__menu {
+      display: none;
+    }
+    &__cart {
+      position: absolute;
+      right: 5%;
+    }
+
+    &__menubar {
+      display: block;
+    }
+    &__mobile {
+      width: 330px;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header {
+    max-width: 540px;
+
+    &__menu {
+      display: none;
+    }
+
+    &__cart {
+      position: absolute;
+      right: 5%;
+    }
+
+    &__menubar {
+      display: block;
+    }
+
+    &__mobile {
+      width: 200px;
+    }
+  }
+}
