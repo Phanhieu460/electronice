@@ -8,6 +8,7 @@ import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
+import Login from './pages/Login/Login'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="login" element={<Login />} />
         {/* <Route path="login" element={<Home />} />
         <Route path="register" element={<Home />} />
         <Route path="cart" element={<Home />} />
