@@ -2,17 +2,23 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import Home from './pages/Home/Home'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Product from './pages/Product/Product'
 import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
+import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 
 function App() {
+  const location = useLocation()
+  console.log(location.pathname)
   return (
     <>
       <Header />
+      {location.pathname !== '/' && (
+        <BreadCrumbs title={location.pathname.split('/').filter(i => i)[0]} href={location.pathname} />
+      )}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />

@@ -105,13 +105,13 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media #{$md-layout} {
   .header {
     max-width: 960px;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media #{$sm-layout} {
   //tablet
   .header {
     max-width: 720px;
@@ -133,7 +133,7 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media #{$xs-layout} {
   .header {
     max-width: 540px;
 
