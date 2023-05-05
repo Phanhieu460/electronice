@@ -1,0 +1,14 @@
+.infor-form-container {
+  background: #f3f3f3;
+  width: 600px;
+  margin: 0 auto;
+  .row {
+    margin: 25px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .infor-form-container {
+    width: 100%;
+  }
+}
