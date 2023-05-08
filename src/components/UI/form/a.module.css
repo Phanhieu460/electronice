@@ -1,0 +1,25 @@
+/* a.module.css */
+
+.main {
+  width: 450px;
+  height: 500px;
+  background-color: #f3f3f3;
+  margin: auto;
+}
+h1,
+p {
+  text-align: center;
+}
+.center {
+  color: green;
+}
+.maininput {
+  border: none;
+  width: 90%;
+  margin-left: 21px;
+}
+.mainitem {
+}
+.mainbutton {
+  margin-left: 21px;
+}
