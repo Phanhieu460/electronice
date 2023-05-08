@@ -8,10 +8,12 @@ import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
-
+import FormCreateAccount from './components/UI/form/CreatAccount'
+import styles from './styleCSS/Form.module.css'
 function App() {
   return (
     <>
+      <FormCreateAccount />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
