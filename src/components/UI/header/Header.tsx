@@ -3,6 +3,7 @@ import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink, Outlet } from 'react-router-dom'
+import { MenuProps, Dropdown, Button } from 'antd'
 
 type Props = {}
 
@@ -10,6 +11,41 @@ const Header = (props: Props) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
 
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
+
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <NavLink target="_blank" rel="noopener noreferrer" to="login">
+          Login
+        </NavLink>
+      )
+    },
+    {
+      key: '2',
+      label: (
+        <NavLink target="_blank" rel="noopener noreferrer" to="create-account">
+          Create Account
+        </NavLink>
+      )
+    },
+    {
+      key: '3',
+      label: (
+        <NavLink rel="noopener noreferrer" to="my-profile">
+          My Profile
+        </NavLink>
+      )
+    },
+    {
+      key: '4',
+      label: (
+        <NavLink target="_blank" rel="noopener noreferrer" to={''}>
+          Logout
+        </NavLink>
+      )
+    }
+  ]
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
@@ -26,9 +62,9 @@ const Header = (props: Props) => {
             <span className="header__cart__icon--quantity">1</span>
           </span>
         </NavLink>
-        <NavLink to="/login">
+        <Dropdown menu={{ items }} placement="bottomRight" arrow>
           <FontAwesomeIcon icon={faCircleUser} />
-        </NavLink>
+        </Dropdown>
       </div>
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />
       {showMenuMobile && (
