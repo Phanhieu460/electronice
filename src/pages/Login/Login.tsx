@@ -5,11 +5,11 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const secret = 'your-secret-key'
-
 const Login = () => {
   const navigate = useNavigate()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const redirectHome = () => {
     navigate('/')
@@ -23,52 +23,42 @@ const Login = () => {
     navigate('/forgotPassword')
   }
 
-  const onFinish = (values: any) => {
-    axios.get('https://644fb981ba9f39c6ab6aa25c.mockapi.io/mock/users', {}).then(res => {
-      res.data.forEach((user: any) => {
-        if (values.username === user.username && values.password === user.password) {
-          document.cookie = `username=${values.username}`
+  const onFinish = async () => {
+    await axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, {
+        email,
+        password
+      })
+      .then(response => {
+        setUser(response.data)
+        document.cookie = `token=${response.data.token}`
+        openNotification(
+          {
+            message: 'Login Success',
+            description: `Hello ${email}`
+          },
+          'success',
+          'topLeft'
+        )
+        redirectHome()
+      })
+      .catch(err => {
+        if (!user) {
+          openNotification(
+            {
+              message: 'Login Failed',
+              description: 'Wrong username or password. Please try again!'
+            },
+            'error',
+            'topLeft'
+          )
         }
       })
-    })
-    if (hasCookieKey('username')) {
-      setIsLoggedIn(true)
-    } else {
-      setIsLoggedIn(false)
-    }
-    if (isLoggedIn) {
-      openNotification(
-        {
-          message: 'Login Success',
-          description: `Hello ${values.username}`
-        },
-        'success',
-        'topLeft'
-      )
-      redirectHome()
-      console.log(isLoggedIn)
-    }
-    if (!isLoggedIn) {
-      openNotification(
-        {
-          message: 'Login Failed',
-          description: 'Wrong username or password. Please try again!'
-        },
-        'error',
-        'topLeft'
-      )
-    }
   }
 
-  function hasCookieKey(key: string): boolean {
-    const cookies = document.cookie.split(';')
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim()
-      if (cookie.startsWith(`${key}=`)) {
-        return true
-      }
-    }
-    return false
+  function getToken() {
+    const token = document.cookie.split('token=')[1]
+    return token ? token : ''
   }
 
   return (
@@ -82,14 +72,19 @@ const Login = () => {
             <h1>Login</h1>
             <p>Please login using account detail below</p>
             <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
-              <Form.Item name="username" rules={[{ required: true, message: 'Please input your Username!' }]}>
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="Email"
+                  onChange={e => setEmail(e.target.value)}
+                />
               </Form.Item>
               <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password!' }]}>
                 <Input
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
+                  onChange={e => setPassword(e.target.value)}
                 />
               </Form.Item>
               <Form.Item>
@@ -117,19 +112,4 @@ const Login = () => {
     </>
   )
 }
-
-const fetchData = async () => {
-  const token = localStorage.getItem('token')
-  try {
-    const response = await axios.get('/api/data', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    console.log(response.data)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 export default Login
