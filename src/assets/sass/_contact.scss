@@ -6,17 +6,18 @@
         margin-right: auto;
         margin-left: auto;
         max-width: 1200px;
-        padding: 60px 0;
+        padding: 0 60px;
+      
 }
 
 .row {    
         background-color: #fff;
         display: flex;
         flex-wrap: wrap;
-        padding: 128px 16px;
-        margin-right: -15px;
-        margin-left: -15px;
-        min-height: 1px;
+     padding-top: 120px;
+        // margin-right: -15px;
+        // margin-left: -15px;
+        // min-height: 1px;
 }
 
 .address__contact-left > p {
@@ -24,17 +25,17 @@
 }
 
 .address__contact-left {
-        flex-grow: 0;
-       
-        padding: 0 16px;
-        box-sizing: border-box;
+    flex-grow: 1;
+    width: 50%;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 .form__contact-right {
-        flex-grow: 1;
-       
-        padding: 0 16px;
-        box-sizing: border-box;
+    flex-grow: 1;
+    width: 50%;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
         
 .contact-info-wrap {
@@ -60,7 +61,7 @@ form {
 .contact-form {
     box-shadow: 10px 25px 80px rgb(150 150 150 / 15%);
     padding: 50px;
-    margin-left: 80px;
+    // margin-left: 80px;
 }
 .contact-form input, .contact-form textarea   {
     background: 0 0;
@@ -96,9 +97,12 @@ form {
 
 
 .map {
-    padding-bottom: 100px;
+
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 60px;
+    width: 100%;
+    padding-bottom: 100px;
 } 
 
 .contact-map {
@@ -115,3 +119,42 @@ form {
 .form-group {
     margin-bottom: 1rem;
 }
+@media #{$md-layout} {
+    .contact {
+    //   max-width: 960px;
+    }
+  }
+
+  @media #{$sm-layout} {
+    //tablet
+    .contact {
+    //   max-width: 720px;
+      .address__contact-left {
+        flex-basis: 100%;
+    padding: 16px;
+ 
+      }
+      .form__contact-right {
+        flex-basis: 100%;
+    padding: 16px;
+
+   
+      }
+      }
+    }
+    @media #{$xs-layout} {
+        .contact {
+            //   max-width: 720px;
+              .address__contact-left {
+                flex-basis: 100%;
+            padding: 16px;
+         
+              }
+              .form__contact-right {
+                flex-basis: 100%;
+            padding: 16px;
+        
+           
+              }
+              }
+      }

@@ -73,11 +73,11 @@ export default class Contact extends React.Component {
       error: '',
       text: ''
     })
-    // const message = {
-    //   message: 'success',
-    //   description: 'sdsds'
-    // }
-    // openNotification('success', message)
+    const message = {
+      message: 'success',
+      description: 'Cảm ơn bạn! Bạn đã thành công đăng ký nhận tin từ Droon!'
+    }
+    openNotification('success', message)
   }
 
   render() {
@@ -137,7 +137,7 @@ export default class Contact extends React.Component {
                         className={`form-control ${this.state.errorEmail ? 'is-invalid' : ''}`}
                         value={this.state.email}
                         placeholder="Email"
-                        autoComplete="email-address"
+                        autoComplete="off"
                         onChange={this.handleEmailAddressChange}
                       />
                       {this.state.errorEmail && <div className="text-danger">{this.state.errorEmail}</div>}
@@ -157,16 +157,18 @@ export default class Contact extends React.Component {
             </div>
           </div>
           <div className="map">
-            <div className="contact-map">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.7718582495863!2d105.76424360000001!3d20.9616751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313452dc742eda35%3A0x7798fbe61e5ffee0!2zNTkzIMSQLiBRdWFuZyBUcnVuZywgUGjDuiBMYSwgSMOgIMSQw7RuZywgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1683010411870!5m2!1svi!2s"
-                width="600"
-                height="450"
-                style={{ border: 0, width: '100%', height: '500px' }}
-                allowFullScreen
-                loading="lazy"
-                // referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+            <div className="row">
+              <div className="contact-map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.7718582495863!2d105.76424360000001!3d20.9616751!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313452dc742eda35%3A0x7798fbe61e5ffee0!2zNTkzIMSQLiBRdWFuZyBUcnVuZywgUGjDuiBMYSwgSMOgIMSQw7RuZywgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1683010411870!5m2!1svi!2s"
+                  width="600"
+                  height="450"
+                  style={{ border: 0, width: '100%', height: '500px' }}
+                  allowFullScreen
+                  loading="lazy"
+                  // referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>
           </div>
         </main>
