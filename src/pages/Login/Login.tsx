@@ -64,9 +64,6 @@ const Login = () => {
   return (
     <>
       <div className="login">
-        <div className="login__breadcrumbs">
-          <p>Home / Login</p>
-        </div>
         <div className="login__main">
           <div className="login__main--form">
             <h1>Login</h1>
