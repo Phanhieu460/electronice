@@ -74,8 +74,8 @@ export default class Contact extends React.Component {
       text: ''
     })
     const message = {
-      message: 'success',
-      description: 'Cảm ơn bạn! Bạn đã thành công đăng ký nhận tin từ Droon!'
+      message: 'Success',
+      description: 'Thank you! You have successfully subscribed to receive news from Droon!'
     }
     openNotification('success', message)
   }
