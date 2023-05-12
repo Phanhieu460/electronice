@@ -31,6 +31,7 @@ function App() {
           {/* <Route path=":productid" element={<Home />} /> */}
         </Route>
       </Routes>
+
       <Footer />
     </>
   )
