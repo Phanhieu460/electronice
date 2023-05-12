@@ -6,7 +6,7 @@ interface NotificationProps {
   description: string // Nội dung
 }
 
-export const openNotification = (props: NotificationProps, type: NotificationType) => {
+export const openNotification = (type: NotificationType, props: NotificationProps) => {
   notification[type]({
     message: props.message,
     description: props.description
