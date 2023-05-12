@@ -4,12 +4,14 @@ import { openNotification } from '../../util/notifications'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useCookies } from 'react-cookie'
 
 const Login = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [token, setToken] = useCookies()
 
   const redirectHome = () => {
     navigate('/')
@@ -31,7 +33,7 @@ const Login = () => {
       })
       .then(response => {
         setUser(response.data)
-        document.cookie = `token=${response.data.token}`
+        setToken('authToken', response.data.token, { path: '/' })
         openNotification(
           {
             message: 'Login Success',
@@ -69,7 +71,19 @@ const Login = () => {
             <h1>Login</h1>
             <p>Please login using account detail below</p>
             <Form name="normal_login" className="login-form" initialValues={{ remember: true }} onFinish={onFinish}>
-              <Form.Item name="email" rules={[{ required: true, message: 'Please input your Email!' }]}>
+              <Form.Item
+                name="email"
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!'
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your E-mail!'
+                  }
+                ]}
+              >
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Email"
