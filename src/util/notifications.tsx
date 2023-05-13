@@ -1,4 +1,5 @@
 import { notification } from 'antd'
+import { NotificationPlacement } from 'antd/es/notification/interface'
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error'
 interface NotificationProps {
@@ -6,9 +7,14 @@ interface NotificationProps {
   description: string // Nội dung
 }
 
-export const openNotification = (type: NotificationType, props: NotificationProps) => {
+export const openNotification = (
+  props: NotificationProps,
+  type: NotificationType,
+  placement?: NotificationPlacement
+) => {
   notification[type]({
     message: props.message,
-    description: props.description
+    description: props.description,
+    placement
   })
 }
