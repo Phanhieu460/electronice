@@ -5,13 +5,15 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './assets/sass/style.scss'
 import { BrowserRouter } from 'react-router-dom'
-// import store from './redux/store'
 import { Provider } from 'react-redux'
+import { store } from 'app/store'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <BrowserRouter>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </BrowserRouter>
 )
 
