@@ -62,17 +62,9 @@ const Header = (props: Props) => {
             <span className="header__cart__icon--quantity">1</span>
           </span>
         </NavLink>
-<<<<<<< Updated upstream
         <Dropdown menu={{ items }} placement="bottomRight" arrow>
           <FontAwesomeIcon icon={faCircleUser} />
         </Dropdown>
-=======
-        <NavLink to="/login">
-          <Dropdown menu={{ items }} placement="bottomRight" arrow>
-            <FontAwesomeIcon icon={faCircleUser} />
-          </Dropdown>
-        </NavLink>
->>>>>>> Stashed changes
       </div>
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />
       {showMenuMobile && (
