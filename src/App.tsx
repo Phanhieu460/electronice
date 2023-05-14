@@ -31,7 +31,7 @@ function App() {
         <Route path="product" element={<Product />}>
           {/* <Route path=":productid" element={<Home />} /> */}
         </Route>
-        <Route path="my-profile" element={<MyProfile />} />
+        <Route path="my-profile/:id" element={<MyProfile />} />
       </Routes>
       <Footer />
     </>

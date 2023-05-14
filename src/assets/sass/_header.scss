@@ -70,7 +70,10 @@
   &__menubar {
     display: none;
   }
-
+  &__account {
+    position: absolute;
+    right: 5%;
+  }
   &__mobile {
     min-height: 100vh;
     position: fixed;
@@ -157,6 +160,10 @@
       right: 5%;
       padding: auto;
     }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     &__menubar {
       display: block;
     }
