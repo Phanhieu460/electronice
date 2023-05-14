@@ -10,6 +10,7 @@ const Header = (props: Props) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
 
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
+
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
@@ -26,7 +27,7 @@ const Header = (props: Props) => {
             <span className="header__cart__icon--quantity">1</span>
           </span>
         </NavLink>
-        <NavLink to="/login">
+        <NavLink to="/register">
           <FontAwesomeIcon icon={faCircleUser} />
         </NavLink>
       </div>

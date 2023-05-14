@@ -61,6 +61,10 @@
         border-radius: 50%;
       }
     }
+    svg {
+      padding: 12px;
+      font-size: 24px;
+    }
   }
 
   &__menubar {
@@ -123,7 +127,10 @@
       position: absolute;
       right: 5%;
     }
-
+    &__account {
+      position: absolute;
+      right: 5%;
+    }
     &__menubar {
       display: block;
     }
@@ -145,7 +152,11 @@
       position: absolute;
       right: 5%;
     }
-
+    &__account {
+      position: absolute;
+      right: 5%;
+      padding: auto;
+    }
     &__menubar {
       display: block;
     }

@@ -9,15 +9,13 @@ import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
+import Register from './components/UI/form/Register'
 
-import FormCreateAccount from './components/UI/form/CreatAccount'
-import styles from './styleCSS/Form.module.css'
 function App() {
   const location = useLocation()
   console.log(location.pathname)
   return (
     <>
-      <FormCreateAccount />
       <Header />
       {location.pathname !== '/' && (
         <BreadCrumbs title={location.pathname.split('/').filter(i => i)[0]} href={location.pathname} />
@@ -26,8 +24,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="register" element={<Register />} />
         {/* <Route path="login" element={<Home />} />
-        <Route path="register" element={<Home />} />
+        <} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
         <Route path="product" element={<Product />}>
