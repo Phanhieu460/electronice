@@ -1,0 +1,43 @@
+.login {
+  &__main {
+    padding: 100px 0;
+    &--form {
+      text-align: center;
+      background: #f3f3f3 none repeat scroll 0 0;
+      max-width: 35%;
+      margin: auto;
+      padding: 50px 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .login {
+    &__main {
+      &--form {
+        max-width: 40%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  //tablet
+  .login {
+    &__main {
+      &--form {
+        max-width: 50%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login {
+    &__main {
+      &--form {
+        max-width: 60%;
+      }
+    }
+  }
+}
