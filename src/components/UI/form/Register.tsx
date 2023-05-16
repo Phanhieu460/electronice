@@ -5,6 +5,7 @@ import { ICreateAccount } from './types/userType'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { openNotification } from '../../../util/notifications'
+import { useCookies } from 'react-cookie'
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState<ICreateAccount>({
@@ -18,8 +19,9 @@ const Register: React.FC = () => {
   // const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const redirectHome = () => {
-    navigate('/')
+  const [_, setCookie] = useCookies(['token'])
+  const redirectLogin = () => {
+    navigate('/login')
   }
   function handleOnChange(e: any) {
     const { value, name } = e.target
@@ -46,7 +48,7 @@ const Register: React.FC = () => {
       openNotification(
         {
           message: 'Passwords do not match',
-          description: 'Please make sure your passwords match.'
+          description: ' Your password is not correct, please enter again!'
         },
         'error'
       )
@@ -56,7 +58,8 @@ const Register: React.FC = () => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, formData)
       if (data) {
-        localStorage.setItem('token', JSON.stringify(data))
+        //  localStorage.setItem('token', JSON.stringify(data))
+        setCookie('token', JSON.stringify(data))
         navigate('/')
         openNotification(
           {
@@ -112,7 +115,7 @@ const Register: React.FC = () => {
         className="main_input"
         label=""
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: 'Please input your Password!', whitespace: true }]}
       >
         <Input.Password placeholder="Password" name="password" onChange={handleOnChange} />
       </Form.Item>
@@ -120,7 +123,7 @@ const Register: React.FC = () => {
         className="main_input"
         label=""
         name="confirmPassword"
-        rules={[{ required: true, message: 'Please input your Confirm Password!' }, {}]}
+        rules={[{ required: true, message: 'Please input your Confirm Password!', whitespace: true }]}
       >
         <Input.Password placeholder="Confirm Password" name="confirmPassword" onChange={handleOnChange} />
       </Form.Item>
@@ -129,9 +132,13 @@ const Register: React.FC = () => {
           Create
         </Button>
       </Form.Item>
-      <a className="main_a" onClick={redirectHome}>
-        Return to Store
-      </a>
+      <div className="main_redirect">
+        Already have an account?
+        <a className="main_a" onClick={redirectLogin}>
+          Log in Now
+        </a>
+      </div>
+      <a className="main_a" onClick={redirectLogin}></a>
     </Form>
   )
 }

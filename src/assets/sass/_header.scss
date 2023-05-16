@@ -1,5 +1,4 @@
 .header {
-  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -109,17 +108,15 @@
   }
 }
 
-@media #{$md-layout} {
-  .header {
-    max-width: 960px;
-  }
-}
+// @media #{$md-layout} {
+//   .header {
+//     max-width: 960px;
+//   }
+// }
 
 @media #{$sm-layout} {
   //tablet
   .header {
-    max-width: 720px;
-
     &__menu {
       display: none;
     }
@@ -142,15 +139,12 @@
 
 @media #{$xs-layout} {
   .header {
-    max-width: 540px;
-
     &__menu {
       display: none;
     }
 
     &__cart {
-      position: absolute;
-      right: 5%;
+      margin-right: 14px;
     }
     &__account {
       position: absolute;

@@ -8,6 +8,7 @@ import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
+import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import Register from './components/UI/form/Register'
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
         <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
         {/* <Route path="login" element={<Home />} />
         <} />
         <Route path="cart" element={<Home />} />
@@ -33,6 +35,7 @@ function App() {
           {/* <Route path=":productid" element={<Home />} /> */}
         </Route>
       </Routes>
+
       <Footer />
     </>
   )

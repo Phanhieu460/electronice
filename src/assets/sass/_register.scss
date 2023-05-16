@@ -30,6 +30,16 @@
   .main_a:hover{
     color: #d72323;
   }
+.main_redirect{
+  margin-left: 21px;
+
+}
+
+.main_redirect a{
+  margin-left: 0;
+  color: #1677ff;
+
+}
   @media screen and (max-width: 992px) {
     .login {
       &__main {
