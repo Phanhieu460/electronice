@@ -1,0 +1,12 @@
+.product {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.product-left {
+  flex-basis: 20%;
+}
+.product-right {
+  flex-basis: 80%;
+}

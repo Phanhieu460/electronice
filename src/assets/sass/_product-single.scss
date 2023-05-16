@@ -1,0 +1,42 @@
+.product {
+  padding: 20px 0px;
+}
+
+.product-single {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 30px;
+  flex-basis: 25%;
+}
+.product-image {
+  box-shadow: 0 0 10px 0 rgb(0 0 0 / 5%);
+  max-width: 100%;
+}
+.product-content {
+  padding: 15px;
+  &__title {
+    font-weight: 400;
+  }
+  &__price {
+    font-size: 14px;
+    margin: 8px 0px;
+    display: block;
+    &__sale {
+      color: red;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  &__ratting {
+    margin-top: 8px;
+    svg {
+      color: #fdb819;
+    }
+  }
+}
+
+@media #{$sm-layout} {
+  //tablet
+}
+
+@media #{$xs-layout} {
+}

@@ -1,0 +1,26 @@
+.product-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-basis: 75%;
+  margin-bottom: 30px;
+  &__filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    font-size: 1rem;
+    .ant-select-selector {
+      border: none;
+    }
+  }
+  &__showing {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  button {
+    background: none;
+    border: none;
+    font-size: 18px;
+  }
+}
