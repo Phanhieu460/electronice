@@ -2,7 +2,7 @@ import { Checkbox } from 'antd'
 import React from 'react'
 
 type Props = {}
-const ShopCategories = () => {
+const ShopCategories = (props: any) => {
   const categories = ['Drone 1', 'drone 2']
   return (
     <div className="product-sidebar">

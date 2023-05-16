@@ -3,7 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import Home from './pages/Home/Home'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Product from './pages/Product/Product'
+import Product from './pages/Product/ProductList'
 import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
@@ -13,7 +13,7 @@ import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 
 function App() {
   const location = useLocation()
-  console.log(location.pathname)
+
   return (
     <>
       <Header />
@@ -29,9 +29,8 @@ function App() {
         <Route path="register" element={<Home />} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
-        <Route path="product" element={<Product />}>
-          {/* <Route path=":productid" element={<Home />} /> */}
-        </Route>
+        <Route path="product" element={<Product />} />
+        <Route path="product-detail/:productid" element={<Home />} />
       </Routes>
 
       <Footer />

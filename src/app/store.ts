@@ -1,13 +1,18 @@
-import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit'
+import { Action, ThunkAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './rootSaga'
+import productReducer from 'features/product/productSlice'
+import authReducer from 'features/auth/authSlice'
+
+const rootReducer = combineReducers({
+  product: productReducer,
+  auth: authReducer
+})
 
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
-  reducer: {
-    // add reducer product: productSlice
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(sagaMiddleware)
 })
 

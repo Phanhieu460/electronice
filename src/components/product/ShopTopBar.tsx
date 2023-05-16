@@ -5,7 +5,7 @@ import React from 'react'
 
 type Props = {}
 
-const ShopTopBar = (props: Props) => {
+const ShopTopBar = (props: any) => {
   return (
     <div className="product-topbar">
       <div className="product-topbar__filter">
@@ -22,7 +22,7 @@ const ShopTopBar = (props: Props) => {
           ]}
         />
       </div>
-      <p className="product-topbar__showing">Showing 1 - 10 of 10 result</p>
+      <p className="product-topbar__showing">Showing 1 - 10 of {props.totalProduct} result</p>
       <div>
         <button>
           <i className="fas fa-th-large"></i>

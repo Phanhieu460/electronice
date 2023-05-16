@@ -1,35 +1,48 @@
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Col, Row } from 'antd'
-import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 type Props = {}
 
-const ProductSingle = (props: Props) => {
+const ProductSingle = (props: any) => {
   return (
-    <Row>
-      <Col span={6}>
-        {' '}
-        <div className="product-single">
-          <img
-            className="product-image"
-            alt="product-image"
-            src="https://cdn.shopify.com/s/files/1/1280/1207/products/7_6371c321-c6fc-45c9-96ac-84cb0ecc4a18_large.jpg?v=1640259867"
-          />
-          <div className="product-content">
-            <h3 className="product-content__title">Demo Product Title</h3>
-            <span className="product-content__price">$21.00</span>
-            <div className="product-content__ratting">
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-              <FontAwesomeIcon icon={faStar} />
-            </div>
-          </div>
+    <div className="product-single">
+      <div className="product-image">
+        <NavLink to={`/product-detail/${props.product._id}`}>
+          <img className="product-image__img" alt="product-image" src={props.product.images[0]} />
+          {props.product.discount > 0 && <span className="product-image__discount">-{props.product.discount}%</span>}
+        </NavLink>
+      </div>
+
+      <div className="product-content">
+        <NavLink to={`/product-detail/${props.product._id}`}>
+          <h3 className="product-content__title">{props.product.name}</h3>
+        </NavLink>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span
+            className="product-content__price"
+            style={{ paddingRight: 10, textDecoration: `${props.product.discount ? 'line-through' : 'none'}` }}
+          >
+            $ {props.product.price}
+          </span>
+          {props.product.discount ? (
+            <span className="product-content__price--sale">
+              $ {props.product.price - (props.product.price * props.product.discount) / 100}
+            </span>
+          ) : (
+            ''
+          )}
         </div>
-      </Col>
-    </Row>
+
+        <div className="product-content__ratting">
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+          <FontAwesomeIcon icon={faStar} />
+        </div>
+      </div>
+    </div>
   )
 }
 

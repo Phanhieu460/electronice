@@ -3,10 +3,31 @@
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 .product-left {
   flex-basis: 20%;
 }
 .product-right {
   flex-basis: 80%;
+}
+
+.product-item {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media #{$sm-layout} {
+  //tablet
+  .product-item {
+  }
+}
+
+@media #{$xs-layout} {
+  .product {
+    display: block;
+  }
+  .product-right {
+    padding: 30px;
+  }
 }

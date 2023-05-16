@@ -24,3 +24,18 @@
     font-size: 18px;
   }
 }
+@media #{$sm-layout} {
+  //tablet
+  .product {
+  }
+}
+
+@media #{$xs-layout} {
+  .product-topbar {
+    display: block;
+    text-align: left;
+    &__filter {
+      justify-content: left;
+    }
+  }
+}
