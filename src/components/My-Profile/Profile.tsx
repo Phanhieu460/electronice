@@ -16,7 +16,7 @@ interface IUser {
   address: string
 }
 
-function MyProfile(props: any) {
+function Profile(props: any) {
   const params = useParams()
   const [infor, setInfor] = useState<IUser | null>(null)
   const [val, setVal] = useState()
@@ -208,4 +208,4 @@ function MyProfile(props: any) {
   )
 }
 
-export default MyProfile
+export default Profile
