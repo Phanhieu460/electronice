@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, Outlet } from 'react-router-dom'
-import { MenuProps, Dropdown, Button } from 'antd'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { MenuProps, Dropdown, Button, Menu } from 'antd'
+import Cookies from 'js-cookie'
 
 type Props = {}
 
@@ -11,41 +12,14 @@ const Header = (props: Props) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
 
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
+  const navigate = useNavigate()
+  const token = Cookies.get('authToken')
 
-  const items: MenuProps['items'] = [
-    {
-      key: '1',
-      label: (
-        <NavLink rel="noopener noreferrer" to="login">
-          Login
-        </NavLink>
-      )
-    },
-    {
-      key: '2',
-      label: (
-        <NavLink rel="noopener noreferrer" to="create-account">
-          Create Account
-        </NavLink>
-      )
-    },
-    {
-      key: '3',
-      label: (
-        <NavLink rel="noopener noreferrer" to="my-profile">
-          My Profile
-        </NavLink>
-      )
-    },
-    {
-      key: '4',
-      label: (
-        <NavLink rel="noopener noreferrer" to={''}>
-          Logout
-        </NavLink>
-      )
-    }
-  ]
+  const handleLogout = () => {
+    Cookies.remove('authToken')
+    navigate('/')
+  }
+
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
@@ -62,7 +36,35 @@ const Header = (props: Props) => {
             <span className="header__cart__icon--quantity">1</span>
           </span>
         </NavLink>
-        <Dropdown menu={{ items }} placement="bottomRight" arrow>
+        <Dropdown
+          dropdownRender={menu => {
+            return (
+              <>
+                {token ? (
+                  <Menu>
+                    <Menu.Item key="profile">
+                      <Link to="/my-profile">My Profile</Link>
+                    </Menu.Item>
+                    <Menu.Item key="logout" onClick={handleLogout}>
+                      Logout
+                    </Menu.Item>
+                  </Menu>
+                ) : (
+                  <Menu>
+                    <Menu.Item key="signIn">
+                      <Link to="/login">Sign In</Link>
+                    </Menu.Item>
+                    <Menu.Item key="signUp">
+                      <Link to="/register">Sign Up</Link>
+                    </Menu.Item>
+                  </Menu>
+                )}
+              </>
+            )
+          }}
+          placement="bottomRight"
+          arrow
+        >
           <FontAwesomeIcon icon={faCircleUser} />
         </Dropdown>
       </div>
