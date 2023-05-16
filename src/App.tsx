@@ -9,7 +9,7 @@ import About from './pages/About/About'
 import Header from './components/UI/header/Header'
 import Footer from './components/UI/footer/Footer'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
-import MyProfile from './components/My-Profile/My-Profile'
+import MyProfile from './components/My-Profile/My-profile'
 
 function App() {
   const location = useLocation()

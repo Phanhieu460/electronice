@@ -16,7 +16,7 @@ const Header = (props: Props) => {
     {
       key: '1',
       label: (
-        <NavLink target="_blank" rel="noopener noreferrer" to="login">
+        <NavLink rel="noopener noreferrer" to="login">
           Login
         </NavLink>
       )
@@ -24,7 +24,7 @@ const Header = (props: Props) => {
     {
       key: '2',
       label: (
-        <NavLink target="_blank" rel="noopener noreferrer" to="create-account">
+        <NavLink rel="noopener noreferrer" to="create-account">
           Create Account
         </NavLink>
       )
@@ -40,7 +40,7 @@ const Header = (props: Props) => {
     {
       key: '4',
       label: (
-        <NavLink target="_blank" rel="noopener noreferrer" to={''}>
+        <NavLink rel="noopener noreferrer" to={''}>
           Logout
         </NavLink>
       )
