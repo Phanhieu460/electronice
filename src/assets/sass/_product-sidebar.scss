@@ -1,0 +1,11 @@
+.product-sidebar {
+  &__title {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+}
+.category-item,
+.tag-item {
+  padding: 4px 0;
+}

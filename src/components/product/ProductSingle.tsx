@@ -10,6 +10,8 @@ const ProductSingle = (props: any) => {
       <div className="product-image">
         <NavLink to={`/product-detail/${props.product._id}`}>
           <img className="product-image__img" alt="product-image" src={props.product.images[0]} />
+
+          {props.product.news && <span className="product-image__news">New</span>}
           {props.product.discount > 0 && <span className="product-image__discount">-{props.product.discount}%</span>}
         </NavLink>
       </div>

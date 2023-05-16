@@ -5,13 +5,17 @@ import { Product } from 'models/product'
 export interface ProductState {
   productList: Product[]
   productById?: Product[]
+  pages: number
+  count: number
   loading: boolean
 }
 
 const initialState: ProductState = {
   loading: false,
   productList: [],
-  productById: []
+  productById: [],
+  pages: 0,
+  count: 0
 }
 
 const productSlice = createSlice({
@@ -24,6 +28,8 @@ const productSlice = createSlice({
     fetchProductListSuccess: (state, action: any) => {
       console.log(action.payload)
       state.productList = action.payload?.products
+      state.pages = action.payload?.pages
+      state.count = action.payload?.count
       state.loading = false
     },
     fetchProductListFailed: state => {
@@ -42,7 +48,14 @@ const productSlice = createSlice({
   }
 })
 // Actions
-export const productActions = productSlice.actions
+export const {
+  fetchProductList,
+  fetchProductListSuccess,
+  fetchProductListFailed,
+  fetchProductById,
+  fetchProductByIdSuccess,
+  fetchProductByIdFailed
+} = productSlice.actions
 
 // Reducer
 const productReducer = productSlice.reducer

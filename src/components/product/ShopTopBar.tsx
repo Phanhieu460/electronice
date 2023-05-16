@@ -22,7 +22,9 @@ const ShopTopBar = (props: any) => {
           ]}
         />
       </div>
-      <p className="product-topbar__showing">Showing 1 - 10 of {props.totalProduct} result</p>
+      <p className="product-topbar__showing">
+        Showing 1 - {props.totalProduct} of {props.totalProduct} result
+      </p>
       <div>
         <button>
           <i className="fas fa-th-large"></i>

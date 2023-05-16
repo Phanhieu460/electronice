@@ -21,7 +21,19 @@
     width: 45px;
     height: 18px;
     right: 5%;
-    top: 15px;
+    top: 20%;
+    text-align: center;
+  }
+  &__news {
+    position: absolute;
+    background: red;
+    color: white;
+    border: 1px solid;
+    border-radius: 14px;
+    width: 45px;
+    height: 18px;
+    right: 5%;
+    top: 5%;
     text-align: center;
   }
 }
