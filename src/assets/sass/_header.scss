@@ -60,12 +60,19 @@
         border-radius: 50%;
       }
     }
+    svg {
+      padding: 12px;
+      font-size: 24px;
+    }
   }
 
   &__menubar {
     display: none;
   }
-
+  &__account {
+    position: absolute;
+    right: 5%;
+  }
   &__mobile {
     min-height: 100vh;
     position: fixed;
@@ -120,7 +127,10 @@
       position: absolute;
       right: 5%;
     }
-
+    &__account {
+      position: absolute;
+      right: 5%;
+    }
     &__menubar {
       display: block;
     }
@@ -139,7 +149,11 @@
     &__cart {
       margin-right: 14px;
     }
-
+    &__account {
+      position: absolute;
+      right: 5%;
+      padding: auto;
+    }
     &__menubar {
       display: block;
     }

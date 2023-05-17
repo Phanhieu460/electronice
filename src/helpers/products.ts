@@ -57,3 +57,25 @@ export const getProductsIndividualSizes = (products: Array<Product>) => {
   const individualProductSizes = getItemArray(productSizes)
   return individualProductSizes
 }
+
+export const getSortedProducts = (products: Array<Product>, sortType: string, sortValue: string) => {
+  if (products && sortType && sortValue) {
+    if (sortType === 'filterSort') {
+      let sortProducts = [...products]
+      if (sortValue === 'default') {
+        return sortProducts
+      }
+      if (sortValue === 'priceHighToLow') {
+        return sortProducts.sort((a, b) => {
+          return b.price - a.price
+        })
+      }
+      if (sortValue === 'priceLowToHigh') {
+        return sortProducts.sort((a, b) => {
+          return a.price - b.price
+        })
+      }
+    }
+  }
+  return products
+}

@@ -26,7 +26,6 @@ const productSlice = createSlice({
       state.loading = true
     },
     fetchProductListSuccess: (state, action: any) => {
-      console.log(action.payload)
       state.productList = action.payload?.products
       state.pages = action.payload?.pages
       state.count = action.payload?.count

@@ -4,14 +4,13 @@ import { openNotification } from '../../util/notifications'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useCookies } from 'react-cookie'
+import Cookies from 'js-cookie'
 
 const Login = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [token, setToken] = useCookies()
 
   const redirectHome = () => {
     navigate('/')
@@ -33,7 +32,7 @@ const Login = () => {
       })
       .then(response => {
         setUser(response.data)
-        setToken('authToken', response.data.token, { path: '/' })
+        Cookies.set('authToken', response.data.token, { path: '/' })
         openNotification(
           {
             message: 'Login Success',

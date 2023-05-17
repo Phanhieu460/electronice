@@ -16,6 +16,7 @@ const ProductList = () => {
   const dispatch = useAppDispatch()
   const { productList, count } = useAppSelector(state => state.product)
   const [pageNumber, setPageNumber] = useState<number>(1)
+  const [products, setProducts] = useState<Array<Product>>()
   const [view, setView] = useState<string>('grid')
   const navigate = useNavigate()
 
@@ -23,11 +24,16 @@ const ProductList = () => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: pageNumber })
     if (pageNumber === 1) navigate(`/product`)
   }, [pageNumber])
+
+  useEffect(() => {
+    if (productList) setProducts(productList)
+  }, [productList])
+
   const handleChangePagination: PaginationProps['onChange'] = page => {
     setPageNumber(page)
     navigate(`/product?pageNumber=${page}`)
   }
-
+  console.log(products)
   return (
     <div className="product">
       <div className="product-left">
@@ -37,10 +43,16 @@ const ProductList = () => {
       </div>
       <div className="product-right">
         {' '}
-        <ShopTopBar totalProduct={productList.length} view={view} setView={setView} />
+        <ShopTopBar
+          totalProduct={productList.length}
+          products={products}
+          view={view}
+          setView={setView}
+          setProducts={setProducts}
+        />
         <div className="product-item">
-          {productList &&
-            productList?.map((product: Product) => {
+          {products &&
+            products?.map((product: Product) => {
               return <ProductSingle product={product} key={product._id} view={view} />
             })}
         </div>
