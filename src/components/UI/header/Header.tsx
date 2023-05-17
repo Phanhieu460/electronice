@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Dropdown, Menu } from 'antd'
+import Cookies from 'js-cookie'
 
 type Props = {}
 
@@ -10,6 +12,13 @@ const Header = (props: Props) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
 
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
+  const navigate = useNavigate()
+  const token = Cookies.get('authToken')
+
+  const handleLogout = () => {
+    Cookies.remove('authToken')
+    navigate('/')
+  }
 
   return (
     <div className="header">
@@ -27,9 +36,37 @@ const Header = (props: Props) => {
             <span className="header__cart__icon--quantity">1</span>
           </span>
         </NavLink>
-        <NavLink to="/register">
+        <Dropdown
+          dropdownRender={menu => {
+            return (
+              <>
+                {token ? (
+                  <Menu>
+                    <Menu.Item key="profile">
+                      <Link to="/my-profile">My Profile</Link>
+                    </Menu.Item>
+                    <Menu.Item key="logout" onClick={handleLogout}>
+                      Logout
+                    </Menu.Item>
+                  </Menu>
+                ) : (
+                  <Menu>
+                    <Menu.Item key="signIn">
+                      <Link to="/login">Sign In</Link>
+                    </Menu.Item>
+                    <Menu.Item key="signUp">
+                      <Link to="/register">Sign Up</Link>
+                    </Menu.Item>
+                  </Menu>
+                )}
+              </>
+            )
+          }}
+          placement="bottomRight"
+          arrow
+        >
           <FontAwesomeIcon icon={faCircleUser} />
-        </NavLink>
+        </Dropdown>
       </div>
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />
       {showMenuMobile && (

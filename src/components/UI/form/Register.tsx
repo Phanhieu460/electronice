@@ -5,7 +5,7 @@ import { ICreateAccount } from './types/userType'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { openNotification } from '../../../util/notifications'
-import { useCookies } from 'react-cookie'
+import Cookies from 'js-cookie'
 
 const Register: React.FC = () => {
   const [formData, setFormData] = useState<ICreateAccount>({
@@ -15,11 +15,8 @@ const Register: React.FC = () => {
     password: '',
     confirmPassword: ''
   })
-  // const [password, setPassword] = useState<string>('')
-  // const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const [_, setCookie] = useCookies(['token'])
   const redirectLogin = () => {
     navigate('/login')
   }
@@ -29,8 +26,6 @@ const Register: React.FC = () => {
       ...prev,
       [name]: value
     }))
-
-    console.log(formData)
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,8 +53,8 @@ const Register: React.FC = () => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, formData)
       if (data) {
-        //  localStorage.setItem('token', JSON.stringify(data))
-        setCookie('token', JSON.stringify(data))
+        Cookies.set('authToken', data.token)
+
         navigate('/')
         openNotification(
           {

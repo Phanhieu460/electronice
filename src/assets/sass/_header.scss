@@ -69,7 +69,10 @@
   &__menubar {
     display: none;
   }
-
+  &__account {
+    position: absolute;
+    right: 5%;
+  }
   &__mobile {
     min-height: 100vh;
     position: fixed;
