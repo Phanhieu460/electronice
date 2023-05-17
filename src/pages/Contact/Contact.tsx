@@ -63,7 +63,6 @@ export default class Contact extends React.Component {
       subject: this.state.subject,
       text: this.state.text
     }
-    console.log(todo)
 
     this.setState({
       name: '',

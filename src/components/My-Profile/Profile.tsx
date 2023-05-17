@@ -45,7 +45,6 @@ function Profile(props: any) {
       duration: 1.5,
       onClose: () => {}
     })
-    console.log(e)
   }
 
   const onblurNumber = (e: any) => {

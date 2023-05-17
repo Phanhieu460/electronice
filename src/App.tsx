@@ -14,7 +14,7 @@ import Register from './components/UI/form/Register'
 
 function App() {
   const location = useLocation()
-  console.log(location.pathname)
+
   return (
     <>
       <Header />
