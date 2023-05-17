@@ -13,7 +13,7 @@ const ShopCategories = (props: any) => {
         <>
           {uniqueCategories.map((category: any, index: number) => {
             return (
-              <div className="category-item">
+              <div className="category-item" key={index}>
                 <Checkbox>
                   <span className="category-name">{category}</span>
                 </Checkbox>

@@ -10,17 +10,22 @@ import { getCategories } from 'helpers/products'
 import { Product } from 'models'
 
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProductList = () => {
   const dispatch = useAppDispatch()
   const { productList, count } = useAppSelector(state => state.product)
   const [pageNumber, setPageNumber] = useState<number>(1)
+  const [view, setView] = useState<string>('grid')
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: pageNumber })
+    if (pageNumber === 1) navigate(`/product`)
   }, [pageNumber])
   const handleChangePagination: PaginationProps['onChange'] = page => {
     setPageNumber(page)
+    navigate(`/product?pageNumber=${page}`)
   }
 
   return (
@@ -32,11 +37,11 @@ const ProductList = () => {
       </div>
       <div className="product-right">
         {' '}
-        <ShopTopBar totalProduct={productList.length} />
+        <ShopTopBar totalProduct={productList.length} view={view} setView={setView} />
         <div className="product-item">
           {productList &&
             productList?.map((product: Product) => {
-              return <ProductSingle product={product} key={product._id} />
+              return <ProductSingle product={product} key={product._id} view={view} />
             })}
         </div>
         <Pagination defaultCurrent={1} total={count} pageSize={12} onChange={handleChangePagination} />;

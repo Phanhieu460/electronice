@@ -13,7 +13,7 @@ const ShopTag = (props: any) => {
         <>
           {uniqueTags.map((tag: any, index: number) => {
             return (
-              <div className="tag-item">
+              <div className="tag-item" key={index}>
                 <Checkbox>
                   <span className="category-name">{tag}</span>
                 </Checkbox>

@@ -40,3 +40,20 @@ export const getTags = (products: Array<Product>) => {
   const itemProductTags = getItemArray(productTags)
   return itemProductTags
 }
+
+export const getProductsIndividualSizes = (products: Array<Product>) => {
+  let productSizes: any = []
+  products &&
+    products.map(product => {
+      return (
+        product.variation &&
+        product.variation.map(single => {
+          return single.size.map(single => {
+            return productSizes.push(single.name)
+          })
+        })
+      )
+    })
+  const individualProductSizes = getItemArray(productSizes)
+  return individualProductSizes
+}

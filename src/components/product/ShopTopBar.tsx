@@ -2,14 +2,17 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Select } from 'antd'
 import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 type Props = {}
 
 const ShopTopBar = (props: any) => {
+  const navigate = useNavigate()
   return (
     <div className="product-topbar">
       <div className="product-topbar__filter">
-        <p>Sort by :</p>
+        <p style={{ paddingRight: 5 }}>Sort by :</p>
         <Select
           defaultValue="featured"
           style={{ width: 200 }}
@@ -26,11 +29,23 @@ const ShopTopBar = (props: any) => {
         Showing 1 - {props.totalProduct} of {props.totalProduct} result
       </p>
       <div>
-        <button>
-          <i className="fas fa-th-large"></i>
+        <button
+          onClick={() => {
+            props.setView('grid')
+          }}
+        >
+          <NavLink to="/product" className="active">
+            <i className="fas fa-th-large"></i>
+          </NavLink>
         </button>
-        <button>
-          <FontAwesomeIcon icon={faBars} />
+        <button
+          onClick={() => {
+            props.setView('list')
+          }}
+        >
+          <NavLink to="/product?view=list" className="">
+            <FontAwesomeIcon icon={faBars} />
+          </NavLink>
         </button>
       </div>
     </div>
