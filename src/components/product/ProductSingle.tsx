@@ -32,11 +32,11 @@ const ProductSingle = (props: any) => {
                 className="product-single-grid__content--price"
                 style={{ paddingRight: 10, textDecoration: `${props.product.discount ? 'line-through' : 'none'}` }}
               >
-                $ {props.product.price}
+                ${props.product.price}
               </span>
               {props.product.discount ? (
                 <span className="product-single-grid__content--priceSale">
-                  $ {props.product.price - (props.product.price * props.product.discount) / 100}
+                  ${props.product.price - (props.product.price * props.product.discount) / 100}
                 </span>
               ) : (
                 ''
@@ -44,11 +44,14 @@ const ProductSingle = (props: any) => {
             </div>
 
             <div className="product-single-grid__content--ratting">
-              <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
-              <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
-              <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
-              <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
-              <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+              <div>
+                <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+                <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+                <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+                <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+                <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
+              </div>
+              <Button style={{ marginLeft: 14 }}>Buy Now</Button>
             </div>
           </div>
         </div>
@@ -76,11 +79,11 @@ const ProductSingle = (props: any) => {
                 className="product-single-list__content--price"
                 style={{ paddingRight: 10, textDecoration: `${props.product.discount ? 'line-through' : 'none'}` }}
               >
-                $ {props.product.price}
+                ${props.product.price}
               </span>
               {props.product.discount ? (
                 <span className="product-single-list__content--priceSale">
-                  $ {props.product.price - (props.product.price * props.product.discount) / 100}
+                  ${props.product.price - (props.product.price * props.product.discount) / 100}
                 </span>
               ) : (
                 ''
@@ -95,7 +98,7 @@ const ProductSingle = (props: any) => {
               <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
             </div>
             <Button className="product-single-list__content--addToCart">
-              <FontAwesomeIcon icon={faCartPlus} />
+              <FontAwesomeIcon icon={faCartPlus} style={{ paddingRight: 5 }} />
               Add To Cart
             </Button>
           </div>

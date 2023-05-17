@@ -26,9 +26,10 @@
 
 @media #{$xs-layout} {
   .product {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
   }
   .product-right {
-    padding: 30px;
+    padding: 10px;
   }
 }

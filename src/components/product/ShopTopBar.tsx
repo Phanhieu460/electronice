@@ -32,7 +32,7 @@ const ShopTopBar = (props: any) => {
       <p className="product-topbar__showing">
         Showing 1 - {props.totalProduct} of {props.totalProduct} result
       </p>
-      <div>
+      <div className="product-topbar__view">
         <button
           onClick={() => {
             props.setView('grid')

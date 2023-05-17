@@ -41,6 +41,7 @@
   &__content {
     padding: 15px;
     width: 250px;
+    background: #f4f4f4;
     > a {
       text-decoration: none;
       color: inherit;
@@ -49,7 +50,7 @@
       display: block;
       font-size: 1rem;
       line-height: 1rem;
-      font-weight: 400;
+      font-weight: 500;
       max-width: 100%;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -71,19 +72,15 @@
     }
     &--ratting {
       margin-top: 8px;
-    }
-  }
-
-  @media #{$sm-layout} {
-    //tablet
-    .product-modal {
-      display: none;
-    }
-  }
-
-  @media #{$xs-layout} {
-    .product-modal {
-      display: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > .ant-btn {
+        &:hover {
+          background: red;
+          color: white;
+        }
+      }
     }
   }
 }
@@ -185,23 +182,29 @@
     > .ant-btn {
       height: 40px;
       border-radius: inherit;
+      background: red;
+      color: white;
     }
     &--addToCart {
       margin-top: 10px;
     }
   }
-
-  @media #{$sm-layout} {
-    //tablet
-    .product-single-list {
-      flex-basis: 45%;
-      margin: 10px;
-    }
+}
+@media #{$sm-layout} {
+  .product-single-list {
+    flex-basis: 45%;
+    margin: 10px;
   }
+}
 
-  @media #{$xs-layout} {
-    .product-single-list {
-      flex-basis: 100%;
+@media #{$xs-layout} {
+  .product-single-list {
+    flex-basis: 100%;
+    flex-direction: column;
+    &__image {
+      &--modal {
+        display: none;
+      }
     }
   }
 }

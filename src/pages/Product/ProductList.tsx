@@ -33,7 +33,7 @@ const ProductList = () => {
     setPageNumber(page)
     navigate(`/product?pageNumber=${page}`)
   }
-  console.log(products)
+
   return (
     <div className="product">
       <div className="product-left">
@@ -56,7 +56,7 @@ const ProductList = () => {
               return <ProductSingle product={product} key={product._id} view={view} />
             })}
         </div>
-        <Pagination defaultCurrent={1} total={count} pageSize={12} onChange={handleChangePagination} />;
+        <Pagination defaultCurrent={1} total={count} pageSize={12} onChange={handleChangePagination} />
       </div>
     </div>
   )
