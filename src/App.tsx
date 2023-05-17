@@ -10,6 +10,7 @@ import Footer from './components/UI/footer/Footer'
 import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
+import Register from './components/UI/form/Register'
 
 function App() {
   const location = useLocation()
@@ -24,9 +25,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         {/* <Route path="login" element={<Home />} />
-        <Route path="register" element={<Home />} />
+        <} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
         <Route path="product" element={<Product />}>

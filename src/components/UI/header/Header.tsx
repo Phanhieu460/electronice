@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { MenuProps, Dropdown, Button, Menu } from 'antd'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Dropdown, Menu } from 'antd'
 import Cookies from 'js-cookie'
 
 type Props = {}
