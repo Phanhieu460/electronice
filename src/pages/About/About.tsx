@@ -1,24 +1,22 @@
 import React, { useState } from 'react'
 import Header from '../../components/UI/header/Header'
 import about from '../../assets/images/about.jpg'
-import feature from '../../assets/images/7.jpg'
-import popular from '../../assets/images/5_100x.jpg'
-import { Carousel } from 'antd'
 import product from '../../assets/images/2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-
-// const contentStyle: React.CSSProperties = {
-//   display: 'inline-block'
-// }
+import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Keyboard, Pagination, Navigation } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
 const About = () => {
-  const [listProduct, setListProduct] = useState([])
-  const [active, setActive] = useState(false)
-  const onToggle = (status: boolean) => setActive(status)
-  // const onChange = (currentSlide: number) => {
-  //   console.log(currentSlide)
-  // }
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/collections/all')
+  }
 
   return (
     <main>
@@ -53,6 +51,7 @@ const About = () => {
           </div>
         </div>
       </div>
+
       <div className="popular">
         <div className="popular__contain">
           <div className="popular__container">
@@ -60,21 +59,53 @@ const About = () => {
               <h2>POPULAR ITEM</h2>
               <p>What Client's Says</p>
             </div>
-            <div className="popular__container--content">
-              <div className="popular--content">
-                <img src={popular} />
-                <p>
-                  What can I say about coffee? Coffee is coffee. It tastes good, wakes you up, and is less than $10 at
-                  most Starbucks. What else do you need?
-                </p>
-                <div className="client-info">
-                  <h5>Hester Perkins</h5>
+
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={30}
+              keyboard={{
+                enabled: true
+              }}
+              // pagination={{
+              //   clickable: true
+              // }}
+              navigation={true}
+              modules={[Keyboard, Pagination, Navigation]}
+              className="mySwiper"
+            >
+              <SwiperSlide>
+                <div className="popular__container--content">
+                  <div className="popular--content">
+                    <img src="//cdn.shopify.com/s/files/1/1280/1207/products/3_100x.jpg?v=1640259627" alt="" />
+                    <p>
+                      What can I say about coffee? Coffee is coffee. It tastes good, wakes you up, and is less than $10
+                      at most Starbucks. What else do you need?
+                    </p>
+                    <div className="client-info">
+                      <h5>Hester Perkins</h5>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </SwiperSlide>
+              <SwiperSlide>
+                <div className="popular__container--content">
+                  <div className="popular--content">
+                    <img src="//cdn.shopify.com/s/files/1/1280/1207/products/5_100x.jpg?v=1640259627" alt="" />
+                    <p>
+                      I've been drinking coffee for years and I can honestly say that coffee is the best product out
+                      there. Coffee has a perfect taste and it wakes me up in the morning. It's also really.affordable.
+                    </p>
+                    <div className="client-info">
+                      <h5>Forster Hobs</h5>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            </Swiper>
           </div>
         </div>
       </div>
+
       <div className="popular__item">
         <div className="popular__item__contain">
           <div className="popular__item__container">
@@ -84,72 +115,160 @@ const About = () => {
             </div>
 
             <div className="popular__item--content">
-              <div className="card">
-                <div className="card__container">
-                  <div className="card__image">
-                    <img src={product} />
-                    <div className="team-action">
-                      <a className="facebook" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="twitter" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="instagram" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
+              <Swiper
+                // slidesPerView={3}
+                breakpoints={{
+                  // when window width is >= 640px
+                  960: {
+                    width: 960,
+                    slidesPerView: 3
+                  },
+                  // when window width is >= 768px
+                  768: {
+                    width: 768,
+                    slidesPerView: 4
+                  },
+                  600: {
+                    width: 600,
+                    slidesPerView: 5
+                  },
+                  480: {
+                    width: 480,
+                    slidesPerView: 1
+                  }
+                }}
+                spaceBetween={30}
+                keyboard={{
+                  enabled: true
+                }}
+                // pagination={{
+                //   clickable: true
+                // }}
+                navigation={true}
+                modules={[Keyboard, Pagination, Navigation]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Mr. Phan Hiếu</h4>
+                        <span>Manager</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="card__content">
-                    <h4>Mr. Mike Banding</h4>
-                    <span>Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card__container">
-                  <div className="card__image">
-                    <img src={product} />
-                    <div className="team-action">
-                      <a className="facebook" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="twitter" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="instagram" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Ms. Bùi Xuân</h4>
+                        <span>Manager</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="card__content">
-                    <h4>Mr. Mike Banding</h4>
-                    <span>Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <div className="card__container">
-                  <div className="card__image">
-                    <img src={product} />
-                    <div className="team-action">
-                      <a className="facebook" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="twitter" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
-                      <a className="instagram" href="#">
-                        <FontAwesomeIcon icon={faFacebook} />
-                      </a>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Mr. Đông Trần</h4>
+                        <span>Manager</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="card__content">
-                    <h4>Mr. Mike Banding</h4>
-                    <span>Manager</span>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Mr. Phạm Hùng</h4>
+                        <span>Manager</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Mr. Dũng Nguyễn</h4>
+                        <span>Manager</span>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </div>
@@ -162,34 +281,188 @@ const About = () => {
               <h3>Featured in Drone</h3>
             </div>
             <div className="featured__item--content">
-              <div className="card__featured">
-                <div className="card__featured__container">
-                  <div className="card__featured__image">
-                    <img src={feature} />
+              <Swiper
+                slidesPerView={4}
+                spaceBetween={30}
+                keyboard={{
+                  enabled: true
+                }}
+                // pagination={{
+                //   clickable: true
+                // }}
+                navigation={true}
+                modules={[Keyboard, Pagination, Navigation]}
+                className="mySwiper"
+              >
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/1.png?v=1639562519" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="card__featured">
-                <div className="card__featured__container">
-                  <div className="card__featured__image">
-                    <img src={feature} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/8.png?v=1639562650" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="card__featured">
-                <div className="card__featured__container">
-                  <div className="card__featured__image">
-                    <img src={feature} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/7.png?v=1639562639" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="card__featured">
-                <div className="card__featured__container">
-                  <div className="card__featured__image">
-                    <img src={feature} />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </div>
