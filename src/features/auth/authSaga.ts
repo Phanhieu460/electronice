@@ -1,48 +1,31 @@
 //@ts-nocheck
-import { PayloadAction } from '@reduxjs/toolkit'
-import { call, delay, fork, put, take } from 'redux-saga/effects'
-import { authActions, LoginPayload } from './authSlice'
+import userApi from 'api/userApi'
+import { ListResponse } from 'models'
+import { call, delay, fork, put, take, takeLatest } from 'redux-saga/effects'
+import { loginFailed, loginSuccess } from './authSlice'
+import { USER_LOGIN, USER_REGISTER } from 'features/types'
 
-function* handleLogin(payload: LoginPayload) {
+function* login(email: string, password: string) {
+  console.log(action)
   try {
-    yield delay(1000)
-
-    localStorage.setItem('access_token', 'fake_token')
-    yield put(
-      authActions.loginSuccess({
-        id: '1',
-        email: 'Easy Frontend'
-      })
-    )
-
-    // redirect to admin page
-    // yield put(push('/admin/dashboard'))
-  } catch (error: any) {
-    yield put(authActions.loginFailed(error.message))
+    const response: ListResponse<User> = yield call(userApi.login(email, password))
+    yield put(loginSuccess(response))
+  } catch (error) {
+    console.log('Login Failed', error)
+    yield put(loginFailed())
   }
 }
-
-function* handleLogout() {
-  yield delay(500)
-  localStorage.removeItem('access_token')
-  // redirect to login page
-  // yield put(push('/login'))
-}
-
-function* watchLoginFlow() {
-  while (true) {
-    const isLoggedIn = Boolean(localStorage.getItem('access_token'))
-
-    if (!isLoggedIn) {
-      const action: PayloadAction<LoginPayload> = yield take(authActions.login.type)
-      yield fork(handleLogin, action.payload)
-    }
-
-    yield take(authActions.logout.type)
-    yield call(handleLogout)
+function* register(email: string, password: string) {
+  try {
+    const response: ListResponse<User> = yield userApi.register(email, password)
+    yield put(loginSuccess(response))
+  } catch (error) {
+    console.log('Register Failed', error)
+    yield put(loginFailed())
   }
 }
 
 export default function* authSaga() {
-  yield fork(watchLoginFlow)
+  yield takeLatest(USER_LOGIN, login)
+  yield takeLatest(USER_REGISTER, register)
 }

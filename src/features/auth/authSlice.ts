@@ -1,18 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { User } from 'models/user'
 
-export interface LoginPayload {
-  username: string
-  password: string
-}
-
-export interface AuthState {
+export interface ProfileState {
   isLoggedIn: boolean
   logging?: boolean
   currentUser?: User
 }
 
-const initialState: AuthState = {
+const initialState: ProfileState = {
   isLoggedIn: false,
   logging: false,
   currentUser: undefined
@@ -22,7 +17,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login(state, action: PayloadAction<LoginPayload>) {
+    login(state) {
       state.logging = true
     },
     loginSuccess(state, action: PayloadAction<User>) {
@@ -42,11 +37,7 @@ const authSlice = createSlice({
 })
 
 // Actions
-export const authActions = authSlice.actions
-
-// Selectors
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn
-export const selectIsLogging = (state: any) => state.auth.logging
+export const { login, loginSuccess, loginFailed } = authSlice.actions
 
 // Reducer
 const authReducer = authSlice.reducer
