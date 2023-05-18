@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+//@ts-nocheck
+import React, { useEffect, useState } from 'react'
 import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Dropdown, Menu } from 'antd'
 import Cookies from 'js-cookie'
+import { parseJwt } from 'util/decodeJWT'
+import api from 'api/apiClient'
 
 type Props = {}
 
@@ -14,6 +17,14 @@ const Header = (props: Props) => {
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
   const navigate = useNavigate()
   const token = Cookies.get('authToken')
+  const [image, setImage] = useState<string>()
+  useEffect(() => {
+    try {
+      api.get(`/api/users/profile/${parseJwt(token).id}`).then(res => setImage(res.image))
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
 
   const handleLogout = () => {
     Cookies.remove('authToken')
@@ -65,7 +76,7 @@ const Header = (props: Props) => {
           placement="bottomRight"
           arrow
         >
-          <FontAwesomeIcon icon={faCircleUser} />
+          {token ? <img src={image} className="avatar" alt="avatar" /> : <FontAwesomeIcon icon={faCircleUser} />}
         </Dropdown>
       </div>
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />
