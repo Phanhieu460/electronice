@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../../components/UI/header/Header'
 import '../../App.css'
 import { faFacebook, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
@@ -63,7 +62,6 @@ export default class Contact extends React.Component {
       subject: this.state.subject,
       text: this.state.text
     }
-    console.log(todo)
 
     this.setState({
       name: '',
@@ -77,7 +75,7 @@ export default class Contact extends React.Component {
       message: 'Success',
       description: 'Thank you! You have successfully subscribed to receive news from Droon!'
     }
-    openNotification('success', message)
+    openNotification(message, 'success')
   }
 
   render() {

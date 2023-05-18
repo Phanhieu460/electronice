@@ -1,0 +1,70 @@
+/* a.module.css */
+
+.main {
+  width: 450px;
+  height: 500px;
+  background-color: #f3f3f3;
+  margin: auto;
+  > h1,
+  > p {
+    text-align: center;
+  }
+}
+.center {
+  color: green;
+}
+.main_input {
+  border: none;
+  width: 90%;
+  margin-left: 21px;
+}
+
+.main_button {
+  width: 90%;
+  margin-left: 21px;
+}
+.main_a {
+  margin-left: 21px;
+  color: #000;
+}
+.main_a:hover {
+  color: #d72323;
+}
+.main_redirect {
+  margin-left: 21px;
+}
+
+.main_redirect a {
+  margin-left: 0;
+  color: #1677ff;
+}
+@media screen and (max-width: 992px) {
+  .login {
+    &__main {
+      &--form {
+        max-width: 40%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  //tablet
+  .login {
+    &__main {
+      &--form {
+        max-width: 50%;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .login {
+    &__main {
+      &--form {
+        max-width: 60%;
+      }
+    }
+  }
+}
