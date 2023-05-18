@@ -9,7 +9,7 @@ interface VariationItem {
   size: Array<SizeItem>
 }
 
-export interface Product {
+export type Product = {
   _id: string
   name: string
   sku: string

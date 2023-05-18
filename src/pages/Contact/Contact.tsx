@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from '../../components/UI/header/Header'
 import '../../App.css'
 import { faFacebook, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons'
 
