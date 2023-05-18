@@ -1,16 +1,22 @@
-import { ListParams, ListResponse } from 'models/common'
-import api from './apiClient'
 import { User } from 'models/user'
+import api from './apiClient'
 
-const productApi = {
-  getProfileById(id: string): Promise<ListResponse<User>> {
+const userApi = {
+  login(data: User): Promise<User> {
+    const url = '/api/users/login'
+    return api.post(url, data)
+  },
+  register(data: User): Promise<User> {
+    const url = '/api/users/register'
+    return api.post(url, data)
+  },
+  profile(id: string): Promise<User> {
     const url = `/api/users/profile/${id}`
     return api.get(url)
   },
-  updateProfile(id: string, data: any): Promise<ListResponse<User>> {
-    const url = `/api/users/profile/${id}`
+  updateProfile(data: User): Promise<User> {
+    const url = `/ap/users/profile/${data._id}`
     return api.patch(url, data)
   }
 }
-
-export default productApi
+export default userApi
