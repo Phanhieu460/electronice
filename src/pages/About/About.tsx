@@ -116,27 +116,28 @@ const About = () => {
 
             <div className="popular__item--content">
               <Swiper
-                // slidesPerView={3}
-                breakpoints={{
-                  // when window width is >= 640px
-                  960: {
-                    width: 960,
-                    slidesPerView: 3
-                  },
-                  // when window width is >= 768px
-                  768: {
-                    width: 768,
-                    slidesPerView: 4
-                  },
-                  600: {
-                    width: 600,
-                    slidesPerView: 5
-                  },
-                  480: {
-                    width: 480,
-                    slidesPerView: 1
-                  }
-                }}
+                autoplay
+                slidesPerView={3}
+                // breakpoints={{
+                //   // when window width is >= 640px
+                //   960: {
+                //     width: 960,
+                //     slidesPerView: 3
+                //   },
+                //   // when window width is >= 768px
+                //   768: {
+                //     width: 768,
+                //     slidesPerView: 4
+                //   },
+                //   600: {
+                //     width: 600,
+                //     slidesPerView: 5
+                //   },
+                //   480: {
+                //     width: 480,
+                //     slidesPerView: 1
+                //   }
+                // }}
                 spaceBetween={30}
                 keyboard={{
                   enabled: true
