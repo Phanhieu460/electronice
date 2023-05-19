@@ -20,7 +20,9 @@ const Header = (props: Props) => {
   const [image, setImage] = useState<string>()
   useEffect(() => {
     try {
-      api.get(`/api/users/profile/${parseJwt(token).id}`).then(res => setImage(res.image))
+      if (token) {
+        api.get(`/api/users/profile/${parseJwt(token).id}`).then(res => setImage(res.image))
+      }
     } catch (error) {
       console.log(error)
     }

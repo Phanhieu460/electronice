@@ -31,8 +31,9 @@ const Login = () => {
         password
       })
       .then(response => {
+        console.log(response.data)
         setUser(response.data)
-        Cookies.set('authToken', response.data.token, { path: '/' })
+        Cookies.set('authToken', response.data.token, { refreshToken: 'testetsstets' })
         openNotification(
           {
             message: 'Login Success',
