@@ -3,12 +3,12 @@ import { Product } from 'models/product'
 import api from './apiClient'
 
 const productApi = {
-  getAll(params: ListParams): Promise<ListResponse<Product>> {
-    const url = '/api/products'
-    return api.get(url, { params })
+  getAll(pageNumber: number): Promise<ListResponse<Product>> {
+    const url = `api/products?pageNumber=${pageNumber}`
+    return api.get(url)
   },
   getById(id: string): Promise<ListResponse<Product>> {
-    const url = '/api/products/${id}'
+    const url = `/api/products/${id}`
     return api.get(url)
   }
 }

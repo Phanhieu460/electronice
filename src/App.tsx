@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import Home from './pages/Home/Home'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import Product from './pages/Product/Product'
+import Product from './pages/Product/ProductList'
 import Contact from './pages/Contact/Contact'
 import About from './pages/About/About'
 import Header from './components/UI/header/Header'
@@ -12,6 +12,7 @@ import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
 import ProductDetail from 'pages/Products/Product-Detail/Product-detail'
+import ProductList from './pages/Product/ProductList'
 
 function App() {
   const location = useLocation()
@@ -32,9 +33,11 @@ function App() {
         <} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
-        <Route path="product" element={<ProductDetail />} />
+        <Route path="product" element={<ProductList />} />
         {/* <Route path=":productid" element={<Home />} /> */}
         <Route path="profile" element={<MyProfile />} />
+        <Route path="product-detail/:productid" element={<ProductDetail />} />
+        <Route path="profile/:id" element={<MyProfile />} />
       </Routes>
 
       <Footer />
