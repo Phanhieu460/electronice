@@ -1,21 +1,21 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import Cookies from 'js-cookie'
 
-const api = axios.create({
-  baseURL: 'https://electronic-server.onrender.com',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
+const api = axios.create()
 
-// Add a request interceptor
+api.defaults.baseURL = process.env.REACT_APP_SERVER_URL
+
 api.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
+  (config: any) => {
+    const token = Cookies.get('auth')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    config.headers['Content-Type'] = 'application/json'
     return config
   },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error)
+  function (err) {
+    return Promise.reject(err)
   }
 )
 
