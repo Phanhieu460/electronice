@@ -1,0 +1,27 @@
+.card-product {
+  position: relative;
+  // display: inline-block;
+  height: auto;
+}
+
+.product-action {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+// (Hidden by Default)
+.product-action-hover {
+  position: absolute;
+  background: rgba(230, 228, 228, 0.5);
+  transition: 0.5s ease;
+  width: 100%;
+  color: black;
+  // z-index: 1;
+  //   display: none;
+}
+.card-product:hover .product-action-hover {
+  // display: block;
+  // background-color: pink;
+  opacity: 1;
+  // opacity: 1;
+}

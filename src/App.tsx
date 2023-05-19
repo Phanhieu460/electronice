@@ -11,6 +11,7 @@ import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
+import ProductDetail from 'pages/Products/Product-Detail/Product-detail'
 
 function App() {
   const location = useLocation()
@@ -31,10 +32,9 @@ function App() {
         <} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
-        <Route path="product" element={<Product />}>
-          {/* <Route path=":productid" element={<Home />} /> */}
-        </Route>
-        <Route path="my-profile/:id" element={<MyProfile />} />
+        <Route path="product" element={<ProductDetail />} />
+        {/* <Route path=":productid" element={<Home />} /> */}
+        <Route path="profile" element={<MyProfile />} />
       </Routes>
 
       <Footer />
