@@ -1,21 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/UI/header/Header'
 import about from '../../assets/images/about.jpg'
 import product from '../../assets/images/2.jpg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Keyboard, Pagination, Navigation } from 'swiper'
+import { Autoplay, Keyboard, Pagination, Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Product } from 'models'
+import { useAppDispatch, useAppSelector } from 'app/hook'
+import { GET_PRODUCT_LIST } from 'features/types'
+import { Button } from 'antd'
+import ProductList from 'pages/Product/ProductList'
+import About2 from './About2'
 
-const About = () => {
+const About = (props: any) => {
+  const dispatch = useAppDispatch()
+  const { productList, count } = useAppSelector(state => state.product)
+  const [products, setProducts] = useState<Array<Product>>()
+
+  useEffect(() => {
+    dispatch({ type: GET_PRODUCT_LIST, pageNumber: 3 })
+  }, [])
+
+  useEffect(() => {
+    if (productList) setProducts(productList)
+  }, [productList])
+  console.log(productList)
   const navigate = useNavigate()
   const handleClick = () => {
-    navigate('/collections/all')
+    navigate('/product')
   }
 
   return (
@@ -66,11 +83,13 @@ const About = () => {
               keyboard={{
                 enabled: true
               }}
-              // pagination={{
-              //   clickable: true
-              // }}
+              loop={true}
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false
+              }}
               navigation={true}
-              modules={[Keyboard, Pagination, Navigation]}
+              modules={[Autoplay, Keyboard, Pagination, Navigation]}
               className="mySwiper"
             >
               <SwiperSlide>
@@ -116,7 +135,11 @@ const About = () => {
 
             <div className="popular__item--content">
               <Swiper
-                autoplay
+                autoplay={{
+                  delay: 1000,
+                  disableOnInteraction: false
+                }}
+                loop={true}
                 slidesPerView={3}
                 // breakpoints={{
                 //   // when window width is >= 640px
@@ -138,15 +161,13 @@ const About = () => {
                 //     slidesPerView: 1
                 //   }
                 // }}
+
                 spaceBetween={30}
                 keyboard={{
                   enabled: true
                 }}
-                // pagination={{
-                //   clickable: true
-                // }}
                 navigation={true}
-                modules={[Keyboard, Pagination, Navigation]}
+                modules={[Keyboard, Pagination, Navigation, Autoplay]}
                 className="mySwiper"
               >
                 <SwiperSlide>
@@ -269,6 +290,30 @@ const About = () => {
                     </div>
                   </div>
                 </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card">
+                    <div className="card__container">
+                      <div className="card__image">
+                        <img src={product} />
+                        <div className="team-action">
+                          <a className="facebook" href="#">
+                            <FontAwesomeIcon icon={faFacebook} />
+                          </a>
+                          <a className="twitter" href="#">
+                            <FontAwesomeIcon icon={faTwitter} />
+                          </a>
+                          <a className="instagram" href="#">
+                            <FontAwesomeIcon icon={faInstagram} />
+                          </a>
+                        </div>
+                      </div>
+                      <div className="card__content">
+                        <h4>Mr. Chiến</h4>
+                        <span>Manager</span>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
               </Swiper>
             </div>
           </div>
@@ -285,45 +330,30 @@ const About = () => {
               <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
+                autoplay={{
+                  delay: 1000,
+                  disableOnInteraction: false
+                }}
+                loop={true}
                 keyboard={{
                   enabled: true
                 }}
-                // pagination={{
-                //   clickable: true
-                // }}
                 navigation={true}
-                modules={[Keyboard, Pagination, Navigation]}
+                modules={[Autoplay, Keyboard, Pagination, Navigation]}
                 className="mySwiper"
               >
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/1.png?v=1639562519" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
+                <div className="product-item">
+                  {products &&
+                    products?.map((product: Product) => {
+                      return (
+                        <SwiperSlide>
+                          <About2 product={product} key={product._id} />
+                        </SwiperSlide>
+                      )
+                    })}
+                </div>
 
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                {/* <SwiperSlide>
                   <div className="card__featured">
                     <div className="card__featured__container">
                       <div className="card__featured__image">
@@ -463,6 +493,62 @@ const About = () => {
                     </div>
                   </div>
                 </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="card__featured">
+                    <div className="card__featured__container">
+                      <div className="card__featured__image">
+                        <span onClick={() => handleClick()}>
+                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
+                        </span>
+                        <div className="gallery__content__wrap">
+                          <div className="gallery__content">
+                            <h3>
+                              <a href="/collections/all">Single Gallery Name</a>
+                            </h3>
+                            <span>Shopify</span>
+                          </div>
+
+                          <div className="gallery__popup">
+                            <a
+                              className="popup__img"
+                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
+                            >
+                              <FontAwesomeIcon icon={faSearch} />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide> */}
               </Swiper>
             </div>
           </div>
