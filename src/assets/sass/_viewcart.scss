@@ -1,0 +1,218 @@
+.ant-table-bordered td,
+.ant-table-bordered th {
+  border: 1px solid #e8e8e8;
+}
+.center {
+  text-align: center !important;
+}
+.ant-table-cell-with-append::before {
+  border-right: 1px solid #e8e8e8;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+}
+.product__hover:hover {
+  color: #f61919;
+  background-color: #fff;
+}
+.product__hover {
+  padding: 4px;
+}
+.vier__cart__main {
+  // max-width: 1200px;
+  margin: 40px;
+}
+.cart-text {
+  padding: 90px 0 90px 100px;
+}
+.view__count {
+  align-items: center;
+  display: inline-flex;
+  // border: 1px solid #cdcbcb;
+  justify-content: space-between;
+}
+.view__count--count {
+  padding: 11px 27px;
+}
+.view__count--icon {
+  padding: 12px 4px;
+}
+.view__event {
+  display: flex;
+  margin: 20px 0 0 0;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.view__event--one {
+  border: 1px solid #a09c9c;
+
+  background-color: #fff;
+}
+.view__event---modifier1 {
+  padding: 12px 24px;
+  margin-right: 20px;
+  border: 1px solid #ccc;
+
+  background-color: #fff;
+}
+.view__event---modifier2 {
+  padding: 12px 24px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.view__event--one:hover,
+.view__event---modifier1:hover,
+.view__event---modifier2:hover {
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  background-color: #f61919;
+}
+.view__total {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+}
+.view__total__note--date,
+.view__total__note--special,
+.view__total__sum {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.view__total__note--date {
+  margin-bottom: 20px;
+}
+.view__total__date {
+  margin-left: 12px;
+}
+.view__total__note--date h3 {
+  margin: 12px;
+  border-bottom: 1px solid #e9e7e7;
+}
+.view__total__note--special h3,
+.view__total__sum h3 {
+  margin: 12px;
+}
+.view__total__date p {
+  display: inline-block;
+}
+
+.view__total__sum--check {
+  margin: 20px 0;
+  padding: 12px 8px;
+  border: none;
+  background-color: #a09c9c;
+}
+.view__total__sum--check:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #f61919;
+}
+
+.main_more {
+  display: none;
+}
+
+@media screen and (min-width: 993) {
+}
+@media screen and (max-width: 992px) {
+  .main_more {
+    display: none;
+  }
+  .view__total {
+    display: block;
+  }
+  .view__total__note--special {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .view__event {
+    display: block;
+  }
+  .view__table {
+    display: none;
+  }
+  .view__total {
+    display: block;
+  }
+  .main_more {
+    display: flex;
+  }
+  .view__total__note {
+    margin-bottom: 20px;
+  }
+  .view__event--one:hover,
+  .view__event---modifier1:hover,
+  .view__event---modifier2:hover {
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    background-color: #f61919;
+  }
+  .view__event---modifier1 {
+    width: 100%;
+    color: #fff;
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    background-color: #8f9092;
+  }
+  .view__event---modifier2 {
+    width: 100%;
+    color: #fff;
+    padding: 12px 24px;
+    background-color: #8f9092;
+    border: 1px solid #ccc;
+  }
+  .view__event--one {
+    width: 100%;
+    height: 44px;
+    margin-bottom: 20px;
+    background-color: #8f9092;
+    color: #fff;
+  }
+
+  .main_more--img img {
+    position: relative;
+  }
+  .main_more--img span {
+    position: absolute;
+    right: auto;
+  }
+  .main_more__right {
+    width: 168px;
+    margin-left: 20px;
+  }
+  .main_more__right--extra,
+  .main_more--icon {
+    display: flex;
+    margin: 10px 0 3px 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main_more--icon {
+    width: 30px;
+  }
+  .main_more--total span:first-child {
+    margin-right: 100px;
+  }
+}
+.view__total--subtotal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(117, 116, 116, 0.8);
+  padding: 20px;
+
+  text-align: center;
+}
