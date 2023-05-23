@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../../components/UI/header/Header'
-import about from '../../assets/images/about.jpg'
-import product from '../../assets/images/2.jpg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Keyboard, Pagination, Navigation } from 'swiper'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { Product } from 'models'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import { GET_PRODUCT_LIST } from 'features/types'
-import { Button } from 'antd'
-import ProductList from 'pages/Product/ProductList'
+import { Product } from 'models'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Autoplay, Keyboard, Navigation, Pagination } from 'swiper'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import product from '../../assets/images/2.jpg'
+import about from '../../assets/images/about.jpg'
 import About2 from './About2'
 
-const About = (props: any) => {
+const About = () => {
   const dispatch = useAppDispatch()
-  const { productList, count } = useAppSelector(state => state.product)
+  const { productList } = useAppSelector(state => state.product)
   const [products, setProducts] = useState<Array<Product>>()
 
   useEffect(() => {
@@ -29,7 +26,7 @@ const About = (props: any) => {
   useEffect(() => {
     if (productList) setProducts(productList)
   }, [productList])
-  console.log(productList)
+
   const navigate = useNavigate()
   const handleClick = () => {
     navigate('/product')
@@ -346,8 +343,8 @@ const About = (props: any) => {
                   {products &&
                     products?.map((product: Product) => {
                       return (
-                        <SwiperSlide>
-                          <About2 product={product} key={product._id} />
+                        <SwiperSlide key={product._id}>
+                          <About2 product={product} />
                         </SwiperSlide>
                       )
                     })}
