@@ -141,27 +141,24 @@ const About = (props: any) => {
                 }}
                 loop={true}
                 slidesPerView={3}
-                // breakpoints={{
-                //   // when window width is >= 640px
-                //   960: {
-                //     width: 960,
-                //     slidesPerView: 3
-                //   },
-                //   // when window width is >= 768px
-                //   768: {
-                //     width: 768,
-                //     slidesPerView: 4
-                //   },
-                //   600: {
-                //     width: 600,
-                //     slidesPerView: 5
-                //   },
-                //   480: {
-                //     width: 480,
-                //     slidesPerView: 1
-                //   }
-                // }}
-
+                breakpoints={{
+                  540: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                  },
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 40
+                  },
+                  960: {
+                    slidesPerView: 3,
+                    spaceBetween: 50
+                  },
+                  1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 50
+                  }
+                }}
                 spaceBetween={30}
                 keyboard={{
                   enabled: true
@@ -328,8 +325,39 @@ const About = (props: any) => {
             </div>
             <div className="featured__item--content">
               <Swiper
-                slidesPerView={4}
+                slidesPerView={3}
                 spaceBetween={30}
+                breakpoints={{
+                  320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                  },
+                  540: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                  },
+
+                  640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                  },
+                  768: {
+                    slidesPerView: 1,
+                    spaceBetween: 40
+                  },
+                  960: {
+                    slidesPerView: 2,
+                    spaceBetween: 60
+                  },
+                  1200: {
+                    slidesPerView: 3,
+                    spaceBetween: 50
+                  },
+                  1440: {
+                    slidesPerView: 4,
+                    spaceBetween: 50
+                  }
+                }}
                 autoplay={{
                   delay: 1000,
                   disableOnInteraction: false
@@ -359,174 +387,6 @@ const About = (props: any) => {
                       <div className="card__featured__image">
                         <span onClick={() => handleClick()}>
                           <img src="//cdn.shopify.com/s/files/1/1280/1207/files/8.png?v=1639562650" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/7.png?v=1639562639" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
-                        </span>
-                        <div className="gallery__content__wrap">
-                          <div className="gallery__content">
-                            <h3>
-                              <a href="/collections/all">Single Gallery Name</a>
-                            </h3>
-                            <span>Shopify</span>
-                          </div>
-
-                          <div className="gallery__popup">
-                            <a
-                              className="popup__img"
-                              href="//cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-                            >
-                              <FontAwesomeIcon icon={faSearch} />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="card__featured">
-                    <div className="card__featured__container">
-                      <div className="card__featured__image">
-                        <span onClick={() => handleClick()}>
-                          <img src="//cdn.shopify.com/s/files/1/1280/1207/files/6.png?v=1639562607" alt="" />
                         </span>
                         <div className="gallery__content__wrap">
                           <div className="gallery__content">
