@@ -1,15 +1,14 @@
-import { Col, Pagination, PaginationProps, Row } from 'antd'
+import { Pagination, PaginationProps } from 'antd'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import ProductSingle from 'components/product/ProductSingle'
 import ShopCategories from 'components/product/ShopCategories'
+import ShopColor from 'components/product/ShopColor'
 import ShopSearch from 'components/product/ShopSearch'
 import ShopTag from 'components/product/ShopTag'
 import ShopTopBar from 'components/product/ShopTopBar'
 import { GET_PRODUCT_LIST } from 'features/types'
-import { getCategories } from 'helpers/products'
 import { Product } from 'models'
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const ProductList = () => {
@@ -38,8 +37,8 @@ const ProductList = () => {
     <div className="product">
       <div className="product-left">
         <ShopSearch />
-        <ShopCategories productList={productList} />
-        <ShopTag productList={productList} />
+        <ShopCategories productList={productList} setProducts={setProducts} />
+        <ShopColor productList={productList} setProducts={setProducts} />
       </div>
       <div className="product-right">
         {' '}
