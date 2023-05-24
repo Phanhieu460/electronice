@@ -1,7 +1,9 @@
 .card-product {
   position: relative;
-  // display: inline-block;
   height: auto;
+  // padding: 0 auto;
+  border: solid 1px rgba(194, 193, 193, 0.561);
+  border-radius: 5px;
 }
 
 .product-action {
@@ -11,17 +13,24 @@
 }
 // (Hidden by Default)
 .product-action-hover {
-  position: absolute;
-  background: rgba(230, 228, 228, 0.5);
-  transition: 0.5s ease;
-  width: 100%;
-  color: black;
-  // z-index: 1;
-  //   display: none;
+  display: flex;
+  justify-content: center;
 }
-.card-product:hover .product-action-hover {
-  // display: block;
-  // background-color: pink;
+
+.product-action-hover ul {
+  position: absolute;
+  background: rgb(255, 255, 255);
+  height: 45px;
+  transition: 0.5s ease;
+  opacity: 0;
+  border-radius: 100px;
+  bottom: 60%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding: 0;
+}
+.card-product:hover .product-action-hover ul {
   opacity: 1;
-  // opacity: 1;
 }

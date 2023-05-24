@@ -23,7 +23,7 @@ function* fetchProductList(action: any) {
 
 function* fetchProductById(action: any) {
   try {
-    const response: ListResponse<Product> = yield call(productApi.getById(action.id))
+    const response: ListResponse<Product> = yield productApi.getById(action.id)
     yield put(fetchProductByIdSuccess(response))
   } catch (error) {
     console.log('Failed to fetch Product By Id', error)
