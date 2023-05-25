@@ -32,7 +32,9 @@ const ProductSingle = (props: any) => {
 
           <div className="product-single-grid__content">
             <NavLink to={`/product-detail/${props.product._id}`}>
-              <h3 className="product-single-grid__content--title">{props.product.name}</h3>
+              <div style={{ height: 50 }}>
+                <h3 className="product-single-grid__content--title">{props.product.name}</h3>
+              </div>
             </NavLink>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <span

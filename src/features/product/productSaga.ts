@@ -1,14 +1,15 @@
 //@ts-nocheck
-import { PayloadAction } from '@reduxjs/toolkit'
 import productApi from 'api/productApi'
-import { ListParams, ListResponse, Product } from 'models'
-import { call, debounce, put, takeLatest } from 'redux-saga/effects'
-import { GET_PRODUCT_BY_ID, GET_PRODUCT_LIST } from 'features/types'
+import { GET_PRODUCT_BY_ID, GET_PRODUCT_LIST, PRODUCT_SEARCH } from 'features/types'
+import { ListResponse, Product } from 'models'
+import { put, takeLatest } from 'redux-saga/effects'
 import {
-  fetchProductListSuccess,
-  fetchProductListFailed,
+  fetchProductByIdFailed,
   fetchProductByIdSuccess,
-  fetchProductByIdFailed
+  fetchProductListFailed,
+  fetchProductListSuccess,
+  fetchProductSearchFailed,
+  fetchProductSearchSuccess
 } from './productSlice'
 
 function* fetchProductList(action: any) {
@@ -23,7 +24,7 @@ function* fetchProductList(action: any) {
 
 function* fetchProductById(action: any) {
   try {
-    const response: ListResponse<Product> = yield call(productApi.getById(action.id))
+    const response: ListResponse<Product> = yield productApi.getById(action.id)
     yield put(fetchProductByIdSuccess(response))
   } catch (error) {
     console.log('Failed to fetch Product By Id', error)
@@ -31,7 +32,18 @@ function* fetchProductById(action: any) {
   }
 }
 
+function* searchProduct(action: any) {
+  try {
+    const response: ListResponse<Product> = yield productApi.search(action.search)
+    yield put(fetchProductSearchSuccess(response))
+  } catch (error) {
+    console.log('Search Failed', error)
+    yield put(fetchProductSearchFailed())
+  }
+}
+
 export default function* productSaga() {
   yield takeLatest(GET_PRODUCT_LIST, fetchProductList)
   yield takeLatest(GET_PRODUCT_BY_ID, fetchProductById)
+  yield takeLatest(PRODUCT_SEARCH, searchProduct)
 }

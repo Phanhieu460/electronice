@@ -4,6 +4,7 @@ import { Product } from 'models/product'
 export interface ProductState {
   productList: Product[]
   productById?: Product[]
+  productSearch?: Product[]
   pages: number
   count: number
   loading: boolean
@@ -13,6 +14,7 @@ const initialState: ProductState = {
   loading: false,
   productList: [],
   productById: [],
+  productSearch: [],
   pages: 0,
   count: 0
 }
@@ -42,6 +44,17 @@ const productSlice = createSlice({
     },
     fetchProductByIdFailed: state => {
       state.loading = false
+    },
+    fetchProductSearch: state => {
+      state.loading = true
+    },
+    fetchProductSearchSuccess: (state, action: any) => {
+      state.productSearch = action.payload?.products
+      state.count = action.payload?.count
+      state.loading = false
+    },
+    fetchProductSearchFailed: state => {
+      state.loading = false
     }
   }
 })
@@ -52,7 +65,10 @@ export const {
   fetchProductListFailed,
   fetchProductById,
   fetchProductByIdSuccess,
-  fetchProductByIdFailed
+  fetchProductByIdFailed,
+  fetchProductSearch,
+  fetchProductSearchSuccess,
+  fetchProductSearchFailed
 } = productSlice.actions
 
 // Reducer
