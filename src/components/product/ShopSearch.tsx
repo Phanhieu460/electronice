@@ -19,7 +19,7 @@ const ShopSearch = (props: any) => {
   return (
     <div className="product-sidebar">
       <h4 className="product-sidebar__title">Search</h4>
-      <Search placeholder="Search our store" onSearch={onSearch} enterButton />
+      <Search placeholder="Search product by name" onSearch={onSearch} enterButton />
     </div>
   )
 }
