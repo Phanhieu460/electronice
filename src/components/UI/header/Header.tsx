@@ -3,7 +3,7 @@ import logo from '../../../assets/images/logo.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Dropdown, Menu } from 'antd'
+import { Button, Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import Cookies from 'js-cookie'
 import { useAppSelector } from 'app/hook'
 
@@ -11,9 +11,12 @@ type Props = {}
 
 const Header = (props: Props) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
-
+  const [showCart, setShowCart] = useState<boolean>(false)
+  const handleClickCart = () => setShowCart(!showCart)
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
+  const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
   const cartData = useAppSelector(state => state.cartData)
   const token = Cookies.get('authToken')
 
@@ -22,7 +25,20 @@ const Header = (props: Props) => {
     Cookies.remove('refreshToken')
     navigate('/')
   }
-
+  const redirectCheckout = () => {
+    navigate('/checkout')
+    setOpen(false)
+  }
+  const redirectViewcart = () => {
+    navigate('/cart')
+    setOpen(false)
+  }
+  const showDrawer = () => {
+    setOpen(true)
+  }
+  const onClose = () => {
+    setOpen(false)
+  }
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
@@ -33,12 +49,37 @@ const Header = (props: Props) => {
         <NavLink to="/contact">Contact</NavLink>
       </div>
       <div className="header__cart">
-        <NavLink to="/cart">
-          <span className="header__cart__icon">
-            <FontAwesomeIcon icon={faCartPlus} />
-            <span className="header__cart__icon--quantity">{cartData && cartData.length ? cartData.length : 0}</span>
-          </span>
-        </NavLink>
+        <div className="header__cart--drawer">
+          <Space>
+            <span className="header__cart__icon">
+              <FontAwesomeIcon className="header__cart--icon" icon={faCartPlus} onClick={showDrawer} />
+              <span className="header__cart__icon--quantity">1</span>
+            </span>
+          </Space>
+
+          <Drawer
+            rootClassName="drewa"
+            title="Shopping cart"
+            placement={placement}
+            width={400}
+            onClose={onClose}
+            open={open}
+          >
+            <p>Your cart is empty now.</p>
+            <div className="shopping__cart">
+              <div className="shopping__cart__total">
+                Total:
+                <span>${'TONGTIEN'}</span>
+              </div>
+            </div>
+            <Button onClick={redirectCheckout} className="shopping__cart__checkout">
+              CHECKOUT
+            </Button>
+            <Button className="shopping__cart__viewcart" onClick={redirectViewcart}>
+              VIEW CART
+            </Button>
+          </Drawer>
+        </div>
         <Dropdown
           dropdownRender={menu => {
             return (
