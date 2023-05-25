@@ -1,18 +1,11 @@
-import {
-  faAngleLeft,
-  faAngleRight,
-  faCartPlus,
-  faChevronLeft,
-  faChevronUp,
-  faMagnifyingGlass
-} from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faCartPlus, faChevronLeft, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Checkbox, Collapse, Input, Select } from 'antd'
+import { Button, Checkbox, Input, Select } from 'antd'
 import Search from 'antd/es/input/Search'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
 
-import { Form, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const CheckOut = () => {
   const [text, setText] = useState('Show order summary ')
