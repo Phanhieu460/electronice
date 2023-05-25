@@ -40,6 +40,22 @@ export const getTags = (products: Array<Product>) => {
   const itemProductTags = getItemArray(productTags)
   return itemProductTags
 }
+export const getColor = (products: Array<Product>) => {
+  let productColor: any = []
+
+  products &&
+    products?.map((product: any) => {
+      return (
+        product.variation &&
+        product?.variation.map((item: any) => {
+          return productColor.push(item.color)
+        })
+      )
+    })
+
+  const itemProductColor = getItemArray(productColor)
+  return itemProductColor
+}
 
 export const getProductsIndividualSizes = (products: Array<Product>) => {
   let productSizes: any = []
@@ -60,6 +76,17 @@ export const getProductsIndividualSizes = (products: Array<Product>) => {
 
 export const getSortedProducts = (products: Array<Product>, sortType: string, sortValue: string) => {
   if (products && sortType && sortValue) {
+    if (sortType === 'category') {
+      return products.filter(product => product.category.filter(single => single === sortValue)[0])
+    }
+    if (sortType === 'tag') {
+      return products.filter(product => product.tag.filter(single => single === sortValue)[0])
+    }
+    if (sortType === 'color') {
+      return products.filter(
+        product => product.variation && product.variation.filter(single => single.color === sortValue)[0]
+      )
+    }
     if (sortType === 'filterSort') {
       let sortProducts = [...products]
       if (sortValue === 'default') {

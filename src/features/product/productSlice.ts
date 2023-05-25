@@ -1,5 +1,4 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { RootState } from 'app/store'
+import { createSlice } from '@reduxjs/toolkit'
 import { Product } from 'models/product'
 
 export interface ProductState {
