@@ -34,7 +34,7 @@ const CheckOut = () => {
   return (
     <div className="check">
       <div className="check__all">
-        <div className="check__main">
+        {/* <div className="check__main">
           <h2 className="check__header">Droon - Drone Shop Shopify Theme</h2>
           <div className="check__header--cart">
             <div className="check__header--click" onClick={handleClick}>
@@ -49,10 +49,10 @@ const CheckOut = () => {
               <div className="check__main__right">
                 <div className="check__right--distance">
                   <div className="check__main__information">
-                    <div>anh</div>
+                    <div>image</div>
                     <div>
-                      <div>2. New badge product</div>
-                      <span>m / gold</span>
+                      <div>product name</div>
+                      <span>variation</span>
                     </div>
                     <div>total</div>
                   </div>
@@ -62,7 +62,7 @@ const CheckOut = () => {
                   </div>
                   <div className="check__main__calculate">
                     <span>shipping</span>
-                    <span>Calculated at next step</span>
+                    <span>456</span>
                   </div>
                   <div className="check__main__total">
                     <span>Total</span>
@@ -132,7 +132,7 @@ const CheckOut = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="check__main__right2">
           <div className="check__right--distance">
             <div className="check__main__information">
