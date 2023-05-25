@@ -19,9 +19,10 @@ const Header = (props: Props) => {
 
   const handleLogout = () => {
     Cookies.remove('authToken')
+    Cookies.remove('refreshToken')
     navigate('/')
   }
-  console.log(cartData, 'daa')
+
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
