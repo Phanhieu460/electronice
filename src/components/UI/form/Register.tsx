@@ -54,7 +54,7 @@ const Register: React.FC = () => {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, formData)
       if (data) {
         Cookies.set('authToken', data.token)
-
+        Cookies.set('refreshToken', data.refreshToken)
         navigate('/')
         openNotification(
           {

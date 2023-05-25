@@ -1,19 +1,8 @@
-import { DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
-import {
-  faBars,
-  faCaretDown,
-  faCaretUp,
-  faCircleXmark,
-  faMinus,
-  faPen,
-  faPlus
-} from '@fortawesome/free-solid-svg-icons'
+import { DeleteOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { render } from '@testing-library/react'
 import { Button, DatePicker, DatePickerProps, Table } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
-import Item from 'antd/es/list/Item'
-import row from 'antd/es/row'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

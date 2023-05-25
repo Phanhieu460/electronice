@@ -1,21 +1,23 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
-const api = axios.create({
-  baseURL: 'https://electronic-server.onrender.com',
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
+const api = axios.create()
+let isRefresh: boolean = false
 
-// Add a request interceptor
+api.defaults.baseURL = process.env.REACT_APP_SERVER_URL
+
 api.interceptors.request.use(
-  function (config) {
-    // Do something before request is sent
+  (config: any) => {
+    const token = Cookies.get('auth')
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    config.headers['Content-Type'] = 'application/json'
     return config
   },
-  function (error) {
-    // Do something with request error
-    return Promise.reject(error)
+  function (err) {
+    return Promise.reject(err)
   }
 )
 
@@ -26,10 +28,43 @@ api.interceptors.response.use(
     // Do something with response data
     return response.data
   },
-  function (error) {
-    // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
-    return Promise.reject(error)
+  async err => {
+    const originalConfig = err.config
+
+    // Access Token was expired
+    if (err?.response?.status === 403 && !originalConfig._retry && !isRefresh) {
+      if (Cookies.get('auth')) {
+        originalConfig._retry = true
+        isRefresh = true
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('refresh')}`
+          }
+        }
+        return api
+          .post('/api/users/refreshToken', config)
+          .then((res: any) => {
+            Cookies.set('authToken', res.data.token)
+            Cookies.set('refreshToken', res.data.refreshToken)
+            api.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+            return api(originalConfig)
+          })
+          .catch(err => {
+            console.log(err)
+            Cookies.remove('authToken')
+            Cookies.remove('refreshToken')
+            const navigate = useNavigate()
+            navigate('/login')
+          })
+          .finally(() => {
+            isRefresh = false
+          })
+      } else {
+        window.location.pathname = '/login'
+      }
+    }
+    return Promise.reject(err)
   }
 )
 

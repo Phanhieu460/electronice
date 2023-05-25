@@ -5,6 +5,7 @@ import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-sol
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Button, Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import Cookies from 'js-cookie'
+import { useAppSelector } from 'app/hook'
 
 type Props = {}
 
@@ -16,10 +17,12 @@ const Header = (props: Props) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
+  const cartData = useAppSelector(state => state.cartData)
   const token = Cookies.get('authToken')
 
   const handleLogout = () => {
     Cookies.remove('authToken')
+    Cookies.remove('refreshToken')
     navigate('/')
   }
   const redirectCheckout = () => {
