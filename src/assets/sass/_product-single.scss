@@ -17,25 +17,43 @@
       position: absolute;
       background: red;
       color: white;
-      border: 1px solid;
+      border: none;
       border-radius: 14px;
       width: 45px;
       height: 18px;
       right: 5%;
       top: 20%;
       text-align: center;
+      padding: 2px;
+      font-weight: 500;
     }
-    &--news {
+    &--discount2 {
       position: absolute;
       background: red;
       color: white;
-      border: 1px solid;
+      border: none;
       border-radius: 14px;
       width: 45px;
       height: 18px;
       right: 5%;
       top: 5%;
       text-align: center;
+      padding: 2px;
+      font-weight: 500;
+    }
+    &--news {
+      position: absolute;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      width: 45px;
+      height: 18px;
+      right: 5%;
+      top: 5%;
+      text-align: center;
+      padding: 2px;
+      font-weight: 500;
     }
   }
   &__content {
@@ -76,6 +94,7 @@
       justify-content: space-between;
       align-items: center;
       > .ant-btn {
+        font-weight: 500;
         &:hover {
           background: red;
           color: white;
@@ -185,6 +204,10 @@
       border-radius: inherit;
       background: red;
       color: white;
+      &:hover {
+        border: none;
+        color: white;
+      }
     }
     &--addToCart {
       margin-top: 10px;

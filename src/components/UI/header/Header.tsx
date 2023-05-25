@@ -5,6 +5,7 @@ import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-sol
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { Dropdown, Menu } from 'antd'
 import Cookies from 'js-cookie'
+import { useAppSelector } from 'app/hook'
 
 type Props = {}
 
@@ -13,13 +14,14 @@ const Header = (props: Props) => {
 
   const handleClickMenuBar = () => setShowMenuMobile(!showMenuMobile)
   const navigate = useNavigate()
+  const cartData = useAppSelector(state => state.cartData)
   const token = Cookies.get('authToken')
 
   const handleLogout = () => {
     Cookies.remove('authToken')
     navigate('/')
   }
-
+  console.log(cartData, 'daa')
   return (
     <div className="header">
       <img className="header__logo" src={logo} alt="logo" />
@@ -33,7 +35,7 @@ const Header = (props: Props) => {
         <NavLink to="/cart">
           <span className="header__cart__icon">
             <FontAwesomeIcon icon={faCartPlus} />
-            <span className="header__cart__icon--quantity">1</span>
+            <span className="header__cart__icon--quantity">{cartData && cartData.length ? cartData.length : 0}</span>
           </span>
         </NavLink>
         <Dropdown

@@ -45,20 +45,36 @@ const ProductModal = (props: any) => {
               ''
             )}
           </div>
-          {props.product.shortDescription.split('. ').map((item: any, index: number) => {
-            return (
-              <div key={index}>
-                {item !== '' && (
-                  <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                    <FontAwesomeIcon icon={faCircle} style={{ fontSize: 6, marginRight: 5 }} />
-                    <li className="product-modal__content--description" key={index}>
-                      {item}
-                    </li>
+          {props.product.shortDescription.split('. ').length > 1
+            ? props.product.shortDescription.split('. ').map((item: any, index: number) => {
+                return (
+                  <div key={index}>
+                    {item !== '' && (
+                      <div style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
+                        <FontAwesomeIcon icon={faCircle} style={{ fontSize: 6, marginRight: 5 }} />
+                        <li className="product-modal__content--description" key={index}>
+                          {item}
+                        </li>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
-            )
-          })}
+                )
+              })
+            : props.product.shortDescription.split('. ').map((item: any, index: number) => {
+                return (
+                  <div key={index}>
+                    {item !== '' && (
+                      <p
+                        style={{ fontSize: 18, fontWeight: 300 }}
+                        className="product-modal__content--description"
+                        key={index}
+                      >
+                        {item}
+                      </p>
+                    )}
+                  </div>
+                )
+              })}
           <div className="product-modal__content--color">
             <span className="product-modal__content--color--title">Color</span>
             <div className="product-modal__content--color--content">

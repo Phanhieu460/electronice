@@ -10,22 +10,29 @@ const ShopCategories = (props: any) => {
   return (
     <div className="product-sidebar">
       <h4 className="product-sidebar__title">Categories</h4>
-
       {uniqueCategories ? (
-        <Radio.Group>
-          {uniqueCategories.map((category: any, index: number) => {
-            return (
-              <Radio
-                className="category-item"
-                value={category}
-                onChange={() => handleSearchByCategories(category)}
-                key={index}
-              >
-                {category}
-              </Radio>
-            )
-          })}
-        </Radio.Group>
+        <>
+          <Radio.Group>
+            <Radio
+              className="category-item"
+              onChange={() => props.setProducts(getSortedProducts(props.productList, 'category', ''))}
+            >
+              All{' '}
+            </Radio>
+            {uniqueCategories.map((category: any, index: number) => {
+              return (
+                <Radio
+                  className="category-item"
+                  value={category}
+                  onChange={() => handleSearchByCategories(category)}
+                  key={index}
+                >
+                  {category}
+                </Radio>
+              )
+            })}
+          </Radio.Group>
+        </>
       ) : (
         'No catogories found'
       )}
