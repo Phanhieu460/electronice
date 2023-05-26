@@ -4,8 +4,19 @@
     font-weight: 400;
     letter-spacing: 0.5px;
   }
+  > .ant-radio-group {
+    display: flex;
+    flex-direction: column;
+  }
 }
-.category-item,
-.tag-item {
+.category-item {
   padding: 4px 0;
+}
+.tag-item {
+  padding: 4px;
+  background: #fff;
+  color: #000;
+  margin: 4px;
+  border: 1px solid #e4e4e4;
+  cursor: pointer;
 }
