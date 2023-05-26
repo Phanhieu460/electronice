@@ -14,9 +14,6 @@ import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
 import ProductDetail from 'pages/Products/Product-Detail/Product-detail'
 import ProductList from './pages/Product/ProductList'
-
-import ProductList from './pages/Product/ProductList'
-
 import CheckOut from 'components/UI/header/cart/CheckOut'
 import ViewCart from 'components/UI/header/cart/ViewCart'
 
