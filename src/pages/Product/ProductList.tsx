@@ -1,15 +1,13 @@
-import { Col, Pagination, PaginationProps, Row } from 'antd'
+import { Pagination, PaginationProps } from 'antd'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import ProductSingle from 'components/product/ProductSingle'
 import ShopCategories from 'components/product/ShopCategories'
+import ShopColor from 'components/product/ShopColor'
 import ShopSearch from 'components/product/ShopSearch'
-import ShopTag from 'components/product/ShopTag'
 import ShopTopBar from 'components/product/ShopTopBar'
 import { GET_PRODUCT_LIST } from 'features/types'
-import { getCategories } from 'helpers/products'
 import { Product } from 'models'
-
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const ProductList = () => {
@@ -23,7 +21,7 @@ const ProductList = () => {
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: pageNumber })
     if (pageNumber === 1) navigate(`/product`)
-  }, [pageNumber])
+  }, [pageNumber, dispatch])
 
   useEffect(() => {
     if (productList) setProducts(productList)
@@ -37,9 +35,9 @@ const ProductList = () => {
   return (
     <div className="product">
       <div className="product-left">
-        <ShopSearch />
-        <ShopCategories productList={productList} />
-        <ShopTag productList={productList} />
+        <ShopSearch productList={productList} setProducts={setProducts} />
+        <ShopCategories productList={productList} setProducts={setProducts} />
+        <ShopColor productList={productList} setProducts={setProducts} />
       </div>
       <div className="product-right">
         {' '}
@@ -56,7 +54,7 @@ const ProductList = () => {
               return <ProductSingle product={product} key={product._id} view={view} />
             })}
         </div>
-        <Pagination defaultCurrent={1} total={count} pageSize={12} onChange={handleChangePagination} />
+        <Pagination defaultCurrent={1} total={count} onChange={handleChangePagination} />
       </div>
     </div>
   )

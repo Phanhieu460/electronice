@@ -1,10 +1,10 @@
-import { Checkbox } from 'antd'
-import { getTags } from 'helpers/products'
-import React from 'react'
+import { getSortedProducts, getTags } from 'helpers/products'
 
-type Props = {}
 const ShopTag = (props: any) => {
   const uniqueTags = getTags(props.productList)
+  const handleSearchByTag = (tag: string) => {
+    props.setProducts(getSortedProducts(props.productList, 'tag', tag))
+  }
   return (
     <div className="product-sidebar">
       <h4 className="product-sidebar__title">Tags</h4>
@@ -13,11 +13,9 @@ const ShopTag = (props: any) => {
         <>
           {uniqueTags.map((tag: any, index: number) => {
             return (
-              <div className="tag-item" key={index}>
-                <Checkbox>
-                  <span className="category-name">{tag}</span>
-                </Checkbox>
-              </div>
+              <button className="tag-item" key={index} onClick={() => handleSearchByTag(tag)}>
+                <span className="category-name">{tag}</span>
+              </button>
             )
           })}
         </>

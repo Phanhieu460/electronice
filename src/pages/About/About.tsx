@@ -31,9 +31,9 @@ const About = (props: any) => {
   }, [productList])
   console.log(productList)
   const navigate = useNavigate()
-  const handleClick = () => {
-    navigate('/product')
-  }
+  // const handleClick = () => {
+  //   navigate('/product')
+  // }
 
   return (
     <main>

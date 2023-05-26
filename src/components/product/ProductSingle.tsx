@@ -4,9 +4,12 @@ import { Button, Modal, Radio } from 'antd'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import ProductModal from './ProductModal'
+import { useDispatch } from 'react-redux'
+import { addToCart } from 'features/cart/cartSlice'
 
 const ProductSingle = (props: any) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -18,14 +21,20 @@ const ProductSingle = (props: any) => {
 
               {props.product.news && <span className="product-single-grid__image--news">New</span>}
               {props.product.discount > 0 && (
-                <span className="product-single-grid__image--discount">-{props.product.discount}%</span>
+                <span
+                  className={`product-single-grid__image--${props.product.news === false ? 'discount2' : 'discount'}`}
+                >
+                  -{props.product.discount}%
+                </span>
               )}
             </NavLink>
           </div>
 
           <div className="product-single-grid__content">
             <NavLink to={`/product-detail/${props.product._id}`}>
-              <h3 className="product-single-grid__content--title">{props.product.name}</h3>
+              <div style={{ height: 50 }}>
+                <h3 className="product-single-grid__content--title">{props.product.name}</h3>
+              </div>
             </NavLink>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <span
@@ -51,7 +60,9 @@ const ProductSingle = (props: any) => {
                 <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
                 <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
               </div>
-              <Button style={{ marginLeft: 14 }}>Buy Now</Button>
+              <Button style={{ marginLeft: 14 }} onClick={() => dispatch(addToCart(props.product))}>
+                Buy Now
+              </Button>
             </div>
           </div>
         </div>
@@ -97,7 +108,10 @@ const ProductSingle = (props: any) => {
               <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
               <FontAwesomeIcon icon={faStar} style={{ color: '#fff700' }} />
             </div>
-            <Button className="product-single-list__content--addToCart">
+            <Button
+              className="product-single-list__content--addToCart"
+              onClick={() => dispatch(addToCart(props.product))}
+            >
               <FontAwesomeIcon icon={faCartPlus} style={{ paddingRight: 5 }} />
               Add To Cart
             </Button>
