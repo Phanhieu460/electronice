@@ -1,4 +1,5 @@
 import React from 'react'
+
 import './App.css'
 import Home from './pages/Home/Home'
 import { Route, Routes, useLocation } from 'react-router-dom'
@@ -13,9 +14,6 @@ import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
 import ProductDetail from 'pages/Products/Product-Detail/Product-detail'
 import ProductList from './pages/Product/ProductList'
-
-import ProductList from './pages/Product/ProductList'
-
 import CheckOut from 'components/UI/header/cart/CheckOut'
 import ViewCart from 'components/UI/header/cart/ViewCart'
 
@@ -44,7 +42,6 @@ function App() {
         <Route path="product" element={<ProductList />} />
         <Route path="product-detail/:productId" element={<ProductDetail />} />
         <Route path="profile" element={<MyProfile />} />
-        {/* <Route path="product-detail/:productid" element={<ProductDetail />} /> */}
         <Route path="profile/:id" element={<MyProfile />} />
       </Routes>
 
