@@ -157,18 +157,7 @@
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
 }
-.shopping__cart__checkout,
-.shopping__cart__viewcart {
-  width: 90%;
-  height: 50px;
-  margin: 18px 0 0 17px;
-}
-.shopping__cart__checkout:hover,
-.shopping__cart__viewcart:hover {
-  background-color: #d72323;
-  border: none;
-  color: #fff !important;
-}
+
 // @media #{$md-layout} {
 //   .header {
 //     max-width: 960px;

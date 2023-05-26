@@ -11,8 +11,8 @@ import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
-import CheckOut from 'components/UI/header/cart/CheckOut'
-import ViewCart from 'components/UI/header/cart/ViewCart'
+import CheckOut from 'pages/Cart/CheckOut'
+import ViewCart from 'pages/Cart/ViewCart'
 
 function App() {
   const location = useLocation()
@@ -31,11 +31,6 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="cart" element={<ViewCart />} />
         <Route path="checkout" element={<CheckOut />} />
-
-        {/* <Route path="login" element={<Home />} />
-        <} />
-        <Route path="cart" element={<Home />} />
-        <Route path="checkout" element={<Home />} /> */}
         <Route path="product" element={<Product />} />
         <Route path="product-detail/:productid" element={<Home />} />
         <Route path="profile/:id" element={<MyProfile />} />

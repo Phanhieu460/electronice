@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import logo from '../../../assets/images/logo.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { Button, Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
-import Cookies from 'js-cookie'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import { useAppSelector } from 'app/hook'
+import Cookies from 'js-cookie'
+import { useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import logo from '../../../assets/images/logo.png'
+import MenuCart from './cart/MenuCart'
 
 type Props = {}
 
@@ -25,14 +26,7 @@ const Header = (props: Props) => {
     Cookies.remove('refreshToken')
     navigate('/')
   }
-  const redirectCheckout = () => {
-    navigate('/checkout')
-    setOpen(false)
-  }
-  const redirectViewcart = () => {
-    navigate('/cart')
-    setOpen(false)
-  }
+
   const showDrawer = () => {
     setOpen(true)
   }
@@ -53,7 +47,7 @@ const Header = (props: Props) => {
           <Space>
             <span className="header__cart__icon">
               <FontAwesomeIcon className="header__cart--icon" icon={faCartPlus} onClick={showDrawer} />
-              <span className="header__cart__icon--quantity">1</span>
+              <span className="header__cart__icon--quantity">{cartData && cartData.length ? cartData.length : 0}</span>
             </span>
           </Space>
 
@@ -65,19 +59,15 @@ const Header = (props: Props) => {
             onClose={onClose}
             open={open}
           >
-            <p>Your cart is empty now.</p>
-            <div className="shopping__cart">
-              <div className="shopping__cart__total">
-                Total:
-                <span>${'TONGTIEN'}</span>
-              </div>
-            </div>
-            <Button onClick={redirectCheckout} className="shopping__cart__checkout">
-              CHECKOUT
-            </Button>
-            <Button className="shopping__cart__viewcart" onClick={redirectViewcart}>
-              VIEW CART
-            </Button>
+            {/* {cartData && cartData.length ? (
+              <>
+                
+                
+              </>
+            ) : (
+              <p>Your cart is empty now.</p>
+            )} */}
+            <MenuCart cartData={cartData} setOpen={setOpen} />
           </Drawer>
         </div>
         <Dropdown
