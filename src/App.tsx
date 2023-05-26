@@ -11,6 +11,9 @@ import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
+
+import ProductList from './pages/Product/ProductList'
+
 import CheckOut from 'components/UI/header/cart/CheckOut'
 import ViewCart from 'components/UI/header/cart/ViewCart'
 
