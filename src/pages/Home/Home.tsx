@@ -16,6 +16,8 @@ import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 
 import { Pagination } from 'swiper'
+import HomeGallery from 'components/home/HomeGallery'
+import HomeBlog from 'components/home/HomeBlog'
 
 const { Meta } = Card
 
@@ -50,8 +52,6 @@ const Home = () => {
   useEffect(() => {
     if (productList) setProducts(productList)
   }, [productList])
-
-  console.log(products)
 
   const faqItems = [
     {
@@ -347,19 +347,31 @@ const Home = () => {
           <div className="home__popular2__main">
             <Swiper
               slidesPerView={4}
+              slidesPerGroupSkip={4}
               spaceBetween={0}
               navigation={true}
               loop={true}
-              pagination={{
-                clickable: true
+              modules={[Navigation]}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2
+                },
+                992: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2
+                },
+                1200: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3
+                }
               }}
-              modules={[Pagination, Navigation]}
               className="mySwiper"
             >
               {products &&
                 products?.map((product: Product) => {
                   return (
-                    <SwiperSlide style={{ width: 300 }}>
+                    <SwiperSlide style={{ width: 270 }}>
                       <ProductSingle product={product} key={product._id} view={view} />
                     </SwiperSlide>
                   )
@@ -369,8 +381,9 @@ const Home = () => {
         </div>
         {/* Map */}
         <div className="home__map">
-          {map.map((item, index) => (
-            <div className={`home__map__item item${index + 1} ${activeIndex === index ? 'active' : ''}`}>
+          <img src="https://cdn.shopify.com/s/files/1/1280/1207/files/lookboo4.png?v=1640767015" alt="" />
+          {map.map((item: any, index: number) => (
+            <div key={index} className={`home__map__item item${index + 1} ${activeIndex === index ? 'active' : ''}`}>
               <Button shape="circle" icon={<FontAwesomeIcon icon={faPlus} />} onClick={() => onClickMap(index)} />
               <div className={`card ${activeIndex === index ? 'active' : ''}`}>
                 <Card style={{ width: 300, marginTop: 16 }}>
@@ -381,105 +394,9 @@ const Home = () => {
           ))}
         </div>
         {/* Blog */}
-        <div className="home__blog">
-          <div className="home__blog__header">
-            <h3>MAIN BLOG</h3>
-            <h4>Latest Blog</h4>
-          </div>
-          <div className="home__blog__main">
-            <div className="home__blog__main__post">
-              <Card
-                hoverable
-                style={{ width: 400 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://cdn.shopify.com/s/files/1/1280/1207/articles/7_600x400_crop_center.jpg?v=1640517551"
-                  />
-                }
-              >
-                <h4>Drone Photography Tips</h4>
-                <Divider />
-                <p>01 Febuary, 2023 \ 0 comments</p>
-                <p>The summer holidays are wonderful. Dressing for them can be signicantly less so: Packing light...</p>
-                <Button danger>View more</Button>
-              </Card>
-            </div>
-            <div className="home__blog__main__post">
-              <Card
-                hoverable
-                style={{ width: 400 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://cdn.shopify.com/s/files/1/1280/1207/articles/5_600x400_crop_center.jpg?v=1640516849"
-                  />
-                }
-              >
-                <h4>Drone Photography Tips</h4>
-                <Divider />
-                <p>01 Febuary, 2023 \ 0 comments</p>
-                <p>The summer holidays are wonderfu;. Dressing for them can be signicantly less so: Packing light...</p>
-                <Button danger>View more</Button>
-              </Card>
-            </div>
-            <div className="home__blog__main__post">
-              <Card
-                hoverable
-                style={{ width: 400 }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://cdn.shopify.com/s/files/1/1280/1207/articles/6_600x400_crop_center.jpg?v=1640516876"
-                  />
-                }
-              >
-                <h4>Drone Photography Tips</h4>
-                <Divider />
-                <p>01 Febuary, 2023 \ 0 comments</p>
-                <p>The summer holidays are wonderfu;. Dressing for them can be signicantly less so: Packing light...</p>
-                <Button danger>View more</Button>
-              </Card>
-            </div>
-          </div>
-        </div>
+        <HomeBlog />
         {/* Gallery */}
-        <div className="home__gallery ">
-          <div className="home__gallery__header">
-            <h3>SHOP PHOTOS</h3>
-            <h4>Droon Gallery</h4>
-          </div>
-          <div className="home__gallery__main">
-            <div className="home__gallery__main__post">
-              <Image
-                preview={{ visible: false }}
-                width={300}
-                src="https://cdn.shopify.com/s/files/1/1280/1207/files/1.png?v=1639562519"
-              />
-            </div>
-            <div className="home__gallery__main__post">
-              <Image
-                preview={{ visible: false }}
-                width={300}
-                src="https://cdn.shopify.com/s/files/1/1280/1207/files/2_93c788d4-5541-4f06-bd64-f2e4a179c801.png?v=1639562540"
-              />
-            </div>
-            <div className="home__gallery__main__post">
-              <Image
-                preview={{ visible: false }}
-                width={300}
-                src="https://cdn.shopify.com/s/files/1/1280/1207/files/3.png?v=1639562552"
-              />
-            </div>
-            <div className="home__gallery__main__post">
-              <Image
-                preview={{ visible: false }}
-                width={300}
-                src="https://cdn.shopify.com/s/files/1/1280/1207/files/4.png?v=1639562566"
-              />
-            </div>
-          </div>
-        </div>
+        <HomeGallery />
         <FloatButton.BackTop />
       </div>
     </>
