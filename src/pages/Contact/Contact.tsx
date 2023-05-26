@@ -17,8 +17,10 @@ export default class Contact extends React.Component {
   }
   validate = () => {
     let error = false
+    const regex =
+      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
-    if (!this.state.email) {
+    if (!this.state.email || regex.test(this.state.email) === false) {
       this.setState({
         errorEmail: 'Email is required!'
       })
@@ -83,18 +85,6 @@ export default class Contact extends React.Component {
   render() {
     return (
       <>
-        {/* <div className="home">
-            <div className="nav-home">
-              <div className="container">
-                <nav className="navbar">
-                  <ul>
-                    <li>Home</li>
-                    <li>Contact</li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div> */}
         <main>
           <div className=" contact">
             <div className="row">
