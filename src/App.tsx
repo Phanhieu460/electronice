@@ -11,6 +11,8 @@ import Login from './pages/Login/Login'
 import BreadCrumbs from './components/UI/BreadCrumb/BreadCrumbs'
 import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
+import ProductDetail from 'pages/Products/Product-Detail/Product-detail'
+import ProductList from './pages/Product/ProductList'
 
 import ProductList from './pages/Product/ProductList'
 
@@ -39,8 +41,10 @@ function App() {
         <} />
         <Route path="cart" element={<Home />} />
         <Route path="checkout" element={<Home />} /> */}
-        <Route path="product" element={<Product />} />
-        <Route path="product-detail/:productid" element={<Home />} />
+        <Route path="product" element={<ProductList />} />
+        <Route path="product-detail/:productId" element={<ProductDetail />} />
+        <Route path="profile" element={<MyProfile />} />
+        {/* <Route path="product-detail/:productid" element={<ProductDetail />} /> */}
         <Route path="profile/:id" element={<MyProfile />} />
       </Routes>
 
