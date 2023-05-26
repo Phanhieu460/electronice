@@ -1,9 +1,9 @@
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Keyboard, Mousewheel, Navigation, Pagination } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import './product-item.scss'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import CardProduct from '../Card/Card'
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper'
+import './product-item.scss'
 
 function ProductItem({ data = [] }) {
   return (

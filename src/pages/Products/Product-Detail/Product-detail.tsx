@@ -1,9 +1,9 @@
-import './product-detail.scss'
 import { Col, Row, Tabs, TabsProps } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import './product-detail.scss'
 
 import { useAppDispatch, useAppSelector } from 'app/hook'
-import { GET_PRODUCT_LIST, GET_PRODUCT_BY_ID } from 'features/types'
+import { GET_PRODUCT_BY_ID, GET_PRODUCT_LIST } from 'features/types'
 import { Product } from 'models'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -13,12 +13,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 
 // import required modules
-import ProductItem from '../Product-Item/Product-Item'
+import { faComment, faDatabase, faEnvelopeSquare, faKey } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import TextArea from 'antd/es/input/TextArea'
+import { useParams } from 'react-router-dom'
+import { Autoplay, Keyboard, Mousewheel, Navigation, Pagination } from 'swiper'
+import facebook from '../../../assets/images/facebook.png'
+import googleLogin from '../../../assets/images/google.png'
+import pinterest from '../../../assets/images/pinterest.png'
+import twitter from '../../../assets/images/twitter.png'
+import SingleProductDetail from '../Card/Single-Product-Detai'
+import Description from '../Description'
 import ImageProduct from '../Infor-Product/Image-Product-Item'
 import InforProduct from '../Infor-Product/infor-product'
-import SingleProductDetail from '../Card/Single-Product-Detai'
-import { useParams } from 'react-router-dom'
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper'
+import ProductItem from '../Product-Item/Product-Item'
 
 function ProductDetail() {
   const dispatch = useAppDispatch()
@@ -26,7 +34,6 @@ function ProductDetail() {
   const [inforProducts, setInforProducts] = useState<Array<Product>>()
   const { productList, productById } = useAppSelector(state => state.product)
   const params = useParams()
-  console.log(params.productId)
 
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: 2 })
@@ -45,34 +52,66 @@ function ProductDetail() {
     {
       key: '1',
       label: <span style={{ color: 'black', fontSize: '16px' }}>Description</span>,
-      children: (
-        <p>
-          {' '}
-          There are many variations of passvendors of Lorem Ipsum available, but the majority have suffered alteration
-          in some form, by injected humour, or randomised words which don't look even slightly believable. If you are
-          going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the
-          middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary,
-          making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined
-          with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated
-          Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc. On the
-          other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the
-          charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are
-          bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the
-          same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish.
-          In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what
-          we like best, every pleasure is to be welcomed and every pain avoided.
-        </p>
-      )
+      children: <>{inforProducts && <Description product={inforProducts} />}</>
     },
     {
       key: '2',
       label: <span style={{ color: 'black', fontSize: '16px' }}>Comments</span>,
-      children: ``
+      children: (
+        <div>
+          <div className="header" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span>0 Comment</span>
+
+            <a onClick={e => e.preventDefault()} style={{ color: 'black' }}>
+              <FontAwesomeIcon icon={faComment} />
+              Login
+            </a>
+          </div>
+          <div style={{ border: ' solid 1px #d0cdcda0' }} />
+          <div className="body" style={{ margin: ' 30px' }}>
+            <TextArea
+              rows={4}
+              style={{ borderRadius: '10px', marginBottom: '20px' }}
+              placeholder="Start the discussion ..."
+            />
+            <span>LOG IN WITH</span>
+            <div style={{ padding: '10px 0 10px' }}>
+              <img src={googleLogin} alt="" style={{ borderRadius: '100%', width: '20px', marginRight: '5px' }} />
+              <img src={facebook} alt="" style={{ borderRadius: '100%', width: '20px', marginRight: '5px' }} />
+              <img src={pinterest} alt="" style={{ borderRadius: '100%', width: '20px', marginRight: '5px' }} />
+              <img src={twitter} alt="" style={{ borderRadius: '100%', width: '20px' }} />
+            </div>
+            <TextArea placeholder="Name..." autoSize />
+          </div>
+          <div style={{ border: ' solid 1px #d0cdcda0' }} />
+          <div className="footer" style={{ justifyContent: 'normal', color: 'gray' }}>
+            <span style={{ marginRight: '15px' }}>
+              <FontAwesomeIcon icon={faEnvelopeSquare} />
+              Subscribe
+            </span>
+            <span style={{ marginRight: '15px' }}>
+              <FontAwesomeIcon icon={faKey} />
+              Privacy
+            </span>
+            <span>
+              <FontAwesomeIcon icon={faDatabase} />
+              Do Not Sell My Data
+            </span>
+          </div>
+        </div>
+      )
     },
     {
       key: '3',
       label: <span style={{ color: 'black', fontSize: '16px' }}> Reviews</span>,
-      children: ``
+      children: (
+        <div style={{ border: ' 1px solid #d0cdcda0', padding: '20px' }}>
+          <h2 style={{ fontWeight: 'initial' }}>Customer Reviews</h2>
+          <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+            No reviewa yet <span style={{ textDecoration: 'underline', fontWeight: 'initial' }}>Write a review</span>
+          </p>
+        </div>
+      )
     }
   ]
   const data: any['data'] = [
@@ -132,12 +171,11 @@ function ProductDetail() {
     }
   ]
 
-  console.log(inforProducts, 'abghsch')
   return (
     <div className="product-container">
       <Row style={{ margin: '50px auto' }}>
         <Col xs={24} xl={12}>
-          <ImageProduct />
+          {inforProducts && <ImageProduct product={inforProducts} />}
         </Col>
         <Col xs={24} xl={12}>
           {inforProducts && <InforProduct product={inforProducts} />}
@@ -158,8 +196,11 @@ function ProductDetail() {
           navigation={true}
           mousewheel={true}
           keyboard={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-          autoplay={true}
+          modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false
+          }}
         >
           {products &&
             products?.map((product: Product) => {

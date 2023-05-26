@@ -89,17 +89,22 @@
     border: 1px solid #d0cdcda0;
     padding: 17px;
   }
-  button {
+  .add-to-cart {
     background-color: black;
     color: white;
     width: 180px;
     height: 60px;
   }
 }
-.dynamic_btn {
+.btn-buy-it {
   background-color: black;
   color: white;
   width: 300px;
   height: 70px;
   font-size: 20px;
+}
+.add-to-cart:hover,
+.btn-buy-it:hover {
+  background-color: rgba(255, 0, 0, 0.798);
+  border: none;
 }

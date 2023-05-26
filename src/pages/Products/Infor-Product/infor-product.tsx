@@ -1,16 +1,15 @@
-import { Button, Modal } from 'antd'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faHeart, faPlaneDeparture, faRoad, faSync } from '@fortawesome/free-solid-svg-icons'
-import facebook from '../../../assets/images/facebook.png'
-import pinterest from '../../../assets/images/pinterest.png'
-import twitter from '../../../assets/images/twitter.png'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Button, Form, Input, Modal } from 'antd'
+import { useState } from 'react'
 import amazon from '../../../assets/images/amazon-pay.png'
 import apple from '../../../assets/images/apple-pay.png'
 import bitcoin from '../../../assets/images/bitcoin.png'
+import facebook from '../../../assets/images/facebook.png'
 import google from '../../../assets/images/google-pay.png'
+import pinterest from '../../../assets/images/pinterest.png'
+import twitter from '../../../assets/images/twitter.png'
 import visa from '../../../assets/images/visa.png'
-import { useState } from 'react'
-import { Form, Input } from 'antd'
 import './infor-product.scss'
 
 function InforProduct(props: any) {
@@ -19,15 +18,25 @@ function InforProduct(props: any) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isModalOpen1, setIsModalOpen1] = useState<boolean>(false)
   const [isModalOpen2, setIsModalOpen2] = useState<boolean>(false)
-  console.log(props, 'fe')
 
   return (
     <>
       <div className="variable-product" style={{ paddingLeft: '20px' }}>
         <h2>{props.product.name}</h2>
-        <h2 style={{ color: 'red' }}>$ {props.product.price}</h2>
+
         <div>
-          <span>Discount: -{props.product.discount} %</span>
+          <span>
+            {props.product.discount == 0 ? (
+              <span style={{ color: 'red', fontSize: '24px' }}>${props.product.price} </span>
+            ) : (
+              <>
+                <span style={{ textDecorationLine: 'line-through', paddingRight: '10px' }}>${props.product.price}</span>
+                <span style={{ color: 'red', fontSize: '24px' }}>
+                  ${props.product.discount * props.product.price * 0.1}
+                </span>
+              </>
+            )}
+          </span>
         </div>
         <div>
           <span>SKU: </span>
@@ -39,18 +48,17 @@ function InforProduct(props: any) {
         </div>
         <div>
           <span>Type: </span>
-          Type 11
+          {props.product.tag}
         </div>
         <div>
-          <span>Availability: </span>4 left in stock
+          <span>Availability: </span>
+          <ul>
+            {props.product.shortDescription?.split('.').map((item: any) => {
+              return <li style={{ listStyle: 'inside' }}>{item}</li>
+            })}
+          </ul>
         </div>
-        <div>
-          <p style={{ textAlign: 'left' }}>
-            As opposed to using 'Content here, content here', making it look like readable English. Many desktop
-            publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for
-            'lorem ipsum' will uncover many..
-          </p>
-        </div>
+
         <table style={{ width: '100%' }}>
           <tr>
             <th>Name: </th>
@@ -113,11 +121,7 @@ function InforProduct(props: any) {
         </div>
         <div className="material">
           <span>Material:</span>
-          <span>metal,</span>
-          <span>resin,</span>
-          <span>leather,</span>
-          <span>slag,</span>
-          <span>fiber,</span>
+          {props.product.category}
         </div>
         <div className="product_additional_information">
           <button
@@ -238,11 +242,11 @@ function InforProduct(props: any) {
               +
             </div>
           </div>
-          <button> ADD TO CART</button>
+          <button className="add-to-cart"> ADD TO CART</button>
           <FontAwesomeIcon icon={faHeart} style={{ fontSize: '24px', color: 'red' }} />
           <FontAwesomeIcon icon={faSync} style={{ fontSize: '24px' }} />
         </div>
-        <button className="dynamic_btn">Buy it now</button>
+        <button className="btn-buy-it">Buy it now</button>
         {/* //share */}
         <div className="pro-details-meta">
           <span>Categories:</span>
@@ -277,28 +281,28 @@ function InforProduct(props: any) {
               <a href="/collections/all/leather">leather,</a>
             </li>
             <li>
-              <a href="/collections/all/m">m,</a>
+              <a href="/collections/all/m">m</a>
             </li>
           </ul>
-          <div className="share-icons-pro-details-meta">
-            <span>Share:</span>
-            <span>
-              <a href="https://www.flaticon.com/free-icons/facebook" title="facebook icons">
-                <img src={facebook} alt="" />
-              </a>
-            </span>
-            <span>
-              <a href="https://www.flaticon.com/free-icons/facebook" title="twitter icons">
-                <img src={twitter} alt="" />
-              </a>
-            </span>
-            <span>
-              <a href="https://www.flaticon.com/free-icons/facebook" title="pinterest icons">
-                <img src={pinterest} alt="" />
-              </a>
-            </span>
-          </div>
-        </div>{' '}
+        </div>
+        <div className="share-icons-pro-details-meta">
+          <span>Share:</span>
+          <span>
+            <a href="https://www.flaticon.com/free-icons/facebook" title="facebook icons">
+              <img src={facebook} alt="" />
+            </a>
+          </span>
+          <span>
+            <a href="https://www.flaticon.com/free-icons/facebook" title="twitter icons">
+              <img src={twitter} alt="" />
+            </a>
+          </span>
+          <span>
+            <a href="https://www.flaticon.com/free-icons/facebook" title="pinterest icons">
+              <img src={pinterest} alt="" />
+            </a>
+          </span>
+        </div>
         <div className="custom-payment-options">
           <span>Guaranteed safe checkout</span>
           <span>
