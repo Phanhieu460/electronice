@@ -5,7 +5,6 @@ import { faHeart, faSearch, faShoppingCart, faSync } from '@fortawesome/free-sol
 const { Meta } = Card
 
 function CardProduct(props: any) {
-  console.log(props)
   return (
     <div className="card-product">
       <Card className="product-action" hoverable cover={<img alt="example" src={props.item?.src} />}>

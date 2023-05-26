@@ -14,8 +14,6 @@ import './image-product-item.scss'
 import { FreeMode, Navigation, Thumbs } from 'swiper'
 
 function ImageProduct(props: any) {
-  console.log(props.product.images)
-
   return (
     <>
       <Swiper
@@ -31,13 +29,14 @@ function ImageProduct(props: any) {
           disableOnInteraction: false
         }}
       >
-        {props.product?.images.map((image: any) => {
-          return (
-            <SwiperSlide>
-              <img src={image} alt="ssa" />
-            </SwiperSlide>
-          )
-        })}
+        {props.product &&
+          props.product?.images?.map((image: any) => {
+            return (
+              <SwiperSlide>
+                <img src={image} alt="ssa" />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
 
       <Swiper
@@ -50,13 +49,14 @@ function ImageProduct(props: any) {
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        {props.product?.images.map((image: any) => {
-          return (
-            <SwiperSlide>
-              <img src={image} alt="ssa" />
-            </SwiperSlide>
-          )
-        })}
+        {props.product &&
+          props.product?.images?.map((image: any) => {
+            return (
+              <SwiperSlide>
+                <img src={image} alt="ssa" />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </>
   )
