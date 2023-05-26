@@ -170,7 +170,6 @@ function ProductDetail() {
       src: 'https://cdn.shopify.com/s/files/1/1280/1207/products/1_1024x1024.jpg?v=1640259628'
     }
   ]
-  console.log(inforProducts)
   return (
     <div className="product-container">
       <Row style={{ margin: '50px auto' }}>

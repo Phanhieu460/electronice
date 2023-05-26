@@ -85,7 +85,6 @@ const ViewCart = () => {
       key: 'count',
       className: 'center',
       render: (count: any, row: any) => {
-        console.log(count, row)
         return (
           <div className="view__count">
             <Button icon={<MinusCircleOutlined />} onClick={() => handleDeclineAndIncrease(row.key, 'down')} />
