@@ -31,8 +31,8 @@ function ProductItem({ data = [] }) {
         >
           {data.map((item: any) => {
             return (
-              <SwiperSlide>
-                <CardProduct key={item._id} item={item} view="grid" />
+              <SwiperSlide key={item._id}>
+                <CardProduct item={item} view="grid" />
               </SwiperSlide>
             )
           })}

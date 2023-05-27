@@ -13,8 +13,6 @@ import './image-product-item.scss'
 import { Autoplay, FreeMode, Navigation, Thumbs } from 'swiper'
 
 function ImageProduct(props: any) {
-  console.log(props.product.images)
-
   return (
     <>
       <Swiper
@@ -29,9 +27,9 @@ function ImageProduct(props: any) {
           disableOnInteraction: false
         }}
       >
-        {props.product?.images?.map((image: any) => {
+        {props.product?.images?.map((image: any, index: number) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <img src={image} alt="ssa" />
             </SwiperSlide>
           )
@@ -47,9 +45,9 @@ function ImageProduct(props: any) {
         modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         className="mySwiper-list"
       >
-        {props.product?.images?.map((image: any) => {
+        {props.product?.images?.map((image: any, index: number) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index}>
               <img src={image} alt="ssa" />
             </SwiperSlide>
           )

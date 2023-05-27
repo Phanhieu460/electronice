@@ -191,35 +191,39 @@ function InforProduct(props: any) {
         <div>
           <span>Availability: </span>
           <ul>
-            {props.product.shortDescription?.split('.').map((item: any) => {
-              return <li style={{ listStyle: 'inside' }}>{item}</li>
+            {props.product.shortDescription?.split('.').map((item: any, index: number) => {
+              return (
+                <li style={{ listStyle: 'inside' }} key={index}>
+                  {item}
+                </li>
+              )
             })}
           </ul>
         </div>
-
         <table style={{ width: '100%' }}>
-          <tr>
-            <th>Name: </th>
-            <td> Product with video</td>
-          </tr>
-          <tr>
-            <th>Vendor: </th>
-            <td>Vendor 11</td>
-          </tr>
-          <tr>
-            <th>Type: </th>
-            <td>Type 11</td>
-          </tr>
-          <tr>
-            <th>Manufacturing: </th>
-            <td>2021 / 12 / 23</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Name: </th>
+              <td> Product with video</td>
+            </tr>
+            <tr>
+              <th>Vendor: </th>
+              <td>Vendor 11</td>
+            </tr>
+            <tr>
+              <th>Type: </th>
+              <td>Type 11</td>
+            </tr>
+            <tr>
+              <th>Manufacturing: </th>
+              <td>2021 / 12 / 23</td>
+            </tr>
+          </tbody>
         </table>
         <div className="product-modal__content--color" style={{ display: 'flex', alignItems: 'center' }}>
           <span className="product-modal__content--color--title">Color :</span>
           <div className="product-modal__content--color--content">
             {props.product?.variation?.map((single: any, key: number) => {
-              console.log(single, 'infor')
               return (
                 <label className={`product-modal__content--color--content--single ${single.color}`} key={key}>
                   <Radio

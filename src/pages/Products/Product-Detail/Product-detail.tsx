@@ -198,10 +198,10 @@ function ProductDetail() {
           mousewheel={true}
           keyboard={true}
           modules={[Autoplay, Navigation, Mousewheel, Keyboard]}
-          // autoplay={{
-          //   delay: 2000,
-          //   disableOnInteraction: false
-          // }}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false
+          }}
           breakpoints={{
             // when window width is >= 640px
             640: {
@@ -218,8 +218,8 @@ function ProductDetail() {
           {products &&
             products?.map((product: Product) => {
               return (
-                <SwiperSlide>
-                  <SingleProductDetail product={product} key={product._id} />
+                <SwiperSlide key={product._id}>
+                  <SingleProductDetail product={product} />
                 </SwiperSlide>
               )
             })}
