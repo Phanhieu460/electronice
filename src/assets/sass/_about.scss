@@ -257,12 +257,14 @@
 }
 
 .featured {
+    max-width: 1200px;
+    margin: 0 auto;
     .featured__item__contain {
         padding-top: 0px;
         padding-bottom: 70px;
         .featured__item__container {
-            margin: 0 auto;
-            padding: 0 50px;
+       
+          
             text-align: center;
             .featured__item--title {
                 padding-bottom: 30px;
@@ -278,7 +280,6 @@
                 }
                 h3 {
                     margin: 0 auto;
-                    width: 38%;
                     font-family: Rajdhani, sans-serif;
                     font-style: normal;
                     font-weight: 700;
@@ -396,6 +397,9 @@
                         }
                     }
                 }
+                .swiper-slide {
+                    width: 320px !important;
+                }
             }
         }
     }
@@ -409,8 +413,6 @@
 .swiper-slide {
     text-align: center;
     font-size: 18px;
-
-    /* Center slide text vertically */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -422,22 +424,12 @@
 .swiper-container {
     width: 480px;
   }
-  @media screen and (min-width: 320px) {
-    .swiper-container {
-      width: 320px;
-    }
-  }
+
   @media screen and (min-width: 540px) {
     .swiper-container {
       width: 540px;
     }
   }
-  @media screen and (min-width: 640px) {
-    .swiper-container {
-      width: 640px;
-    }
-  }
-  
   @media screen and (min-width: 768px) {
     .swiper-container {
       width: 768px;
@@ -464,7 +456,7 @@
     main {
         padding: 0 30px;
         margin: 0 auto;
-        max-width: 960px;
+        max-width: 1200px;
         .about {
             .about__droon {
                 .about__droon-image {
@@ -525,6 +517,7 @@
 
 @media #{$sm-layout} {
     main {
+        max-width: 992px;
         padding: 0 30px;
         margin: 0 auto;
     }
@@ -532,7 +525,7 @@
 
 @media #{$xs-layout} {
     main {
-        max-width: 540px;
+        max-width: 768px;
         padding: 0 30px;
         margin: 0 auto;
     }
