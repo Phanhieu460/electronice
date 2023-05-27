@@ -16,9 +16,13 @@ const CheckOut = () => {
   const redirectCart = () => {
     navigate('/cart')
   }
+<<<<<<< HEAD
   const redirectShipping = () => {
     navigate('/shipping')
   }
+=======
+
+>>>>>>> e3242c077d317cb8131da72dc4bdd85437d73fef
   const handleLogout = () => {
     Cookies.remove('authToken')
     navigate('/')
@@ -36,7 +40,7 @@ const CheckOut = () => {
   return (
     <div className="check">
       <div className="check__all">
-        <div className="check__main">
+        {/* <div className="check__main">
           <h2 className="check__header">Droon - Drone Shop Shopify Theme</h2>
           <div className="check__header--cart">
             <div className="check__header--click" onClick={handleClick}>
@@ -134,7 +138,7 @@ const CheckOut = () => {
               </Button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="check__main__right2">
           <div className="check__right--distance">
             <div className="check__main__information">

@@ -2,10 +2,14 @@ import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-sol
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import Cookies from 'js-cookie'
+<<<<<<< HEAD
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '../../../assets/images/logo.png'
+=======
+import { useAppSelector } from 'app/hook'
+>>>>>>> e3242c077d317cb8131da72dc4bdd85437d73fef
 
 type Props = {}
 
@@ -17,11 +21,13 @@ const Header = (props: Props) => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
+  const cartData = useAppSelector(state => state.cartData)
   const token = Cookies.get('authToken')
   const productStore = useSelector((state: any) => state.product.productStore)
 
   const handleLogout = () => {
     Cookies.remove('authToken')
+    Cookies.remove('refreshToken')
     navigate('/')
   }
   const redirectCheckout = () => {

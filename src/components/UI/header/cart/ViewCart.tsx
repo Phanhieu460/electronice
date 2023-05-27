@@ -3,9 +3,13 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, DatePicker, DatePickerProps, Table } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
+<<<<<<< HEAD
 import { decrementByCount, incrementByCount, remove } from 'features/product/productSlider'
 import { useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+=======
+import { useState } from 'react'
+>>>>>>> e3242c077d317cb8131da72dc4bdd85437d73fef
 import { useNavigate } from 'react-router-dom'
 
 const ViewCart = () => {
