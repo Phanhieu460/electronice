@@ -116,20 +116,9 @@
 .main_more {
   display: none;
 }
-// .header__cart__icon--quantity {
-//   position: absolute;
-//   right: 36px;
-//   top: 17px;
-//   transform: translate(-50%, -100%);
-//   font-size: 13px;
-//   width: 22px;
-//   height: 22px;
-//   line-height: 22px;
-//   text-align: center;
-//   color: #fff;
-//   background-color: #1f2226;
-//   border-radius: 50%;
-// }
+.view-img {
+  height: 100px;
+}
 @media screen and (min-width: 993) {
 }
 @media screen and (max-width: 992px) {
@@ -217,6 +206,9 @@
   }
   .main_more--total span:first-child {
     margin-right: 100px;
+  }
+  .main_more--dowup {
+    display: flex;
   }
 }
 .view__total--subtotal {

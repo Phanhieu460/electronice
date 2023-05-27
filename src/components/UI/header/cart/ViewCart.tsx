@@ -1,88 +1,43 @@
-import { DeleteOutlined, EditOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
-import {
-  faBars,
-  faCaretDown,
-  faCaretUp,
-  faCircleXmark,
-  faMinus,
-  faPen,
-  faPlus
-} from '@fortawesome/free-solid-svg-icons'
+import { DeleteOutlined, MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { render } from '@testing-library/react'
 import { Button, DatePicker, DatePickerProps, Table } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
-import Item from 'antd/es/list/Item'
-import row from 'antd/es/row'
-import { useState } from 'react'
+import { decrementByCount, incrementByCount, remove } from 'features/product/productSlider'
+import { useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-let data = [
-  {
-    key: '1',
-    image: 'path/to/image1',
-    product: 'Product 1',
-    price: 200,
-    count: 1
-  },
-  {
-    key: '2',
-    image: 'path/to/image2',
-    product: 'Product 2',
-    price: 50,
-    count: 2
-  }
-]
 
 const ViewCart = () => {
   const navigate = useNavigate()
-  const [listProduct, setListProduct] = useState(data)
+  const productStore = useSelector((state: any) => state.product.productStore)
+  const dispatch = useDispatch()
+  const [total, setTotal] = useState(0)
+  useMemo(() => {
+    const totalProduct = productStore.reduce((acc: number, curr: any) => {
+      return acc + curr.price * curr.count
+    }, 0)
+    setTotal(totalProduct)
+  }, [productStore])
+
   const redirectCheckout = () => {
     navigate('/checkout')
   }
 
-  const handleDeclineAndIncrease = (id: string, action: string) => {
-    const product = listProduct.map(item => {
-      if (item.key === id) {
-        if (action === 'up') {
-          return {
-            ...item,
-            count: item.count + 1
-          }
-        }
-        {
-          return {
-            ...item,
-            count: item.count !== 0 ? item.count - 1 : item.count
-          }
-        }
-      }
-      return item
-    })
-    setListProduct(product)
-  }
-  const handleClearCart = () => {
-    setListProduct([])
-  }
-  const handleRemove = (id: string) => {
-    const newListProduct = listProduct.filter(item => item.key !== id)
-    setListProduct(newListProduct)
-  }
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {}
-  const [showProduct, setShowProduct] = useState<boolean>(true)
   const columns = [
     {
       title: 'Image',
       dataIndex: 'image',
       key: 'image',
-      render: () => <img src="path/to/image" alt="product" />,
+      render: (image: string) => <img src={image} alt="product" />,
       className: 'ant-table-cell ant-table-cell-with-append center'
     },
     {
       title: 'Product',
-      dataIndex: 'product',
+      dataIndex: 'name',
       className: 'center',
-      key: 'product'
+      key: 'name'
     },
     {
       title: 'Price',
@@ -96,12 +51,11 @@ const ViewCart = () => {
       key: 'count',
       className: 'center',
       render: (count: any, row: any) => {
-        console.log(count, row)
         return (
           <div className="view__count">
-            <Button icon={<MinusCircleOutlined />} onClick={() => handleDeclineAndIncrease(row.key, 'down')} />
+            <Button icon={<MinusCircleOutlined />} onClick={() => dispatch(decrementByCount({ id: row.id }))} />
             <div className="view__count--count">{count}</div>
-            <Button icon={<PlusCircleOutlined />} onClick={() => handleDeclineAndIncrease(row.key, 'up')} />
+            <Button icon={<PlusCircleOutlined />} onClick={() => dispatch(incrementByCount({ id: row.id }))} />
           </div>
         )
       }
@@ -120,22 +74,26 @@ const ViewCart = () => {
       className: 'center',
       render: (_: any, row: any) => (
         <>
-          <Button className="product__hover" icon={<DeleteOutlined />} onClick={() => handleRemove(row.key)} />
+          <Button
+            className="product__hover"
+            icon={<DeleteOutlined />}
+            onClick={() => dispatch(remove({ id: row.id }))}
+          />
         </>
       )
     }
   ]
-
   return (
     <div className="vier__cart__main">
-      {showProduct && (
+      {productStore && (
         <>
           <Table
             columns={columns}
-            dataSource={listProduct}
+            dataSource={productStore}
             pagination={false}
             className="view__table ant-table-bordered"
           />
+
           <div className="main_more">
             <div className="main_more--left">
               <div className="main_more--img">
@@ -152,10 +110,17 @@ const ViewCart = () => {
                 <div className="main_more__right--extra ">
                   <div>tiền</div>
                   <div className="main_more--icon">
-                    <span>{10}</span>
                     <div className="main_more--dowup">
-                      {/* <div> <FontAwesomeIcon icon={faCaretUp} onClick={() => handleDeclineAndIncrease(row.key, 'down')} /> </div>
-                      <div> <FontAwesomeIcon icon={faCaretDown} onClick={() => handleDeclineAndIncrease(row.key, 'up')} /> </div> */}
+                      <Button
+                        icon={<MinusCircleOutlined />}
+                        onClick={(row: any) => dispatch(decrementByCount({ id: row.id }))}
+                      />
+                      <div className="view__count--count">10</div>
+
+                      <Button
+                        icon={<PlusCircleOutlined />}
+                        onClick={(row: any) => dispatch(incrementByCount({ id: row.id }))}
+                      />
                     </div>
                   </div>
                 </div>
@@ -172,9 +137,7 @@ const ViewCart = () => {
             </button>
             <div className="view__event---modifier">
               <button className="view__event---modifier1">UPDATE CART</button>
-              <button className="view__event---modifier2" onClick={handleClearCart}>
-                CLEAR CART
-              </button>
+              <button className="view__event---modifier2">CLEAR CART</button>
             </div>
           </div>
           <div className="view__total">
@@ -201,9 +164,9 @@ const ViewCart = () => {
                   <h3>Cart Totals</h3>
                   <div className="view__total--subtotal">
                     <div className="grid-item">Subtotal</div>
-                    <div className="grid-item">gia phu</div>
+                    <div className="grid-item">{total}</div>
                     <div className="grid-item">Total</div>
-                    <div className="grid-item">Tong tien</div>
+                    <div className="grid-item">{total} </div>
                   </div>
                   <button onClick={redirectCheckout} className="view__total__sum--check">
                     Proceed to Checkout

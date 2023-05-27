@@ -1,18 +1,11 @@
-import {
-  faAngleLeft,
-  faAngleRight,
-  faCartPlus,
-  faChevronLeft,
-  faChevronUp,
-  faMagnifyingGlass
-} from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight, faCartPlus, faChevronLeft, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Checkbox, Collapse, Input, Select } from 'antd'
+import { Button, Checkbox, Input, Select } from 'antd'
 import Search from 'antd/es/input/Search'
 import Cookies from 'js-cookie'
 import { useState } from 'react'
 
-import { Form, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const CheckOut = () => {
   const [text, setText] = useState('Show order summary ')
@@ -23,8 +16,9 @@ const CheckOut = () => {
   const redirectCart = () => {
     navigate('/cart')
   }
-  const token = Cookies.get('authToken')
-
+  const redirectShipping = () => {
+    navigate('/shipping')
+  }
   const handleLogout = () => {
     Cookies.remove('authToken')
     navigate('/')
@@ -45,7 +39,6 @@ const CheckOut = () => {
         <div className="check__main">
           <h2 className="check__header">Droon - Drone Shop Shopify Theme</h2>
           <div className="check__header--cart">
-            {/* <div className="check__header--click"> */}
             <div className="check__header--click" onClick={handleClick}>
               <div>
                 <FontAwesomeIcon className="check__header--icon" icon={faCartPlus} />
@@ -56,12 +49,12 @@ const CheckOut = () => {
             </div>
             {showTotal && (
               <div className="check__main__right">
-                <div className="check__right--distance">
+                <div className="check__right--distance1">
                   <div className="check__main__information">
-                    <div>anh</div>
+                    <div>image</div>
                     <div>
-                      <div>2. New badge product</div>
-                      <span>m / gold</span>
+                      <div>product name</div>
+                      <span>variation</span>
                     </div>
                     <div>total</div>
                   </div>
@@ -71,7 +64,7 @@ const CheckOut = () => {
                   </div>
                   <div className="check__main__calculate">
                     <span>shipping</span>
-                    <span>Calculated at next step</span>
+                    <span>456</span>
                   </div>
                   <div className="check__main__total">
                     <span>Total</span>
@@ -80,8 +73,6 @@ const CheckOut = () => {
                 </div>
               </div>
             )}
-
-            {/* </div> */}
           </div>
 
           <div className="check__main__navigation ">
@@ -138,7 +129,7 @@ const CheckOut = () => {
                 <FontAwesomeIcon icon={faChevronLeft} />
                 Return to cart
               </a>
-              <Button className="check__directional--continue" type="primary">
+              <Button onClick={redirectShipping} className="check__directional--continue" type="primary">
                 Continue to shipping
               </Button>
             </div>
@@ -168,7 +159,6 @@ const CheckOut = () => {
             </div>
           </div>
         </div>
-        {/* //// */}
       </div>
 
       <footer></footer>

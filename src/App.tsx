@@ -13,6 +13,8 @@ import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
 import CheckOut from 'components/UI/header/cart/CheckOut'
 import ViewCart from 'components/UI/header/cart/ViewCart'
+import Shipping from 'components/UI/header/cart/Shipping'
+import Payment from 'components/UI/header/cart/Payment'
 
 function App() {
   const location = useLocation()
@@ -31,6 +33,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="cart" element={<ViewCart />} />
         <Route path="checkout" element={<CheckOut />} />
+        <Route path="shipping" element={<Shipping />} />
+        <Route path="payment" element={<Payment />} />
 
         {/* <Route path="login" element={<Home />} />
         <} />

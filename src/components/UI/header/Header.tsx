@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import logo from '../../../assets/images/logo.png'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faCartPlus, faCircleUser, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import Cookies from 'js-cookie'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import logo from '../../../assets/images/logo.png'
 
 type Props = {}
 
@@ -17,6 +18,7 @@ const Header = (props: Props) => {
   const [open, setOpen] = useState(false)
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
   const token = Cookies.get('authToken')
+  const productStore = useSelector((state: any) => state.product.productStore)
 
   const handleLogout = () => {
     Cookies.remove('authToken')
@@ -50,7 +52,7 @@ const Header = (props: Props) => {
           <Space>
             <span className="header__cart__icon">
               <FontAwesomeIcon className="header__cart--icon" icon={faCartPlus} onClick={showDrawer} />
-              <span className="header__cart__icon--quantity">1</span>
+              <span className="header__cart__icon--quantity">{productStore.length}</span>
             </span>
           </Space>
 
@@ -77,6 +79,27 @@ const Header = (props: Props) => {
             </Button>
           </Drawer>
         </div>
+        {/* {showCart && (
+          <div className="shope__cart">
+            <div className="shope__cart__icon">
+              <h1> Shopping Cart</h1>
+              <FontAwesomeIcon icon={faXmark} className="shope__cart__icon--close" onClick={() => setShowCart(false)} />
+            </div>
+            <p>Your cart is empty now.</p>
+            <div className="shopping__cart">
+              <div className="shopping__cart__total">
+                Total:
+                <span>${'TONGTIEN'}</span>
+              </div>
+              <button onClick={redirectCheckout} className="shopping__cart__checkout">
+                CHECKOUT
+              </button>
+              <button className="shopping__cart__viewcart" onClick={redirectViewcart}>
+                VIEW CART
+              </button>
+            </div>
+          </div>
+        )} */}
         <Dropdown
           dropdownRender={menu => {
             return (
@@ -109,6 +132,7 @@ const Header = (props: Props) => {
           <FontAwesomeIcon icon={faCircleUser} />
         </Dropdown>
       </div>
+
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />
       {showMenuMobile && (
         <div className="header__mobile">

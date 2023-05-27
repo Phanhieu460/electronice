@@ -4,8 +4,7 @@
 
 .check__main {
   width: 574px;
-  margin: auto;
-  margin-left: 20px;
+  margin-right: 10px;
 }
 .check__contact div {
   margin-bottom: 12px;
@@ -99,6 +98,7 @@
   .check__main {
   }
   .check__main__right2 {
+    display: block;
     width: 500px;
     border-left: 1px solid #ccc;
   }
@@ -107,17 +107,32 @@
   }
 }
 @media screen and (max-width: 992px) {
-  .check__header--click {
-    display: flex;
-    color: #f1323e;
-    margin-bottom: 21px;
-    justify-content: space-between;
+  .check__main {
+    max-width: 700px;
+    margin-left: 87px;
   }
   .check__main__right2 {
     display: none;
   }
+  .check__header--click {
+    display: flex;
+    color: #f1323e;
+    margin-bottom: 21px;
+    width: 574px;
+    justify-content: space-between;
+  }
+  .check__right--distance {
+    display: none;
+  }
+  .check__right--distance1 {
+    display: block;
+  }
 }
 @media screen and (max-width: 768px) {
+  .check__main {
+    max-width: 768px;
+    margin-left: 20px;
+  }
   .check__shipping--name {
     display: block;
   }
@@ -129,7 +144,7 @@
   }
   .check__address--state {
     width: 100%;
-    margin: 20px 20px 20px 0px;
+    margin: 26px 0 20px 0;
   }
   .check__header--click {
     display: flex;
