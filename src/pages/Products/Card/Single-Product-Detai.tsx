@@ -31,7 +31,7 @@ function SingleProductDetail(props: any) {
           </span>
           {props.product.discount ? (
             <span className="product-detail-single-grid__content--priceSale">
-              ${props.product.price - (props.product.price * props.product.discount) / 100}
+              ${props.product.price * props.product.discount * 0.1}
             </span>
           ) : (
             ''

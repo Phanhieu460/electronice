@@ -104,7 +104,6 @@ const ProductSingle = (props: any) => {
           </div>
         </div>
       )}
-      <ProductModal product={props.product} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </>
   )
 }
