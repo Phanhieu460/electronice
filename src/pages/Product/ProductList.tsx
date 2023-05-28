@@ -21,7 +21,7 @@ const ProductList = () => {
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: pageNumber })
     if (pageNumber === 1) navigate(`/product`)
-  }, [pageNumber, dispatch])
+  }, [pageNumber, dispatch, navigate])
 
   useEffect(() => {
     if (productList) setProducts(productList)

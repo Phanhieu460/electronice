@@ -36,7 +36,11 @@
   padding: 10px 0;
 }
 
-.mySwiper-list .swiper-slide-thumb-active {
+.mySwiper .swiper-slide {
+  width: 25%;
+}
+
+.mySwiper .swiper-slide-thumb-active {
   opacity: 1;
 }
 
