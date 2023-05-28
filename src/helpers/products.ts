@@ -106,3 +106,7 @@ export const getSortedProducts = (products: Array<Product>, sortType: string, so
   }
   return products
 }
+
+export const getDiscountPrice = (price: number, discount: number) => {
+  return discount && discount > 0 ? price - price * (discount / 100) : 0
+}

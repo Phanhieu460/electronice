@@ -47,7 +47,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_LIST, pageNumber: 1 })
-  })
+  }, [])
 
   useEffect(() => {
     if (productList) setProducts(productList)

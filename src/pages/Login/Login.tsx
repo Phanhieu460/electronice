@@ -2,7 +2,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Button, Checkbox, Form, Input, Space } from 'antd'
 import { openNotification } from '../../util/notifications'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -11,6 +11,8 @@ const Login = () => {
   const [user, setUser] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const location = useLocation()
+  const { from } = location.state || { from: '/' }
 
   const redirectHome = () => {
     navigate('/')
@@ -42,7 +44,7 @@ const Login = () => {
           'success',
           'topLeft'
         )
-        redirectHome()
+        navigate(from, { replace: true })
       })
       .catch(err => {
         if (!user) {
