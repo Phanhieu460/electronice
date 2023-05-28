@@ -323,42 +323,27 @@ const About = () => {
             <div className="featured__item--content">
               <Swiper
                 slidesPerView={3}
-                spaceBetween={30}
                 breakpoints={{
-                  320: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                  },
                   540: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                  },
-
-                  640: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
+                    slidesPerView: 1
                   },
                   768: {
-                    slidesPerView: 1,
-                    spaceBetween: 40
+                    slidesPerView: 1
                   },
                   960: {
-                    slidesPerView: 2,
-                    spaceBetween: 60
+                    slidesPerView: 2
                   },
                   1200: {
-                    slidesPerView: 3,
-                    spaceBetween: 50
+                    slidesPerView: 3
                   },
                   1440: {
-                    slidesPerView: 4,
-                    spaceBetween: 50
+                    slidesPerView: 4
                   }
                 }}
-                autoplay={{
-                  delay: 1000,
-                  disableOnInteraction: false
-                }}
+                // autoplay={{
+                //   delay: 1000,
+                //   disableOnInteraction: false
+                // }}
                 loop={true}
                 keyboard={{
                   enabled: true
