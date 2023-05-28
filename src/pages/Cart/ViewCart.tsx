@@ -4,6 +4,7 @@ import { Col, Row } from 'antd'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import { addToCart, decreaseQuantity, deleteAllFromCart, deleteFromCart } from 'features/cart/cartSlice'
 import { getDiscountPrice } from 'helpers/products'
+import Cookies from 'js-cookie'
 import { Link, useNavigate } from 'react-router-dom'
 
 const ViewCart = () => {
@@ -11,6 +12,8 @@ const ViewCart = () => {
   const navigate = useNavigate()
   const cartData = useAppSelector(state => state.cartData)
   let cartTotalPrice = 0
+
+  const isCheckout = Cookies.get('authToken')
 
   const handleClickCheckout = () => {
     navigate('/checkout')
@@ -99,6 +102,7 @@ const ViewCart = () => {
             <button onClick={handleClickCheckout} className="view-cart__total--checkout">
               Proceed to Checkout
             </button>
+            {/* <Link to="/login?redirect=checkout">Checkout</Link> */}
           </div>
         </>
       ) : (

@@ -13,6 +13,7 @@ import MyProfile from './components/My-Profile/Profile'
 import Register from './components/UI/form/Register'
 import CheckOut from 'pages/Cart/CheckOut'
 import ViewCart from 'pages/Cart/ViewCart'
+import PrivateRoute from 'util/PrivateRoute'
 
 function App() {
   const location = useLocation()
@@ -30,10 +31,13 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="cart" element={<ViewCart />} />
-        <Route path="checkout" element={<CheckOut />} />
         <Route path="product" element={<Product />} />
         <Route path="product-detail/:productid" element={<Home />} />
-        <Route path="profile/:id" element={<MyProfile />} />
+
+        <Route element={<PrivateRoute />}>
+          <Route path="checkout" element={<CheckOut />} />
+          <Route path="profile" element={<MyProfile />} />
+        </Route>
       </Routes>
 
       <Footer />
