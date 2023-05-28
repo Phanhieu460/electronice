@@ -169,7 +169,7 @@ function InforProduct(props: any) {
               <>
                 <span style={{ textDecorationLine: 'line-through', paddingRight: '10px' }}>${props.product.price}</span>
                 <span style={{ color: 'red', fontSize: '24px' }}>
-                  ${props.product.discount * props.product.price * 0.1}
+                  ${props.product.price - (props.product.price * props.product.discount) / 100}
                 </span>
               </>
             )}
@@ -191,13 +191,21 @@ function InforProduct(props: any) {
         <div>
           <span>Availability: </span>
           <ul>
-            {props.product.shortDescription?.split('.').map((item: any, index: number) => {
-              return (
-                <li style={{ listStyle: 'inside' }} key={index}>
-                  {item}
-                </li>
-              )
-            })}
+            {props.product.shortDescription?.split('.').length > 1
+              ? props.product.shortDescription?.split('.').map((item: any, index: number) => {
+                  return (
+                    <li style={{ listStyle: 'inside' }} key={index}>
+                      {item}
+                    </li>
+                  )
+                })
+              : props.product.shortDescription?.split('.').map((item: any, index: number) => {
+                  return (
+                    <div style={{ listStyle: 'inside' }} key={index}>
+                      {item}
+                    </div>
+                  )
+                })}
           </ul>
         </div>
         <table style={{ width: '100%' }}>

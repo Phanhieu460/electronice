@@ -27,13 +27,14 @@ function ImageProduct(props: any) {
           disableOnInteraction: false
         }}
       >
-        {props.product?.images?.map((image: any, index: number) => {
-          return (
-            <SwiperSlide key={index}>
-              <img src={image} alt="ssa" />
-            </SwiperSlide>
-          )
-        })}
+        {props.product &&
+          props.product?.images?.map((image: any) => {
+            return (
+              <SwiperSlide>
+                <img src={image} alt="ssa" />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
 
       <Swiper
@@ -45,13 +46,14 @@ function ImageProduct(props: any) {
         modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         className="mySwiper-list"
       >
-        {props.product?.images?.map((image: any, index: number) => {
-          return (
-            <SwiperSlide key={index}>
-              <img src={image} alt="ssa" />
-            </SwiperSlide>
-          )
-        })}
+        {props.product &&
+          props.product?.images?.map((image: any) => {
+            return (
+              <SwiperSlide>
+                <img src={image} alt="ssa" />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </>
   )

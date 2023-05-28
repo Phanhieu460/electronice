@@ -33,6 +33,7 @@ const Login = () => {
       .then(response => {
         setUser(response.data)
         Cookies.set('authToken', response.data.token, { path: '/' })
+        Cookies.set('refreshToken', response.data.refreshToken, { path: '/' })
         openNotification(
           {
             message: 'Login Success',
