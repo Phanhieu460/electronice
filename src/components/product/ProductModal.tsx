@@ -152,7 +152,6 @@ const ProductModal = (props: any) => {
               </button>
             </div>
           </div>
-          <Button className="product-modal__content--addToCart" onClick={() => dispatch(addToCart(props.product))}>
           <Button
             className="product-modal__content--addToCart"
             onClick={() => {
