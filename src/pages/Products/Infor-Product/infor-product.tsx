@@ -11,13 +11,17 @@ import pinterest from '../../../assets/images/pinterest.png'
 import twitter from '../../../assets/images/twitter.png'
 import visa from '../../../assets/images/visa.png'
 import './infor-product.scss'
+import { useAppDispatch, useAppSelector } from 'app/hook'
+import { getProductCartQuantity } from 'helpers/products'
+import { addToCart } from 'features/cart/cartSlice'
 
 function InforProduct(props: any) {
-  const [count, setCount] = useState(0)
+  const dispatch = useAppDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isModalOpen1, setIsModalOpen1] = useState<boolean>(false)
   const [isModalOpen2, setIsModalOpen2] = useState<boolean>(false)
+  const cartData = useAppSelector(state => state.cartData)
 
   const [selectedProductColor, setSelectedProductColor] = useState(
     props.product.variation ? props.product.variation[0].color : ''
@@ -26,6 +30,13 @@ function InforProduct(props: any) {
   const [selectedProductSize, setSelectedProductSize] = useState(
     props.product.variation ? props.product.variation[0].size[0].name : ''
   )
+  const [productStock] = useState(
+    props.product?.variation?.length > 0 ? props.product?.variation[0]?.size[0]?.stock : props.product.stock
+  )
+  const [quantityCount, setQuantityCount] = useState(1)
+
+  const productCartQty = getProductCartQuantity(cartData, props.product, selectedProductColor, selectedProductSize)
+
   const columns = [
     {
       key: 'international',
@@ -382,23 +393,20 @@ function InforProduct(props: any) {
         </div>
         <div className="details-quality-sticky-pro-button">
           <div className="cart-details">
-            <div
-              onClick={() => {
-                setCount(count - 1)
-              }}
-            >
-              -
-            </div>
-            <div style={{ padding: '0 10px' }}>{count}</div>
-            <div
-              onClick={() => {
-                setCount(count + 1)
-              }}
+            <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)}>-</button>
+            <div style={{ padding: '0 10px' }}>{quantityCount}</div>
+            <button
+              onClick={() =>
+                setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)
+              }
             >
               +
-            </div>
+            </button>
           </div>
-          <button className="add-to-cart"> ADD TO CART</button>
+          <button className="add-to-cart" onClick={() => dispatch(addToCart(props.product))}>
+            {' '}
+            ADD TO CART
+          </button>
           <FontAwesomeIcon icon={faHeart} style={{ fontSize: '24px', color: 'red' }} />
           <FontAwesomeIcon icon={faSync} style={{ fontSize: '24px' }} />
         </div>
