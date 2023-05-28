@@ -19,10 +19,6 @@
   padding: 20px 0px;
 }
 
-.material span {
-  padding: 10px;
-}
-
 .color-product label img,
 .size-product label img {
   padding: 5px;
@@ -79,13 +75,13 @@
 .details-quality-sticky-pro-button {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 30px auto;
 
   .cart-details {
     display: flex;
     width: 50px;
-    justify-content: space-evenly;
+    justify-content: space-between;
     border: 1px solid #d0cdcda0;
     padding: 17px;
   }

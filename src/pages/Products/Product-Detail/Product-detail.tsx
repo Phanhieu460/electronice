@@ -27,6 +27,7 @@ import Description from '../Description'
 import ImageProduct from '../Infor-Product/Image-Product-Item'
 import InforProduct from '../Infor-Product/infor-product'
 import ProductItem from '../Product-Item/Product-Item'
+import ShopTag from 'components/product/ShopTag'
 
 function ProductDetail() {
   const dispatch = useAppDispatch()
@@ -188,24 +189,36 @@ function ProductDetail() {
 
       <h3 style={{ color: 'red', textAlign: 'center', paddingTop: '20px' }}>POPULAR ITEM</h3>
       <h1 style={{ textAlign: 'center' }}>Featured in Drone</h1>
-      <div className="container-product-detail">
+      <div className="container-product-single-detail">
         <Swiper
           slidesPerView={4}
           spaceBetween={30}
           navigation={true}
           mousewheel={true}
           keyboard={true}
-          modules={[Autoplay, Navigation, Pagination, Mousewheel, Keyboard]}
+          modules={[Autoplay, Navigation, Mousewheel, Keyboard]}
           autoplay={{
-            delay: 2500,
+            delay: 2000,
             disableOnInteraction: false
+          }}
+          breakpoints={{
+            // when window width is >= 640px
+            640: {
+              width: 640,
+              slidesPerView: 2
+            },
+            // when window width is >= 768px
+            768: {
+              width: 768,
+              slidesPerView: 4
+            }
           }}
         >
           {products &&
             products?.map((product: Product) => {
               return (
-                <SwiperSlide>
-                  <SingleProductDetail product={product} key={product._id} />
+                <SwiperSlide key={product._id}>
+                  <SingleProductDetail product={product} />
                 </SwiperSlide>
               )
             })}

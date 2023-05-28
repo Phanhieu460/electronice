@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
 const initialState: any = []
@@ -7,9 +7,9 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: any) => {
+    addToCart: (state, action: PayloadAction<any>) => {
       if (action.payload.variation === undefined) {
-        const cartItem = state.filter((item: any) => item.id === action.payload)[0]
+        const cartItem = state.filter((item: any) => item.id === action.payload._id)[0]
         if (cartItem === undefined) {
           return [
             ...state,
@@ -77,6 +77,7 @@ const cartSlice = createSlice({
       }
     },
     decreaseQuantity: (state, action: any) => {
+      console.log(action)
       if (action.payload.quantity === 1) {
         const remainingItems = (cartItems: any, product: any) =>
           cartItems.filter((cartItem: any) => cartItem.cartItemId !== product.cartItemId)

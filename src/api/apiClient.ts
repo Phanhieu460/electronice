@@ -9,7 +9,7 @@ api.defaults.baseURL = process.env.REACT_APP_SERVER_URL
 
 api.interceptors.request.use(
   (config: any) => {
-    const token = Cookies.get('auth')
+    const token = Cookies.get('authToken')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
@@ -32,22 +32,28 @@ api.interceptors.response.use(
     const originalConfig = err.config
 
     // Access Token was expired
-    if (err?.response?.status === 403 && !originalConfig._retry && !isRefresh) {
-      if (Cookies.get('auth')) {
+    if (err?.response?.status === 401 && !originalConfig._retry && !isRefresh) {
+      if (Cookies.get('authToken')) {
         originalConfig._retry = true
         isRefresh = true
 
         const config = {
           headers: {
-            Authorization: `Bearer ${Cookies.get('refresh')}`
+            Authorization: `Bearer ${Cookies.get('refreshToken')}`
           }
         }
         return api
-          .post('/api/users/refreshToken', config)
+          .post(
+            '/api/users/refreshToken',
+            {
+              refreshToken: Cookies.get('refreshToken')
+            },
+            config
+          )
           .then((res: any) => {
             Cookies.set('authToken', res.data.token)
             Cookies.set('refreshToken', res.data.refreshToken)
-            api.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
+            api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
             return api(originalConfig)
           })
           .catch(err => {
