@@ -14,9 +14,11 @@ import './infor-product.scss'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import { getProductCartQuantity } from 'helpers/products'
 import { addToCart } from 'features/cart/cartSlice'
+import { openNotification } from 'util/notifications'
 
 function InforProduct(props: any) {
   const dispatch = useAppDispatch()
+  const [product, setProduct] = useState(props.product)
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isModalOpen1, setIsModalOpen1] = useState<boolean>(false)
@@ -403,7 +405,35 @@ function InforProduct(props: any) {
               +
             </button>
           </div>
-          <button className="add-to-cart" onClick={() => dispatch(addToCart(props.product))}>
+          <button
+            className="add-to-cart"
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  ...product,
+                  quantity: quantityCount,
+                  selectedProductColor: selectedProductColor
+                    ? selectedProductColor
+                    : product.selectedProductColor
+                    ? product.selectedProductColor
+                    : null,
+                  selectedProductSize: selectedProductSize
+                    ? selectedProductSize
+                    : product.selectedProductSize
+                    ? product.selectedProductSize
+                    : null
+                })
+              )
+
+              openNotification(
+                {
+                  message: 'Success',
+                  description: 'Added to cart successfully!'
+                },
+                'success'
+              )
+            }}
+          >
             {' '}
             ADD TO CART
           </button>

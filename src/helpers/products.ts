@@ -126,6 +126,7 @@ export const getProductCartQuantity = (cartItems: any, product: any, color: any,
   } else {
     return 0
   }
+}
 
 export const getDiscountPrice = (price: number, discount: number) => {
   return discount && discount > 0 ? price - price * (discount / 100) : 0
