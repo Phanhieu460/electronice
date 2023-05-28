@@ -1,4 +1,4 @@
-import { Keyboard, Mousewheel, Navigation, Pagination } from 'swiper'
+import { Keyboard, Mousewheel, Navigation } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -17,13 +17,22 @@ function ProductItem({ data = [] }) {
           navigation={true}
           mousewheel={true}
           keyboard={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-          className="mySwiper-item"
+          modules={[Navigation, Mousewheel, Keyboard]}
+          breakpoints={{
+            576: {
+              // width: 576,
+              slidesPerView: 2
+            },
+            768: {
+              // width: 768,
+              slidesPerView: 4
+            }
+          }}
         >
           {data.map((item: any) => {
             return (
-              <SwiperSlide>
-                <CardProduct key={item._id} item={item} view="grid" />
+              <SwiperSlide key={item._id}>
+                <CardProduct item={item} view="grid" />
               </SwiperSlide>
             )
           })}

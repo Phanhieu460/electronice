@@ -106,6 +106,26 @@ export const getSortedProducts = (products: Array<Product>, sortType: string, so
   }
   return products
 }
+// get product cart quantity
+export const getProductCartQuantity = (cartItems: any, product: any, color: any, size: any) => {
+  let productInCart = cartItems?.filter(
+    (single: any) =>
+      single.id === product._id &&
+      (single.selectedProductColor ? single.selectedProductColor === color : true) &&
+      (single.selectedProductSize ? single.selectedProductSize === size : true)
+  )[0]
+  if (cartItems?.length >= 1 && productInCart) {
+    if (product.variation) {
+      return cartItems?.filter(
+        (single: any) =>
+          single.id === product._id && single.selectedProductColor === color && single.selectedProductSize === size
+      )[0].quantity
+    } else {
+      return cartItems?.filter((single: any) => product._id === single.id)[0].quantity
+    }
+  } else {
+    return 0
+  }
 
 export const getDiscountPrice = (price: number, discount: number) => {
   return discount && discount > 0 ? price - price * (discount / 100) : 0

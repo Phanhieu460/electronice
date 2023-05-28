@@ -1,6 +1,6 @@
 import { faEnvelope, faHeart, faPlaneDeparture, faRoad, faSync } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Form, Input, Modal } from 'antd'
+import { Button, Form, Input, Modal, Radio, Table } from 'antd'
 import { useState } from 'react'
 import amazon from '../../../assets/images/amazon-pay.png'
 import apple from '../../../assets/images/apple-pay.png'
@@ -11,20 +11,168 @@ import pinterest from '../../../assets/images/pinterest.png'
 import twitter from '../../../assets/images/twitter.png'
 import visa from '../../../assets/images/visa.png'
 import './infor-product.scss'
+import { useAppDispatch, useAppSelector } from 'app/hook'
+import { getProductCartQuantity } from 'helpers/products'
+import { addToCart } from 'features/cart/cartSlice'
 
 function InforProduct(props: any) {
-  const [count, setCount] = useState(0)
+  const dispatch = useAppDispatch()
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [isModalOpen1, setIsModalOpen1] = useState<boolean>(false)
   const [isModalOpen2, setIsModalOpen2] = useState<boolean>(false)
+  const cartData = useAppSelector(state => state.cartData)
+
+  const [selectedProductColor, setSelectedProductColor] = useState(
+    props.product.variation ? props.product.variation[0].color : ''
+  )
+
+  const [selectedProductSize, setSelectedProductSize] = useState(
+    props.product.variation ? props.product.variation[0].size[0].name : ''
+  )
+  const [productStock] = useState(
+    props.product?.variation?.length > 0 ? props.product?.variation[0]?.size[0]?.stock : props.product.stock
+  )
+  const [quantityCount, setQuantityCount] = useState(1)
+
+  const productCartQty = getProductCartQuantity(cartData, props.product, selectedProductColor, selectedProductSize)
+
+  const columns = [
+    {
+      key: 'international',
+      title: 'INTERNATIONAL',
+      dataIndex: 'international'
+    },
+    {
+      key: 'xs',
+      title: 'XS',
+      dataIndex: 'xs'
+    },
+    {
+      key: 's',
+      title: 'S',
+      dataIndex: 's'
+    },
+    {
+      key: 'm',
+      title: 'M',
+      dataIndex: 'm'
+    },
+    {
+      key: 'l',
+      title: 'L',
+      dataIndex: 'l'
+    },
+    {
+      key: 'xl',
+      title: 'XL',
+      dataIndex: 'xl'
+    },
+    {
+      key: 'xxl',
+      title: 'XXL',
+      dataIndex: 'xxl'
+    }
+  ]
+  const data = [
+    {
+      id: 1,
+      international: 'EUROPE',
+      xs: '32',
+      s: '34',
+      m: '36',
+      l: '38',
+      xl: '40',
+      xxl: '42'
+    },
+    {
+      id: 2,
+      international: 'US',
+      xs: '0',
+      s: '2',
+      m: '4',
+      l: '6',
+      xl: '8',
+      xxl: '10'
+    },
+    {
+      id: 3,
+      international: 'CHEST FIT (INCHES)',
+      xs: '28"',
+      s: '30"',
+      m: '32"',
+      l: '34"',
+      xl: '36"',
+      xxl: '38"'
+    },
+    {
+      id: 4,
+      international: 'CHEST FIT (CM)',
+      xs: '716',
+      s: '76',
+      m: '81',
+      l: '86',
+      xl: '91.5',
+      xxl: '96.5'
+    },
+    {
+      id: 5,
+      international: 'WAIST FIR (INCHES)',
+      xs: '21"',
+      s: '23"',
+      m: '25"',
+      l: '27"',
+      xl: '29"',
+      xxl: '31"'
+    },
+    {
+      id: 6,
+      international: 'WAIST FIR (CM)',
+      xs: '53.5',
+      s: '58.5',
+      m: '63.5',
+      l: '68.5',
+      xl: '74',
+      xxl: '79'
+    },
+    {
+      id: 7,
+      international: 'HIPS FIR (INCHES)',
+      xs: '33"',
+      s: '34"',
+      m: '36"',
+      l: '38"',
+      xl: '40"',
+      xxl: '42"'
+    },
+    {
+      id: 8,
+      international: 'HIPS FIR (CM)',
+      xs: '81.5',
+      s: '	86.5',
+      m: '91.5',
+      l: '96.5',
+      xl: '101',
+      xxl: '106.5'
+    },
+    {
+      id: 9,
+      international: 'SKORT LENGTHS (SM)',
+      xs: '36.5',
+      s: '38',
+      m: '39.5',
+      l: '41',
+      xl: '42.5',
+      xxl: '44'
+    }
+  ]
 
   return (
     <>
       <div className="variable-product" style={{ paddingLeft: '20px' }}>
         <h2>{props.product.name}</h2>
 
-        <div>
+        <div style={{ margin: '20px 0' }}>
           <span>
             {props.product.discount == 0 ? (
               <span style={{ color: 'red', fontSize: '24px' }}>${props.product.price} </span>
@@ -32,7 +180,7 @@ function InforProduct(props: any) {
               <>
                 <span style={{ textDecorationLine: 'line-through', paddingRight: '10px' }}>${props.product.price}</span>
                 <span style={{ color: 'red', fontSize: '24px' }}>
-                  ${props.product.discount * props.product.price * 0.1}
+                  ${props.product.price - (props.product.price * props.product.discount) / 100}
                 </span>
               </>
             )}
@@ -50,79 +198,98 @@ function InforProduct(props: any) {
           <span>Type: </span>
           {props.product.tag}
         </div>
+
         <div>
           <span>Availability: </span>
           <ul>
-            {props.product.shortDescription?.split('.').map((item: any) => {
-              return <li style={{ listStyle: 'inside' }}>{item}</li>
-            })}
+            {props.product.shortDescription?.split('.').length > 1
+              ? props.product.shortDescription?.split('.').map((item: any, index: number) => {
+                  return (
+                    <li style={{ listStyle: 'inside' }} key={index}>
+                      {item}
+                    </li>
+                  )
+                })
+              : props.product.shortDescription?.split('.').map((item: any, index: number) => {
+                  return (
+                    <div style={{ listStyle: 'inside' }} key={index}>
+                      {item}
+                    </div>
+                  )
+                })}
           </ul>
         </div>
-
         <table style={{ width: '100%' }}>
-          <tr>
-            <th>Name: </th>
-            <td> Product with video</td>
-          </tr>
-          <tr>
-            <th>Vendor: </th>
-            <td>Vendor 11</td>
-          </tr>
-          <tr>
-            <th>Type: </th>
-            <td>Type 11</td>
-          </tr>
-          <tr>
-            <th>Manufacturing: </th>
-            <td>2021 / 12 / 23</td>
-          </tr>
+          <tbody>
+            <tr>
+              <th>Name: </th>
+              <td> Product with video</td>
+            </tr>
+            <tr>
+              <th>Vendor: </th>
+              <td>Vendor 11</td>
+            </tr>
+            <tr>
+              <th>Type: </th>
+              <td>Type 11</td>
+            </tr>
+            <tr>
+              <th>Manufacturing: </th>
+              <td>2021 / 12 / 23</td>
+            </tr>
+          </tbody>
         </table>
-        <div className="size-product">
-          <span>Size:</span>
-          <label>
-            <input type="radio" name="test" value="small" checked />
-            <img src="https://via.placeholder.com/30x30/a6a/fff&text=S" alt="Option 1" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="big" />
-            <img src="https://via.placeholder.com/30x30/a6a/fff&text=M" alt="Option 2" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="small" checked />
-            <img src="https://via.placeholder.com/30x30/a6a/fff&text=L" alt="Option 3" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="big" />
-            <img src="https://via.placeholder.com/30x30/a6a/fff&text=XL" alt="Option 4" />
-          </label>
+        <div className="product-modal__content--color" style={{ display: 'flex', alignItems: 'center' }}>
+          <span className="product-modal__content--color--title">Color :</span>
+          <div className="product-modal__content--color--content">
+            {props.product?.variation?.map((single: any, key: number) => {
+              return (
+                <label className={`product-modal__content--color--content--single ${single.color}`} key={key}>
+                  <Radio
+                    value={single.color}
+                    name="product-color"
+                    checked={single.color === selectedProductColor ? true : false}
+                    onChange={() => setSelectedProductColor(single.color)}
+                  />
+                  <div
+                    className="color-checkmark"
+                    style={{
+                      background: `${single?.color}`,
+                      width: '10px',
+                      height: '10px',
+                      border: ' 1px solid black'
+                    }}
+                  ></div>
+                </label>
+              )
+            })}
+          </div>
         </div>
-        <div className="color-product">
-          <span>Color:</span>
-          <label>
-            <input type="radio" name="test" value="purple" checked />
-            <img src="https://via.placeholder.com/30x30/a6a/fff&text=" alt="Option 5" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="light-purple" />
-            <img src="https://via.placeholder.com/30x30/b0f/fff&text=" alt="Option 6" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="black" checked />
-            <img src="https://via.placeholder.com/30x30/000/fff&text=" alt="Option 7" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="pink" />
-            <img src="https://via.placeholder.com/30x30/f2b/fff&text=" alt="Option 8" />
-          </label>
-          <label>
-            <input type="radio" name="test" value="yellow" />
-            <img src="https://via.placeholder.com/30x30/ed8/fff&text=" alt="Option 9" />
-          </label>
+        <div className="product-modal__content--size" style={{ display: 'flex', alignItems: 'center' }}>
+          <span className="product-modal__content--size--title">Size :</span>
+          <div className="product-modal__content--size--content">
+            {props.product.variation &&
+              props.product?.variation?.map((single: any) => {
+                return single.color === selectedProductColor
+                  ? single?.size?.map((singleSize: any, key: number) => {
+                      return (
+                        <label className={`product-modal__content--size--content--single`} key={key}>
+                          <Radio
+                            value={singleSize.name}
+                            checked={singleSize.name === selectedProductSize ? true : false}
+                            onChange={() => {
+                              setSelectedProductSize(singleSize.name)
+                            }}
+                          />
+                          <span className="size-name">{singleSize.name.toUpperCase()}</span>
+                        </label>
+                      )
+                    })
+                  : ''
+              })}
+          </div>
         </div>
-        <div className="material">
-          <span>Material:</span>
-          {props.product.category}
-        </div>
+
         <div className="product_additional_information">
           <button
             className="button"
@@ -133,10 +300,10 @@ function InforProduct(props: any) {
           >
             <FontAwesomeIcon icon={faRoad} /> Size Guide
           </button>
-          <Modal title="Basic Modal" footer={null} open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+          <Modal title="Size Guide" footer={null} open={isModalOpen} onCancel={() => setIsModalOpen(false)}>
+            <div className="table">
+              <Table dataSource={data} columns={columns} pagination={false} />
+            </div>
           </Modal>
           <button
             className="button"
@@ -226,44 +393,29 @@ function InforProduct(props: any) {
         </div>
         <div className="details-quality-sticky-pro-button">
           <div className="cart-details">
-            <div
-              onClick={() => {
-                setCount(count - 1)
-              }}
-            >
-              -
-            </div>
-            <div style={{ padding: '0 10px' }}>{count}</div>
-            <div
-              onClick={() => {
-                setCount(count + 1)
-              }}
+            <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)}>-</button>
+            <div style={{ padding: '0 10px' }}>{quantityCount}</div>
+            <button
+              onClick={() =>
+                setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)
+              }
             >
               +
-            </div>
+            </button>
           </div>
-          <button className="add-to-cart"> ADD TO CART</button>
+          <button className="add-to-cart" onClick={() => dispatch(addToCart(props.product))}>
+            {' '}
+            ADD TO CART
+          </button>
           <FontAwesomeIcon icon={faHeart} style={{ fontSize: '24px', color: 'red' }} />
           <FontAwesomeIcon icon={faSync} style={{ fontSize: '24px' }} />
         </div>
         <button className="btn-buy-it">Buy it now</button>
         {/* //share */}
-        <div className="pro-details-meta">
-          <span>Categories:</span>
-          <ul>
-            <li>
-              <a href="/collections/best-selling">Best Selling,</a>
-            </li>
-            <li>
-              <a href="/collections/deal-collections">Deal Collections,</a>
-            </li>
-            <li>
-              <a href="/collections/new-products">New Products,</a>
-            </li>
-            <li>
-              <a href="/collections/upsell-products">Upsell Products,</a>
-            </li>
-          </ul>
+
+        <div className="material">
+          <span>Material:</span>
+          {props.product.category}
         </div>
         <div className="pro-details-meta">
           <span>Tag:</span>
