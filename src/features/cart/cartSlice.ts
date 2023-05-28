@@ -8,9 +8,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<any>) => {
-      console.log(action.payload, 'slice')
       if (action.payload.variation === undefined) {
-        const cartItem = state.filter((item: any) => item.id === action.payload)[0]
+        const cartItem = state.filter((item: any) => item.id === action.payload._id)[0]
         if (cartItem === undefined) {
           return [
             ...state,

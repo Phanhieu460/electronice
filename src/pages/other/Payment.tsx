@@ -2,11 +2,14 @@ import { faAngleRight, faCartPlus, faChevronLeft, faChevronUp } from '@fortaweso
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Input, Radio, Select } from 'antd'
 import Search from 'antd/es/input/Search'
-import { useAppSelector } from 'app/hook'
+import { useAppDispatch, useAppSelector } from 'app/hook'
+import { deleteAllFromCart } from 'features/cart/cartSlice'
+import { ORDER_CREATE_SUCCESS } from 'features/types'
 import { getDiscountPrice } from 'helpers/products'
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
+import { openNotification } from 'util/notifications'
 
 const Payment = () => {
   const navigate = useNavigate()
@@ -15,7 +18,11 @@ const Payment = () => {
   const [showusers, setShowUsers] = useState(false)
   const [isTextOne, setIsTextOne] = useState(true)
   const cartData = useAppSelector(state => state.cartData)
+  const { info, message, status } = useAppSelector(state => state.orderData)
   let cartTotalPrice = 0
+  let totalPrice = 0
+
+  const dispatch = useAppDispatch()
   const redirectCart = () => {
     navigate('/cart')
   }
@@ -38,6 +45,32 @@ const Payment = () => {
   const handleoffuser = () => {
     setShowUsers(false)
   }
+
+  const handleClickOrder = () => {
+    dispatch({
+      type: ORDER_CREATE_SUCCESS,
+      data: {
+        orderItems: cartData,
+        shippingAddress: info,
+        paymentMethod: 'paymentOnDelivery',
+        // itemsPrice: itemsPrice,
+        shippingPrice: 10,
+        taxPrice: 10,
+        totalPrice: totalPrice
+      }
+    })
+    dispatch(deleteAllFromCart(cartData))
+
+    openNotification(
+      {
+        message: 'Success',
+        description: 'Order Successfully!'
+      },
+      'success'
+    )
+    navigate('/')
+  }
+
   return (
     <div className="payment">
       <div className="payment__main">
@@ -53,25 +86,31 @@ const Payment = () => {
         {showTotal && (
           <div className="payment__main__right2">
             <div className="payment__right--distance2">
-              <div className="check__main__information">
-                {cartData &&
-                  cartData?.map((single: any) => {
-                    const discountedPrice = getDiscountPrice(single.price, single.discount)
-                    discountedPrice > 0
-                      ? (cartTotalPrice += discountedPrice * single.quantity)
-                      : (cartTotalPrice += single.price * single.quantity)
+              {cartData &&
+                cartData?.map((single: any) => {
+                  const discountedPrice = getDiscountPrice(single.price, single.discount)
+                  discountedPrice > 0
+                    ? (cartTotalPrice += discountedPrice * single.quantity)
+                    : (cartTotalPrice += single.price * single.quantity)
 
-                    return (
-                      <div key={single._id} className="check__main__information">
-                        {/* <div className="check__main__information--img">
-                    <img alt="Product Image" src={single?.images[0]} />
-                  </div> */}
-                        <div>{single.name}</div>
-                        <div> ${discountedPrice > 0 ? discountedPrice.toFixed(2) : single.price.toFixed(2)}</div>
+                  return (
+                    <li key={single._id} className="checkout-product__item">
+                      <div className="checkout-product__item--name">
+                        <div className="checkout-product__item--name--img">
+                          <Link to={`/product-detail/${single._id}`}>
+                            <img alt="Product Image" src={single?.images[0]} />
+                          </Link>
+                        </div>
+                        <h4>
+                          <Link to={'/product/' + single._id}> {single.name} </Link>
+                        </h4>
                       </div>
-                    )
-                  })}
-              </div>
+                      <span className="checkout-product__item--price">
+                        ${discountedPrice > 0 ? discountedPrice.toFixed(2) : single.price.toFixed(2)}
+                      </span>
+                    </li>
+                  )
+                })}
               <div className="checkout-product__price">
                 <div className="checkout-product__price--item">
                   Subtotal:
@@ -101,12 +140,12 @@ const Payment = () => {
         <div className="ship__main__address">
           <div className="ship__main__address--conact">
             <span>Contact</span>
-            <span>email đăng ký</span>
+            <span>{info.email}</span>
             <a href="">change</a>
           </div>
           <div className="ship__main__address--shipto">
             <span>Ship to</span>
-            <span>địa chỉ nhận hàng</span>
+            <span>{info.address}</span>
             <a href="">change</a>
           </div>
           <div className="ship__main__address--methodtotal">
@@ -178,7 +217,7 @@ const Payment = () => {
             <FontAwesomeIcon icon={faChevronLeft} />
             Return to shipping
           </a>
-          <Button onClick={redirectShipping} className="check__directional--continue" type="primary">
+          <Button onClick={handleClickOrder} className="check__directional--continue" type="primary">
             Complete order
           </Button>
         </div>

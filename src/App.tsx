@@ -39,9 +39,9 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="checkout" element={<CheckOut />} />
           <Route path="profile" element={<MyProfile />} />
-        </Route>
         <Route path="shipping" element={<Shipping />} />
         <Route path="payment" element={<Payment />} />
+        </Route>
         <Route path="product" element={<ProductList />} />
         <Route path="product-detail/:productId" element={<ProductDetail />} />
       </Routes>

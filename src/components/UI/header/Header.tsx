@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Drawer, DrawerProps, Dropdown, Menu, Space } from 'antd'
 import { useAppSelector } from 'app/hook'
 import Cookies from 'js-cookie'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import logo from '../../../assets/images/logo.png'
 import MenuCart from './cart/MenuCart'
+import { parseJwt } from 'util/decodeJWT'
+import api from 'api/apiClient'
+import { User } from 'models/user'
 
 type Props = {}
 
@@ -20,6 +23,18 @@ const Header = (props: Props) => {
   const [placement, setPlacement] = useState<DrawerProps['placement']>('right')
   const cartData = useAppSelector(state => state.cartData)
   const token = Cookies.get('authToken')
+  const [profile, setProfile] = useState<any>()
+
+  useEffect(() => {
+    if (token) {
+      api
+        .get(`api/users/profile/${parseJwt(token).id}`)
+        .then((res: any) => {
+          setProfile(res)
+        })
+        .catch(err => console.log(err))
+    }
+  }, [])
 
   const handleLogout = () => {
     Cookies.remove('authToken')
@@ -35,7 +50,9 @@ const Header = (props: Props) => {
   }
   return (
     <div className="header">
-      <img className="header__logo" src={logo} alt="logo" />
+      <Link to="/">
+        <img className="header__logo" src={logo} alt="logo" />
+      </Link>
       <div className="header__menu">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/product">Product</NavLink>
@@ -77,7 +94,7 @@ const Header = (props: Props) => {
                 {token ? (
                   <Menu>
                     <Menu.Item key="profile">
-                      <Link to="/my-profile">My Profile</Link>
+                      <Link to="/profile">My Profile</Link>
                     </Menu.Item>
                     <Menu.Item key="logout" onClick={handleLogout}>
                       Logout
@@ -99,7 +116,7 @@ const Header = (props: Props) => {
           placement="bottomRight"
           arrow
         >
-          <FontAwesomeIcon icon={faCircleUser} />
+          {profile ? <img className="avatar" src={profile?.image} /> : <FontAwesomeIcon icon={faCircleUser} />}
         </Dropdown>
       </div>
       <FontAwesomeIcon icon={faBars} className="header__menubar" onClick={handleClickMenuBar} />

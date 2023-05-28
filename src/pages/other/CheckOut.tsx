@@ -1,11 +1,25 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Col, Form, Input, InputNumber, Row } from 'antd'
+import api from 'api/apiClient'
 import { useAppDispatch, useAppSelector } from 'app/hook'
+import { createInfomation } from 'features/order/orderSlice'
 import { getDiscountPrice } from 'helpers/products'
 import Cookies from 'js-cookie'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { parseJwt } from 'util/decodeJWT'
+
+interface User {
+  _id: string
+  email: string
+  password: string
+  firstName: string
+  lastName: string
+  phone: string
+  address: string
+  image: string
+}
 
 const CheckOut = () => {
   const [text, setText] = useState('Show order summary ')
@@ -14,6 +28,7 @@ const CheckOut = () => {
   const navigate = useNavigate()
   const cartData = useAppSelector(state => state.cartData)
   const dispatch = useAppDispatch()
+  const [information, setInfomation] = useState<any>()
 
   const redirectCart = () => {
     navigate('/cart')
@@ -22,10 +37,6 @@ const CheckOut = () => {
     navigate('/shipping')
   }
 
-  const handleLogout = () => {
-    Cookies.remove('authToken')
-    navigate('/')
-  }
   const handleClick = () => {
     setShowTotal(!showTotal)
     setIsTextOne(!isTextOne)
@@ -36,16 +47,18 @@ const CheckOut = () => {
       setShowTotal(false)
     }
   }
-  const handleCheckout = () => {
+  const handleCheckout = (values: any) => {
+    dispatch(createInfomation(values))
     navigate('/shipping')
   }
   let cartTotalPrice = 0
+
   return (
     <div className="checkout">
       <div className="checkout-information">
         <Row>
           <Col span={18}>
-            <Form onFinish={handleCheckout}>
+            <Form onFinish={handleCheckout} autoComplete="off" initialValues={{ remember: true }}>
               <h3>Contact Information</h3>
               <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Enter an email' }]}>
                 <Input />
@@ -71,19 +84,20 @@ const CheckOut = () => {
               >
                 <InputNumber />
               </Form.Item>
-
-              <div className="list-button">
-                <Button className="checkout-information--cart">
-                  <Link to="/cart">
-                    {' '}
-                    <FontAwesomeIcon icon={faChevronLeft} />
-                    Return to cart
-                  </Link>
-                </Button>
-                <Button className="checkout-information--continue">
-                  <Link to="/shipping">Continue Shipping</Link>
-                </Button>
-              </div>
+              <Form.Item>
+                <div className="list-button">
+                  <Button className="checkout-information--cart">
+                    <Link to="/cart">
+                      {' '}
+                      <FontAwesomeIcon icon={faChevronLeft} />
+                      Return to cart
+                    </Link>
+                  </Button>
+                  <Button type="primary" htmlType="submit" className="checkout-information--continue">
+                    Continue Shipping
+                  </Button>
+                </div>
+              </Form.Item>
             </Form>
           </Col>
         </Row>
