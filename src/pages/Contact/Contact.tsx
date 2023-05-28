@@ -77,7 +77,7 @@ export default class Contact extends React.Component {
     }
     openNotification(message, 'success')
   }
-
+  // regex.placeholder
   render() {
     return (
       <>

@@ -16,7 +16,7 @@
   &__name {
     flex-basis: 90%;
     word-break: break-all;
-    color: rgb(242, 101, 34);
+    color: #f1323e;
   }
   &__quantity {
     display: flex;
@@ -69,7 +69,7 @@
       }
     }
     &--checkout {
-      background: rgb(242, 101, 34);
+      background: #f1323e;
       border: none;
       box-shadow: none;
       padding: 12px 24px;
