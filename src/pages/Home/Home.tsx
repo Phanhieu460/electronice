@@ -1,15 +1,17 @@
 import { Image, Button, Card, Carousel, Col, Divider, FloatButton, Row, Collapse, Avatar } from 'antd'
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faMinus, faPlus, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import { GET_PRODUCT_LIST } from 'features/types'
-import { useNavigate } from 'react-router-dom'
 import { Product } from 'models'
 import ProductSingle from 'components/product/ProductSingle'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation } from 'swiper'
-
+import { Autoplay, Keyboard, Navigation } from 'swiper'
+import { useNavigate } from 'react-router-dom'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
@@ -31,6 +33,11 @@ const contentStyle: React.CSSProperties = {
 }
 
 const Home = () => {
+  const navigate = useNavigate()
+  const handleClick = () => {
+    navigate('/product')
+  }
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const dispatch = useAppDispatch()
   const [products, setProducts] = useState<Array<Product>>()
@@ -108,9 +115,150 @@ const Home = () => {
 
   return (
     <>
-      <div>
+      <div className="home">
         {/* Carousel */}
-        <div className="home__carousel">x</div>
+
+        <div className="home__carousel">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            keyboard={{
+              enabled: true
+            }}
+            loop={true}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false
+            }}
+            navigation={false}
+            pagination={true}
+            direction="horizontal"
+            modules={[Autoplay, Keyboard, Pagination, Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide className="swiper__feature">
+              <div
+                className="home__carousel__contain"
+                style={{
+                  backgroundImage:
+                    "url('//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_8737877e-52de-4384-b9c7-5ab1521594a6.png?v=1639042929')",
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundColor: '#edfeff'
+                }}
+              >
+                <div className="home__carousel__content">
+                  <div className="home__carousel__right">
+                    <div className="slider-content ">
+                      <h1 className="animated">
+                        <span>DRONE</span> DIGITAL
+                      </h1>
+                      <p className="animated">
+                        Experience the decibels like your ears deserve to. Safe for the ears, very for the heart.{' '}
+                      </p>
+                      <div className="slider__animated__btn__wrap">
+                        <div className="slider-btn ">
+                          <a className="animated" onClick={() => handleClick()}>
+                            Explore More
+                          </a>
+                        </div>
+                        <div className="slider__animated__btn ">
+                          <a className="video-popup magni_video_pop" href="https://www.youtube.com/watch?v=_9VUPq3SxOc">
+                            <FontAwesomeIcon className="btn-play" icon={faPlay} />
+                          </a>
+                          <span>Watch Video</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="swiper__feature">
+              <div
+                className="home__carousel__contain"
+                style={{
+                  backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_2_7a3d4cb6-4e02-4bdb-ac70-200256f51a5b.png?v=1640513231")`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundColor: '#edfeff'
+                }}
+              >
+                <div className="home__carousel__content">
+                  <div className="home__carousel__right">
+                    <div className="slider-content ">
+                      <h1 className="animated">
+                        <span>DRONE</span> MINIMAL
+                      </h1>
+                      <p className="animated">
+                        Experience the decibels like your ears deserve to. Safe for the ears, very for the heart.
+                      </p>
+                      <div className="slider__animated__btn__wrap">
+                        <div className="slider-btn ">
+                          <a className="animated" onClick={() => handleClick()}>
+                            Explore More
+                          </a>
+                        </div>
+                        <div className="slider__animated__btn ">
+                          <a className="video-popup magni_video_pop" href="https://www.youtube.com/watch?v=_9VUPq3SxOc">
+                            <FontAwesomeIcon className="btn-play" icon={faPlay} />
+                          </a>
+                          <span>Watch Video</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide className="swiper__feature">
+              <div
+                className="home__carousel__contain"
+                style={{
+                  backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_3_4fedfad3-59c2-4a0e-922d-92c38cd4bb6c.png?v=1640510457")`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundColor: '#edfeff'
+                }}
+              >
+                <div className="home__carousel__content">
+                  <div className="home__carousel__right">
+                    <div className="slider-content ">
+                      <h1 className="animated">
+                        <span>DRONE</span> CLASSIC
+                      </h1>
+                      <p className="animated">
+                        Experience the decibels like your ears deserve to. Safe for the ears, very for the heart.
+                      </p>
+                      <div className="slider__animated__btn__wrap">
+                        <div className="slider-btn ">
+                          <a className="animated" onClick={() => handleClick()}>
+                            Explore More
+                          </a>
+                        </div>
+                        <div className="slider__animated__btn ">
+                          <a className="video-popup magni_video_pop" href="https://www.youtube.com/watch?v=_9VUPq3SxOc">
+                            <FontAwesomeIcon className="btn-play" icon={faPlay} />
+                          </a>
+                          <span>Watch Video</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+        <div className="owl-nav">
+          <div className="owl-prev">
+            <FontAwesomeIcon icon={faChevronUp} />
+          </div>
+          <div className="owl-next">
+            <FontAwesomeIcon icon={faChevronDown} />
+          </div>
+        </div>
+
         {/* Feature 1*/}
         <div className="home__feature">
           <div className="home__feature__img">
