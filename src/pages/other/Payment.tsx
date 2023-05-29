@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Link, useNavigate } from 'react-router-dom'
 import { openNotification } from 'util/notifications'
+import emailjs from '@emailjs/browser'
 
 const Payment = () => {
   const navigate = useNavigate()
@@ -18,7 +19,7 @@ const Payment = () => {
   const [showusers, setShowUsers] = useState(false)
   const [isTextOne, setIsTextOne] = useState(true)
   const cartData = useAppSelector(state => state.cartData)
-  const { info, message, status } = useAppSelector(state => state.orderData)
+  const { info, message, status, order } = useAppSelector(state => state.orderData)
   let cartTotalPrice = 0
   let totalPrice = 0
 
@@ -59,6 +60,16 @@ const Payment = () => {
         totalPrice: totalPrice
       }
     })
+    emailjs.send(
+      'service_5f8npy4',
+      'template_tjm48p4',
+      {
+        to_name: `${info.lastName} ${info.firstName}`,
+        orderId: order._id,
+        shipping: 7
+      },
+      'U102AGtdKCqDr34_W'
+    )
     dispatch(deleteAllFromCart(cartData))
     if (status && status === 200) {
       openNotification(
