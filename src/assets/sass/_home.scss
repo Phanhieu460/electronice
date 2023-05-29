@@ -586,6 +586,18 @@
 @media #{$sm-layout} {
   //tablet
   .home {
+    .home__carousel {
+   .home__carousel__contain {
+    height: 800px !important;
+    .home__carousel__content {
+   
+      .home__carousel__right{
+
+      }
+    }
+   }
+  }
+
     &__feature {
       flex-direction: column;
     }
@@ -639,6 +651,26 @@
 
 @media #{$xs-layout} {
   .home {
+    .home__carousel {
+      .home__carousel__contain {
+        height: 700px !important;
+       
+       .home__carousel__content {
+      
+         .home__carousel__right{
+          width: 100%;
+          position: relative;
+          margin-right: -15px;
+          margin-left: -15px;
+          margin: 0 auto;
+          top: 0;
+          left: 0;
+          flex-basis: 50%;
+   
+         }
+       }
+      }
+     }
     &__feature {
       flex-direction: column;
     }
@@ -708,18 +740,6 @@
 .swiper {
   width: 100%;
   height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  // width: 320px !important;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .swiper-slide img {

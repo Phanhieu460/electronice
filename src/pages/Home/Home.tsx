@@ -136,7 +136,7 @@ const Home = () => {
             modules={[Autoplay, Keyboard, Pagination, Navigation]}
             className="mySwiper"
           >
-            <SwiperSlide className="swiper__feature">
+            <SwiperSlide>
               <div
                 className="home__carousel__contain"
                 style={{
@@ -174,7 +174,7 @@ const Home = () => {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="swiper__feature">
+            <SwiperSlide>
               <div
                 className="home__carousel__contain"
                 style={{
@@ -211,7 +211,7 @@ const Home = () => {
                 </div>
               </div>
             </SwiperSlide>
-            <SwiperSlide className="swiper__feature">
+            <SwiperSlide>
               <div
                 className="home__carousel__contain"
                 style={{
