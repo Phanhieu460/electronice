@@ -125,11 +125,11 @@ const Home = () => {
             keyboard={{
               enabled: true
             }}
-            loop={true}
-            autoplay={{
-              delay: 5000,
-              disableOnInteraction: false
-            }}
+            // loop={true}
+            // autoplay={{
+            //   delay: 5000,
+            //   disableOnInteraction: false
+            // }}
             navigation={false}
             pagination={true}
             direction="horizontal"
@@ -250,14 +250,16 @@ const Home = () => {
             </SwiperSlide>
           </Swiper>
         </div>
-        <div className="owl-nav">
+
+        {/* Prev button  */}
+        {/* <div className="owl-nav">
           <div className="owl-prev">
             <FontAwesomeIcon icon={faChevronUp} />
           </div>
           <div className="owl-next">
             <FontAwesomeIcon icon={faChevronDown} />
           </div>
-        </div>
+        </div> */}
 
         {/* Feature 1*/}
         <div className="home__feature">

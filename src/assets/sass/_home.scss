@@ -593,6 +593,11 @@
    
       .home__carousel__right{
 
+        .slider-content  {
+          h1 {
+            font-size: 130px;
+          }
+        }
       }
     }
    }
@@ -653,7 +658,7 @@
   .home {
     .home__carousel {
       .home__carousel__contain {
-        height: 700px !important;
+        height: 600px !important;
        
        .home__carousel__content {
       
@@ -666,6 +671,11 @@
           top: 0;
           left: 0;
           flex-basis: 50%;
+          .slider-content  {
+            h1 {
+              font-size: 130px;
+            }
+          }
    
          }
        }
