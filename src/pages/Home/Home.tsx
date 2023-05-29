@@ -138,7 +138,7 @@ const Home = () => {
                   backgroundImage:
                     "url('//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_8737877e-52de-4384-b9c7-5ab1521594a6.png?v=1639042929')",
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
+                  backgroundSize: 'cover',
                   backgroundColor: '#edfeff',
                   backgroundPosition: 'center'
                 }}
@@ -176,7 +176,7 @@ const Home = () => {
                 style={{
                   backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_2_7a3d4cb6-4e02-4bdb-ac70-200256f51a5b.png?v=1640513231")`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
+                  backgroundSize: 'cover',
                   backgroundColor: '#edfeff',
                   backgroundPosition: 'center'
                 }}
@@ -214,7 +214,7 @@ const Home = () => {
                 style={{
                   backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_3_4fedfad3-59c2-4a0e-922d-92c38cd4bb6c.png?v=1640510457")`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain',
+                  backgroundSize: 'cover',
                   backgroundColor: '#edfeff',
                   backgroundPosition: 'center'
                 }}
