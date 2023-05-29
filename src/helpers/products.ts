@@ -107,21 +107,21 @@ export const getSortedProducts = (products: Array<Product>, sortType: string, so
   return products
 }
 // get product cart quantity
-export const getProductCartQuantity = (cartItems: any, product: any, color: any, size: any) => {
-  let productInCart = cartItems?.filter(
+export const getProductCartQuantity = (cartData: any[], product: Product, color: string, size: string) => {
+  let productInCart = cartData?.filter(
     (single: any) =>
       single.id === product._id &&
       (single.selectedProductColor ? single.selectedProductColor === color : true) &&
       (single.selectedProductSize ? single.selectedProductSize === size : true)
   )[0]
-  if (cartItems?.length >= 1 && productInCart) {
+  if (cartData?.length >= 1 && productInCart) {
     if (product.variation) {
-      return cartItems?.filter(
+      return cartData?.filter(
         (single: any) =>
           single.id === product._id && single.selectedProductColor === color && single.selectedProductSize === size
-      )[0].quantity
+      )[0]?.quantity
     } else {
-      return cartItems?.filter((single: any) => product._id === single.id)[0].quantity
+      return cartData?.filter((single: any) => product._id === single.id)[0]?.quantity
     }
   } else {
     return 0

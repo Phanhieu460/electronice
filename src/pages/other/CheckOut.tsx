@@ -1,14 +1,13 @@
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Col, Form, Input, InputNumber, Row } from 'antd'
-import api from 'api/apiClient'
+import { Button, Col, Form, Input, Row, Select } from 'antd'
 import { useAppDispatch, useAppSelector } from 'app/hook'
 import { createInfomation } from 'features/order/orderSlice'
 import { getDiscountPrice } from 'helpers/products'
-import Cookies from 'js-cookie'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { parseJwt } from 'util/decodeJWT'
+
+const { Option } = Select
 
 interface User {
   _id: string
@@ -47,6 +46,7 @@ const CheckOut = () => {
       setShowTotal(false)
     }
   }
+
   const handleCheckout = (values: any) => {
     dispatch(createInfomation(values))
     navigate('/shipping')
@@ -57,24 +57,49 @@ const CheckOut = () => {
     <div className="checkout">
       <div className="checkout-information">
         <Row>
-          <Col span={18}>
-            <Form onFinish={handleCheckout} autoComplete="off" initialValues={{ remember: true }}>
+          <Col xs={24} sm={24} md={20} lg={18} xl={22}>
+            <Form
+              onFinish={handleCheckout}
+              autoComplete="off"
+              initialValues={{ remember: true }}
+              labelCol={{ span: 4 }}
+              wrapperCol={{ span: 20 }}
+            >
               <h3>Contact Information</h3>
-              <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Enter an email' }]}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!'
+                  },
+
+                  { required: true, message: 'Enter an email' }
+                ]}
+              >
                 <Input />
               </Form.Item>
               <h3>Shipping Address</h3>
               <Form.Item
                 label="First Name"
                 name="firstName"
-                rules={[{ required: true, message: 'Enter a first name' }]}
+                rules={[{ required: true, message: 'Enter a first name', whitespace: true }]}
               >
                 <Input />
               </Form.Item>
-              <Form.Item label="Last Name" name="lastName" rules={[{ required: true, message: 'Enter a last name' }]}>
+              <Form.Item
+                label="Last Name"
+                name="lastName"
+                rules={[{ required: true, message: 'Enter a last name', whitespace: true }]}
+              >
                 <Input />
               </Form.Item>
-              <Form.Item label="Address" name="address" rules={[{ required: true, message: 'Enter an address' }]}>
+              <Form.Item
+                label="Address"
+                name="address"
+                rules={[{ required: true, message: 'Enter an address', whitespace: true }]}
+              >
                 <Input />
               </Form.Item>
               <Form.Item
@@ -82,7 +107,7 @@ const CheckOut = () => {
                 name="phone"
                 rules={[{ required: true, message: 'Enter a phone number to use this delivery method' }]}
               >
-                <InputNumber />
+                <Input />
               </Form.Item>
               <Form.Item>
                 <div className="list-button">

@@ -1,9 +1,7 @@
 .home {
   .home__carousel {
-  
     .home__carousel__contain {
-      height: 80vh !important;
-      
+      height: 80vh;
 
       .home__carousel__content {
         margin: 0 auto;
@@ -18,7 +16,7 @@
           margin-right: -15px;
           margin-left: -15px;
           left: 200px;
-          top: 100px;
+          top: 20px;
           flex-basis: 50%;
           .slider-content {
             * {
@@ -34,15 +32,15 @@
               font-style: normal;
               font-weight: 700;
               color: #333333;
-              font-size: 150px;
-              line-height: 130px;
+              font-size: 60px;
+              line-height: 80px;
               margin-bottom: 20px;
             }
             span {
               color: #d72323 !important;
             }
             p {
-              font-family: "Work Sans", sans-serif;
+              font-family: 'Work Sans', sans-serif;
               font-style: normal;
               font-weight: 400;
               color: #333333;
@@ -64,7 +62,7 @@
                   padding: 20px 40px;
                   text-transform: unset;
                   font-size: 20px;
-                  font-family: "Work Sans", sans-serif;
+                  font-family: 'Work Sans', sans-serif;
                   font-style: normal;
                   font-weight: 500;
                   &:hover {
@@ -142,7 +140,7 @@
                 span {
                   color: #d72323;
                   font-size: 20px;
-                  font-family: "Work Sans", sans-serif;
+                  font-family: 'Work Sans', sans-serif;
                   font-style: normal;
                   font-weight: 500;
                   position: relative;
@@ -156,26 +154,22 @@
     }
   }
   .swiper-slide {
-   text-align: initial;
+    text-align: initial;
     display: inline;
     opacity: 1;
     /* Center slide text vertically */
-
-}
-.swiper-pagination-bullet {
-  background-color: #ffffff;
-
-  border: 1px solid #d72323;
-  outline: 1px solid #d72323;
-  outline-offset: 3px;
-
-  &-active {
-    background-color: red;
   }
+  .swiper-pagination-bullet {
+    background-color: #ffffff;
 
-}
+    border: 1px solid #d72323;
+    outline: 1px solid #d72323;
+    outline-offset: 3px;
 
-
+    &-active {
+      background-color: red;
+    }
+  }
 
   // Carousel
   // &__carousel {
@@ -210,7 +204,7 @@
     justify-content: center;
 
     &__background {
-      background-image: url("https://cdn.shopify.com/s/files/1/1280/1207/files/video-bg333.png?v=1640774424");
+      background-image: url('https://cdn.shopify.com/s/files/1/1280/1207/files/video-bg333.png?v=1640774424');
     }
 
     .feature-main {
@@ -396,7 +390,7 @@
 
   &__faq {
     padding: 80px 0;
-    background-image: url("https://cdn.shopify.com/s/files/1/1280/1207/files/footer_593c80c4-8655-4539-9284-caec2f76ff5b_1.png?v=1639462409");
+    background-image: url('https://cdn.shopify.com/s/files/1/1280/1207/files/footer_593c80c4-8655-4539-9284-caec2f76ff5b_1.png?v=1639462409');
 
     &__header {
       padding-bottom: 40px;
@@ -554,6 +548,27 @@
   // Gallery
   &__gallery {
     padding-bottom: 100px;
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      // width: 320px !important;
+
+      /* Center slide text vertically */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      display: block;
+      object-fit: cover;
+    }
     &__header {
       text-align: center;
       h3 {
@@ -586,6 +601,22 @@
 @media #{$sm-layout} {
   //tablet
   .home {
+    &__carousel {
+      &__contain {
+        height: 40vh !important;
+        .home__carousel__content {
+          .home__carousel__right {
+            .slider-content {
+              h1 {
+                font-size: 40px !important;
+                line-height: 45px !important;
+                margin-bottom: 20px !important;
+              }
+            }
+          }
+        }
+      }
+    }
     &__feature {
       flex-direction: column;
     }
@@ -639,6 +670,29 @@
 
 @media #{$xs-layout} {
   .home {
+    &__carousel {
+      &__contain {
+        height: 40vh !important;
+        .home__carousel__content {
+          .home__carousel__right {
+            padding: 20px;
+            left: 0px !important;
+            width: 100% !important;
+            .slider-content {
+              h1 {
+                font-size: 32px !important;
+                line-height: 40px !important;
+              }
+              .slider__animated__btn__wrap {
+                .slider__animated__btn {
+                  display: none !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     &__feature {
       flex-direction: column;
     }
@@ -705,27 +759,6 @@
   }
 }
 
-.swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  // width: 320px !important;
-
-  /* Center slide text vertically */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.swiper-slide img {
-  display: block;
-  object-fit: cover;
-}
 // .swiper-button-prev,
 // .swiper-button-next {
 //   color: rgb(233, 226, 226);

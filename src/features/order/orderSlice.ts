@@ -25,7 +25,6 @@ const orderSlice = createSlice({
       state.error = action.payload
     },
     createInfomation: (state, action: PayloadAction<any>) => {
-      console.log(action)
       state.info = action.payload
     }
   }

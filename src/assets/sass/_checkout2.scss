@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-  padding: 50px 0;
+  padding: 50px;
 }
 .checkout-information {
   flex-basis: 60%;
@@ -69,4 +69,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+@media #{$sm-layout} {
+  .checkout {
+    padding: 50px;
+  }
+}
+@media #{$xs-layout} {
+  .checkout {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    padding: 50px 4px;
+  }
+  .checkout-information,
+  .checkout-product {
+    flex-basis: 100%;
+    padding: 12px;
+  }
 }

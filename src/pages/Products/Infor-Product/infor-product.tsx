@@ -32,12 +32,17 @@ function InforProduct(props: any) {
   const [selectedProductSize, setSelectedProductSize] = useState(
     props.product.variation ? props.product.variation[0].size[0].name : ''
   )
-  const [productStock] = useState(
-    props.product?.variation?.length > 0 ? props.product?.variation[0]?.size[0]?.stock : props.product.stock
+  const [productStock, setProductStock] = useState(
+    props.product?.variation ? props.product?.variation[0]?.size[0]?.stock : props?.product?.stock
   )
   const [quantityCount, setQuantityCount] = useState(1)
 
-  const productCartQty = getProductCartQuantity(cartData, props.product, selectedProductColor, selectedProductSize)
+  const productCartQty = getProductCartQuantity(
+    cartData.length >= 1 ? cartData : [],
+    props.product,
+    selectedProductColor,
+    selectedProductSize
+  )
 
   const columns = [
     {
@@ -168,7 +173,6 @@ function InforProduct(props: any) {
       xxl: '44'
     }
   ]
-
   return (
     <>
       <div className="variable-product" style={{ paddingLeft: '20px' }}>
@@ -251,7 +255,12 @@ function InforProduct(props: any) {
                     value={single.color}
                     name="product-color"
                     checked={single.color === selectedProductColor ? true : false}
-                    onChange={() => setSelectedProductColor(single.color)}
+                    onChange={() => {
+                      setSelectedProductColor(single.color)
+                      setSelectedProductSize(single.size[0].name)
+                      setProductStock(single.size[0].stock)
+                      setQuantityCount(1)
+                    }}
                   />
                   <div
                     className="color-checkmark"
@@ -281,6 +290,8 @@ function InforProduct(props: any) {
                             checked={singleSize.name === selectedProductSize ? true : false}
                             onChange={() => {
                               setSelectedProductSize(singleSize.name)
+                              setProductStock(singleSize.stock)
+                              setQuantityCount(1)
                             }}
                           />
                           <span className="size-name">{singleSize.name.toUpperCase()}</span>
@@ -394,49 +405,73 @@ function InforProduct(props: any) {
           </Modal>
         </div>
         <div className="details-quality-sticky-pro-button">
-          <div className="cart-details">
+          <div className="details-quality-sticky-pro-button__quantity">
             <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)}>-</button>
-            <div style={{ padding: '0 10px' }}>{quantityCount}</div>
+            <input
+              style={{ border: 'none', width: 15 }}
+              className="cart-plus-minus-box"
+              type="text"
+              value={quantityCount}
+              readOnly
+            />
             <button
-              onClick={() =>
+              onClick={() => {
                 setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)
-              }
+              }}
             >
               +
             </button>
           </div>
-          <button
-            className="add-to-cart"
-            onClick={() => {
-              dispatch(
-                addToCart({
-                  ...product,
-                  quantity: quantityCount,
-                  selectedProductColor: selectedProductColor
-                    ? selectedProductColor
-                    : product.selectedProductColor
-                    ? product.selectedProductColor
-                    : null,
-                  selectedProductSize: selectedProductSize
-                    ? selectedProductSize
-                    : product.selectedProductSize
-                    ? product.selectedProductSize
-                    : null
-                })
-              )
+          {productStock && productStock > 0 ? (
+            <button
+              className="add-to-cart"
+              onClick={() => {
+                dispatch(
+                  addToCart({
+                    ...product,
+                    quantity: quantityCount,
+                    selectedProductColor: selectedProductColor
+                      ? selectedProductColor
+                      : product.selectedProductColor
+                      ? product.selectedProductColor
+                      : null,
+                    selectedProductSize: selectedProductSize
+                      ? selectedProductSize
+                      : product.selectedProductSize
+                      ? product.selectedProductSize
+                      : null
+                  })
+                )
 
-              openNotification(
-                {
-                  message: 'Success',
-                  description: 'Added to cart successfully!'
-                },
-                'success'
-              )
-            }}
-          >
-            {' '}
-            ADD TO CART
-          </button>
+                openNotification(
+                  {
+                    message: 'Success',
+                    description: 'Added to cart successfully!'
+                  },
+                  'success'
+                )
+              }}
+              disabled={productCartQty >= productStock}
+            >
+              {' '}
+              ADD TO CART
+            </button>
+          ) : (
+            <button
+              style={{
+                background: 'black',
+                color: 'white',
+                border: 'none',
+                boxShadow: 'none',
+                fontSize: 14,
+                padding: '12px 24px',
+                cursor: 'pointer'
+              }}
+              disabled
+            >
+              Out of Stock
+            </button>
+          )}
           <FontAwesomeIcon icon={faHeart} style={{ fontSize: '24px', color: 'red' }} />
           <FontAwesomeIcon icon={faSync} style={{ fontSize: '24px' }} />
         </div>

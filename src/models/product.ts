@@ -22,4 +22,5 @@ export type Product = {
   images: Array<string>
   shortDescription: string
   fullDescription: string
+  quantity?: number
 }

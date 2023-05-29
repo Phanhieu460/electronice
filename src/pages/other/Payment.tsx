@@ -60,14 +60,24 @@ const Payment = () => {
       }
     })
     dispatch(deleteAllFromCart(cartData))
+    if (status && status === 200) {
+      openNotification(
+        {
+          message: 'Success',
+          description: 'Order Successfully!'
+        },
+        'success'
+      )
+    } else {
+      openNotification(
+        {
+          message: 'Error',
+          description: 'Order Error!'
+        },
+        'error'
+      )
+    }
 
-    openNotification(
-      {
-        message: 'Success',
-        description: 'Order Successfully!'
-      },
-      'success'
-    )
     navigate('/')
   }
 

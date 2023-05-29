@@ -7,7 +7,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<any>) => {
+    addToCart: (state = initialState, action: PayloadAction<any>) => {
       if (action.payload.variation === undefined) {
         const cartItem = state.filter((item: any) => item.id === action.payload._id)[0]
         if (cartItem === undefined) {
@@ -76,8 +76,7 @@ const cartSlice = createSlice({
         }
       }
     },
-    decreaseQuantity: (state, action: any) => {
-      console.log(action)
+    decreaseQuantity: (state = initialState, action: any) => {
       if (action.payload.quantity === 1) {
         const remainingItems = (cartItems: any, product: any) =>
           cartItems.filter((cartItem: any) => cartItem.cartItemId !== product.cartItemId)
@@ -88,7 +87,7 @@ const cartSlice = createSlice({
         )
       }
     },
-    deleteFromCart: (state, action: any) => {
+    deleteFromCart: (state = initialState, action: any) => {
       const remainingItems = (cartItems: any, product: any) =>
         cartItems.filter((cartItem: any) => cartItem.cartItemId !== product.cartItemId)
       return remainingItems(state, action.payload)

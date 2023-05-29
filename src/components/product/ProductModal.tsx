@@ -24,7 +24,12 @@ const ProductModal = (props: any) => {
   )
   const [quantityCount, setQuantityCount] = useState(1)
 
-  const productCartQty = getProductCartQuantity(cartData, props.product, selectedProductColor, selectedProductSize)
+  const productCartQty = getProductCartQuantity(
+    cartData.length >= 1 ? cartData : [],
+    props.product,
+    selectedProductColor,
+    selectedProductSize
+  )
 
   return (
     <Modal open={props.isModalOpen} footer={null} width={1000} onCancel={() => props.setIsModalOpen(false)}>
@@ -97,6 +102,7 @@ const ProductModal = (props: any) => {
                       value={single.color}
                       name="product-color"
                       checked={single.color === selectedProductColor ? true : false}
+                      defaultChecked={single.color === selectedProductColor ? true : false}
                       onChange={() => {
                         setSelectedProductColor(single.color)
                         setSelectedProductSize(single.size[0].name)
@@ -113,36 +119,37 @@ const ProductModal = (props: any) => {
           <div className="product-modal__content--size">
             <span className="product-modal__content--size--title">Size</span>
             <div className="product-modal__content--size--content">
-              {props.product.variation &&
-                props.product.variation.map((single: any) => {
-                  return single.color === selectedProductColor
-                    ? single.size.map((singleSize: any, key: number) => {
-                        return (
-                          <label className={`product-modal__content--size--content--single`} key={key}>
-                            <Radio
-                              value={singleSize.name}
-                              checked={singleSize.name === selectedProductSize ? true : false}
-                              onChange={() => {
-                                setSelectedProductSize(singleSize.name)
-                                setProductStock(singleSize.stock)
-                                setQuantityCount(1)
-                              }}
-                            />
-                            <span className="size-name">{singleSize.name.toUpperCase()}</span>
-                          </label>
-                        )
-                      })
-                    : ''
-                })}
+              {props.product.variation.map((single: any) => {
+                return single.color === selectedProductColor
+                  ? single.size.map((singleSize: any, key: number) => {
+                      return (
+                        <label className={`product-modal__content--size--content--single`} key={key}>
+                          <Radio
+                            value={singleSize.name}
+                            checked={singleSize.name === selectedProductSize ? true : false}
+                            defaultChecked={singleSize.name === selectedProductSize ? true : false}
+                            onChange={() => {
+                              setSelectedProductSize(singleSize.name)
+                              setProductStock(singleSize.stock)
+                              setQuantityCount(1)
+                            }}
+                          />
+                          <span className="size-name">{singleSize.name.toUpperCase()}</span>
+                        </label>
+                      )
+                    })
+                  : ''
+              })}
             </div>
           </div>
 
-          <div className="view-cart__quantity">
-            <div className="view-cart__quantity--content">
+          <div className="product-modal__quantity-addToCart">
+            <div className="product-modal__quantity-addToCart--content">
               <button onClick={() => setQuantityCount(quantityCount > 1 ? quantityCount - 1 : 1)}>
                 <FontAwesomeIcon icon={faMinus} />
               </button>
               <input className="cart-plus-minus-box" type="text" value={quantityCount} readOnly />
+
               <button
                 onClick={() =>
                   setQuantityCount(quantityCount < productStock - productCartQty ? quantityCount + 1 : quantityCount)
@@ -151,39 +158,39 @@ const ProductModal = (props: any) => {
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
+            <Button
+              className="product-modal__content--addToCart"
+              onClick={() => {
+                dispatch(
+                  addToCart({
+                    ...product,
+                    quantity: quantityCount,
+                    selectedProductColor: selectedProductColor
+                      ? selectedProductColor
+                      : product.selectedProductColor
+                      ? product.selectedProductColor
+                      : null,
+                    selectedProductSize: selectedProductSize
+                      ? selectedProductSize
+                      : product.selectedProductSize
+                      ? product.selectedProductSize
+                      : null
+                  })
+                )
+                props.setIsModalOpen(false)
+                openNotification(
+                  {
+                    message: 'Success',
+                    description: 'Added to cart successfully!'
+                  },
+                  'success'
+                )
+              }}
+            >
+              <FontAwesomeIcon icon={faCartPlus} style={{ marginRight: 5 }} />
+              Add To Cart
+            </Button>
           </div>
-          <Button
-            className="product-modal__content--addToCart"
-            onClick={() => {
-              dispatch(
-                addToCart({
-                  ...product,
-                  quantity: quantityCount,
-                  selectedProductColor: selectedProductColor
-                    ? selectedProductColor
-                    : product.selectedProductColor
-                    ? product.selectedProductColor
-                    : null,
-                  selectedProductSize: selectedProductSize
-                    ? selectedProductSize
-                    : product.selectedProductSize
-                    ? product.selectedProductSize
-                    : null
-                })
-              )
-              props.setIsModalOpen(false)
-              openNotification(
-                {
-                  message: 'Success',
-                  description: 'Added to cart successfully!'
-                },
-                'success'
-              )
-            }}
-          >
-            <FontAwesomeIcon icon={faCartPlus} style={{ marginRight: 5 }} />
-            Add To Cart
-          </Button>
         </div>
       </div>
     </Modal>

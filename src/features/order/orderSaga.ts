@@ -6,7 +6,6 @@ import { orderCreateFailed, orderCreateSuccess } from './orderSlice'
 import { ORDER_CREATE_SUCCESS } from 'features/types'
 
 function* createOrder(action: any) {
-  console.log(action)
   try {
     const response: ListResponse<any> = yield orderApi.createOrder(action.data)
     yield put(orderCreateSuccess(response))

@@ -1,25 +1,20 @@
-import { Image, Button, Card, Carousel, Col, Divider, FloatButton, Row, Collapse, Avatar } from 'antd'
-import { useEffect, useState } from 'react'
+import { faChevronDown, faChevronUp, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { Avatar, Button, Card, Col, Collapse, Divider, FloatButton, Row } from 'antd'
 import { useAppDispatch, useAppSelector } from 'app/hook'
+import ProductSingle from 'components/product/ProductSingle'
 import { GET_PRODUCT_LIST } from 'features/types'
 import { Product } from 'models'
-import ProductSingle from 'components/product/ProductSingle'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Keyboard, Navigation } from 'swiper'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { faPlay } from '@fortawesome/free-solid-svg-icons'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { Keyboard, Navigation, Pagination } from 'swiper'
 import 'swiper/css'
-import 'swiper/css/pagination'
-
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { Pagination } from 'swiper'
-import HomeGallery from 'components/home/HomeGallery'
 import HomeBlog from 'components/home/HomeBlog'
+import HomeGallery from 'components/home/HomeGallery'
 
 const { Meta } = Card
 
@@ -133,7 +128,7 @@ const Home = () => {
             navigation={false}
             pagination={true}
             direction="horizontal"
-            modules={[Autoplay, Keyboard, Pagination, Navigation]}
+            modules={[Keyboard, Pagination, Navigation]}
             className="mySwiper"
           >
             <SwiperSlide className="swiper__feature">
@@ -143,8 +138,9 @@ const Home = () => {
                   backgroundImage:
                     "url('//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_8737877e-52de-4384-b9c7-5ab1521594a6.png?v=1639042929')",
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundColor: '#edfeff'
+                  backgroundSize: 'contain',
+                  backgroundColor: '#edfeff',
+                  backgroundPosition: 'center'
                 }}
               >
                 <div className="home__carousel__content">
@@ -180,8 +176,9 @@ const Home = () => {
                 style={{
                   backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_2_7a3d4cb6-4e02-4bdb-ac70-200256f51a5b.png?v=1640513231")`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundColor: '#edfeff'
+                  backgroundSize: 'contain',
+                  backgroundColor: '#edfeff',
+                  backgroundPosition: 'center'
                 }}
               >
                 <div className="home__carousel__content">
@@ -217,8 +214,9 @@ const Home = () => {
                 style={{
                   backgroundImage: `url("//cdn.shopify.com/s/files/1/1280/1207/files/slider_full_3_4fedfad3-59c2-4a0e-922d-92c38cd4bb6c.png?v=1640510457")`,
                   backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'cover',
-                  backgroundColor: '#edfeff'
+                  backgroundSize: 'contain',
+                  backgroundColor: '#edfeff',
+                  backgroundPosition: 'center'
                 }}
               >
                 <div className="home__carousel__content">

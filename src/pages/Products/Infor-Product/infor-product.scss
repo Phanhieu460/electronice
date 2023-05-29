@@ -78,12 +78,22 @@
   justify-content: space-between;
   margin: 30px auto;
 
-  .cart-details {
+  &__quantity {
     display: flex;
-    width: 50px;
     justify-content: space-between;
-    border: 1px solid #d0cdcda0;
-    padding: 17px;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 0 0 1px rgba(4, 50, 47, 0.16);
+    align-items: center;
+    margin-right: 8px;
+    > button {
+      background: white;
+      padding: 8px;
+      border: none;
+      box-shadow: none;
+      font-size: 14px;
+      width: 44px;
+      cursor: pointer;
+    }
   }
   .add-to-cart {
     background-color: black;

@@ -51,9 +51,9 @@ api.interceptors.response.use(
             config
           )
           .then((res: any) => {
-            Cookies.set('authToken', res.data.token)
-            Cookies.set('refreshToken', res.data.refreshToken)
-            api.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+            Cookies.set('authToken', res.token)
+            Cookies.set('refreshToken', res.refreshToken)
+            api.defaults.headers.common['Authorization'] = `Bearer ${res.token}`
             return api(originalConfig)
           })
           .catch(err => {
