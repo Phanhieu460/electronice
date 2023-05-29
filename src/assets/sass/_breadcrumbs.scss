@@ -1,0 +1,18 @@
+.breadcrumb-container {
+  background-image: url('https://cdn.shopify.com/s/files/1/1280/1207/files/testi_bg.jpg?v=1640166481');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px 0;
+}
+.ant-breadcrumb ol {
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+@media #{$xs-layout} {
+  .breadcrumb-container {
+    padding: 40px 0;
+  }
+}

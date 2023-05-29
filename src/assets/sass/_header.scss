@@ -1,5 +1,4 @@
 .header {
-  max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -48,8 +47,8 @@
     &__icon {
       &--quantity {
         position: absolute;
-        left: 80%;
-        top: -80%;
+        right: 52px;
+        top: 41px;
         transform: translate(-50%, -100%);
         font-size: 13px;
         width: 22px;
@@ -61,12 +60,19 @@
         border-radius: 50%;
       }
     }
+    svg {
+      padding: 12px;
+      font-size: 24px;
+    }
   }
 
   &__menubar {
     display: none;
   }
-
+  &__account {
+    position: absolute;
+    right: 5%;
+  }
   &__mobile {
     min-height: 100vh;
     position: fixed;
@@ -104,18 +110,63 @@
     }
   }
 }
-
-@media screen and (max-width: 992px) {
-  .header {
-    max-width: 960px;
-  }
+.header__cart {
+  display: flex;
 }
 
-@media screen and (max-width: 768px) {
+.shope__cart {
+  position: absolute;
+  color: #000;
+  top: 100px;
+  right: 73px;
+  width: 340px;
+  min-height: 100vh;
+  background-color: #fff;
+  box-shadow: 0px 16px 5px 0 rgba(0, 0, 0, 0.1);
+}
+.shope__cart:hover {
+  color: #000;
+  cursor: default;
+}
+.shope__cart__icon {
+  display: flex;
+  font-size: 20px;
+  width: 90%;
+  z-index: 1000;
+  padding: 29px 0 0 0;
+  margin-left: 17px;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+.shope__cart__icon h1 {
+  margin: 0;
+  font-size: 21px;
+}
+.shope__cart__icon--close {
+  transform: translateY(-12px);
+}
+.shopping__cart__total {
+  display: flex;
+  margin-left: 17px;
+
+  justify-content: space-between;
+  width: 90%;
+  padding: 12px 0 12px 0;
+
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+// @media #{$md-layout} {
+//   .header {
+//     max-width: 960px;
+//   }
+// }
+
+@media #{$sm-layout} {
   //tablet
   .header {
-    max-width: 720px;
-
     &__menu {
       display: none;
     }
@@ -123,7 +174,10 @@
       position: absolute;
       right: 5%;
     }
-
+    &__account {
+      position: absolute;
+      right: 5%;
+    }
     &__menubar {
       display: block;
     }
@@ -133,19 +187,20 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media #{$xs-layout} {
   .header {
-    max-width: 540px;
-
     &__menu {
       display: none;
     }
 
     &__cart {
+      margin-right: 14px;
+    }
+    &__account {
       position: absolute;
       right: 5%;
+      padding: auto;
     }
-
     &__menubar {
       display: block;
     }
@@ -154,4 +209,9 @@
       width: 200px;
     }
   }
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
 }

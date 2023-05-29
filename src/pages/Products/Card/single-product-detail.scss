@@ -1,0 +1,88 @@
+.product-single-detail-grid {
+  border: 1px solid #f1f1f1;
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    &--img {
+      box-shadow: 0 0 10px 0 rgb(0 0 0 / 5%);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+    }
+    &--discount {
+      position: absolute;
+      background: red;
+      color: white;
+      border: 1px solid;
+      border-radius: 14px;
+      width: 45px;
+      height: 18px;
+      right: 5%;
+      top: 20%;
+      text-align: center;
+    }
+    &--news {
+      position: absolute;
+      background: red;
+      color: white;
+      border: 1px solid;
+      border-radius: 14px;
+      width: 45px;
+      height: 18px;
+      right: 5%;
+      top: 5%;
+      text-align: center;
+    }
+  }
+  &__content {
+    padding: 15px;
+    // width: 100%;
+    // height: 150px;
+    background: #f4f4f4;
+    > a {
+      text-decoration: none;
+      color: inherit;
+    }
+    &--title {
+      display: block;
+      font-size: 1rem;
+      line-height: 1rem;
+      font-weight: 500;
+      max-width: 100%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      // Addition lines for 2 line or multiline ellipsis
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+    }
+    &--price {
+      font-size: 16px;
+      margin: 8px 0px;
+      display: block;
+    }
+    &--priceSale {
+      color: red;
+      font-size: 22px;
+      font-weight: 500;
+    }
+    &--ratting {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      > .ant-btn {
+        &:hover {
+          background: red;
+          color: white;
+        }
+      }
+    }
+  }
+}

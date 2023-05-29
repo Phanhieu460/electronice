@@ -1,0 +1,122 @@
+.payment {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.payment__header--click {
+  display: none;
+}
+.payment__main {
+  flex-basis: 60%;
+  margin: 20px 20px 12px 0;
+}
+.ship__main__address--methodtotal {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px;
+  padding: 17px 0 0 0;
+  border-top: 1px solid #ccc;
+}
+.payment__payment-text {
+  padding: 10px 0 12px 0;
+}
+.payment__payment--cod {
+  border: 1px solid #ff5151;
+  background-color: #fff4f4;
+}
+.payment__payment--cod {
+  height: 24px;
+  padding: 12px 0 12px 10px;
+  border-radius: 5px;
+}
+.payment__show {
+}
+.payment__show--same,
+.payment__show--use {
+  width: 572px;
+  height: 24px;
+  padding: 12px 0 12px 0px;
+
+  border: 1px solid #ff5151;
+  background-color: #fff4f4;
+}
+
+.payment__main__right {
+  flex-basis: 40%;
+  margin: 65px 20px 12px 59px;
+  border-left: 1px solid #ccc;
+  padding-left: 22px;
+  &--price {
+    border-top: 1px solid #e4e4e4;
+    &--item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  &--total {
+    border-top: 1px solid #e4e4e4;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__information {
+    display: flex;
+    align-items: center;
+    &--item {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      &--img {
+        flex-basis: 30%;
+        img {
+          height: auto;
+          max-width: 100%;
+        }
+      }
+      &--name {
+        flex-basis: 70%;
+      }
+    }
+  }
+}
+.payment__show--address {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #f8f6f6;
+  width: 532px;
+}
+.payment__directional {
+  display: flex;
+  margin: 20px 0;
+  justify-content: space-between;
+}
+@media screen and (min-width: 993px) {
+}
+@media screen and (max-width: 992px) {
+  .payment__right--distance {
+    display: none;
+  }
+  .payment__header--click {
+    display: flex;
+    color: #ff5151;
+    justify-content: space-between;
+  }
+  .payment__main__right {
+    border: none;
+  }
+  .check__right--distance {
+    display: none;
+  }
+  .payment__right--distance2 {
+    display: block;
+  }
+}
+@media screen and (max-width: 768px) {
+  .payment__directional {
+    display: block;
+  }
+  .check__directional--cart {
+    margin-left: 223px;
+  }
+}

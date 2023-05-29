@@ -1,0 +1,36 @@
+.card-product {
+  position: relative;
+  border: solid 1px rgba(194, 193, 193, 0.561);
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+}
+
+.product-action {
+  display: block;
+  padding: 2px;
+}
+// (Hidden by Default)
+.product-action-hover {
+  display: flex;
+  justify-content: center;
+}
+
+.product-action-hover ul {
+  position: absolute;
+  background: rgb(255, 255, 255);
+  height: 45px;
+  transition: 0.5s ease;
+  opacity: 0;
+  border-radius: 100px;
+  bottom: 60%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding: 0;
+}
+.card-product:hover .product-action-hover ul {
+  opacity: 1;
+}
